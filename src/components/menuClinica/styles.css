@@ -1,0 +1,32 @@
+.menu-clinica-container {
+  width: 170px;
+  background-color: #1bd3da;
+  /* height: 100vh; */
+}
+
+.menu-clinica-container .menu-clinica {
+  height: 100vh;
+}
+
+.menu-clinica-container .menu-clinica ul {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-around;
+  list-style: none;
+}
+
+.menu-clinica-container .menu-clinica ul a {
+  font-size: 3em;
+  color: rgb(62, 63, 63);
+  transition: 0.3s;
+}
+
+.menu-clinica-container .menu-clinica ul a:hover {
+  color: rgb(116, 114, 114);
+}
+
+.menuActive {
+  color: white;
+}
