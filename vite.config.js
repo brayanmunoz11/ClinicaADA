@@ -14,6 +14,7 @@ export default defineConfig({
       { find: 'services', replacement: '/src/services' }
     ]
   },
+  // root: 'src',
   build: {
     outDir: './public'
   }

@@ -26,6 +26,7 @@ export default function LoginRegistro ({}){
     setLoading(true)
     SendLogin({formData})
       .then(res => {
+        console.log(res)
         setLoading(false)
         return (res) ? history.push('/Clinica') : null
       })
