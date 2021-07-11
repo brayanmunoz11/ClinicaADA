@@ -1,11 +1,7 @@
-// const API_URL = 'https://api-login-heroku.herokuapp.com/signin'
-// import { useHistory } from "react-router-dom";
-// const history = useHistory()
+import {API_URL} from './API_KEYS.js'
 
-
-const API_URL = 'http://localhost:4000/signup'
 function sendRegistro({formData}) {
-  return fetch(API_URL, {
+  return fetch(`${API_URL}/signup`, {
     method: 'POST',
     body: formData,
   })

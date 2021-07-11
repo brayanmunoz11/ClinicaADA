@@ -1,7 +1,7 @@
-// const API_URL = 'https://api-login-heroku.herokuapp.com/signin'
-const API_URL = 'http://localhost:4000/signin'
+import {API_URL} from './API_KEYS.js'
+
 function sendLogin({formData}) {
-  return fetch(API_URL, {
+  return fetch(`${API_URL}/signin`, {
     method: 'POST',
     body: formData,
   })

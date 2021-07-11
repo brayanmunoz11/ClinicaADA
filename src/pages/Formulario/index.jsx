@@ -11,6 +11,7 @@ import {
 } from '@material-ui/pickers';
 
 export default function Formulario ({}){
+  console.log('render Formulario')
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const handleDateChange = (date) => {
