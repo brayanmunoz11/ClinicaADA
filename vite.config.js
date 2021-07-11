@@ -13,5 +13,8 @@ export default defineConfig({
       { find: 'img', replacement: '/src/assets/img' },
       { find: 'services', replacement: '/src/services' }
     ]
+  },
+  build: {
+    outDir: './public'
   }
 })
