@@ -2,17 +2,16 @@ import 'date-fns';
 import React, {useState} from 'react'
 import Select from 'react-select'
 import Grid from '@material-ui/core/Grid';
-import { FormularioContainer } from './styles'
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import { FormularioContainer, Derecha, Izquierda, Centro } from './styles'
 
 export default function Formulario ({}){
-  console.log('render Formulario')
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [valor, setValor] = useState(10);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -23,18 +22,15 @@ export default function Formulario ({}){
     { value: 'traumatologia', label: 'Traumatologia' },
     { value: 'oncologia', label: 'Oncologia' }
   ]
-
-  const enviar = (evt) => {
-    evt.preventDefault()
-    const formData = new FormData(evt.target)
-    // debugger
-    console.log(formData.get('tipo'))
-  }
+  const turnos = [
+    {value: 'm', label: 'Mañana'},
+    {value: 't', label: 'Tarde'},
+    {value: 'n', label: 'Noche'}
+  ]
 
   return (<>
     <FormularioContainer>
-      <h1>Formulario</h1>
-      <form action="" onSubmit={enviar}>
+      <Derecha>
         <div className="inputInfo">
           <h2>Especialidad</h2>
           <div className="select">
@@ -50,13 +46,13 @@ export default function Formulario ({}){
                   name="fecha"
                   margin="normal"
                   id="date-picker-dialog"
-                  label="Date picker dialog"
                   format="dd/MM/yyyy"
                   value={selectedDate}
                   onChange={handleDateChange}
                   KeyboardButtonProps={{
                     'aria-label': 'change date',
                   }}
+                  style={{width: '100%'}}
                 />
               </Grid>
             </MuiPickersUtilsProvider>
@@ -65,12 +61,24 @@ export default function Formulario ({}){
         <div className="inputInfo">
           <h2>Turno</h2>
           <div className="select">
-            <Select options={[{value: 'm', label: 'Mañana'}, {value: 't', label: 'Tarde'}]} name="turno"/>
+            <Select
+              options={turnos}
+              name="turno"
+              value={valor}
+              placeholder='Elige un turno'
+              onChange={(evt) => setValor(evt)}/>
           </div>
         </div>
-
-        <button>on</button>
-      </form>
+      </Derecha>
+      <Centro>
+        <span></span>
+      </Centro>
+      <Izquierda>
+        <div className="extraInfo">
+          <h2>Informacion extra</h2>
+          <textarea name="" id="" cols="30" rows="10"></textarea>
+        </div>
+      </Izquierda>
     </FormularioContainer>
   </>)
 }

@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
 import Formulario from "pages/Formulario";
+import ChooseDoctor from "components/ChooseDoctor";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -37,7 +38,7 @@ export default function TabsWrappedLabel({tabState}) {
         <Formulario/>
       </TabPanel>
       <TabPanel value={tabState} index="two">
-        Item Two
+        <ChooseDoctor/>
       </TabPanel>
       <TabPanel value={tabState} index="three">
         Item Three
