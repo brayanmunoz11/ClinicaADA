@@ -3,29 +3,29 @@ import React, {useState} from 'react'
 import Select from 'react-select'
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
+import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
 import { FormularioContainer, Derecha, Izquierda, Centro } from './styles'
 
-export default function Formulario ({}){
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [valor, setValor] = useState(10);
+export default function Formulario ({ especialidad, updateEspecialidad, horario, updateHHorario,turno, updateTurno, updateExtra}){
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+    updateHHorario(date)
   };
 
   const Especialidad = [
     { value: 'cardiologia', label: 'Cardiologia' },
     { value: 'traumatologia', label: 'Traumatologia' },
+    { value: 'oncologia', label: 'Oncologia' },
+    { value: 'oncologia', label: 'Oncologia' },
+    { value: 'oncologia', label: 'Oncologia' },
+    { value: 'oncologia', label: 'Oncologia' },
+    { value: 'oncologia', label: 'Oncologia' },
     { value: 'oncologia', label: 'Oncologia' }
   ]
   const turnos = [
-    {value: 'm', label: 'Mañana'},
-    {value: 't', label: 'Tarde'},
-    {value: 'n', label: 'Noche'}
+    {value: 'mañana', label: 'Mañana'},
+    {value: 'tarde', label: 'Tarde'},
+    {value: 'noche', label: 'Noche'}
   ]
 
   return (<>
@@ -34,7 +34,16 @@ export default function Formulario ({}){
         <div className="inputInfo">
           <h2>Especialidad</h2>
           <div className="select">
-            <Select options={Especialidad} name="especialidad"/>
+            <Select
+              options={Especialidad}
+              name="especialidad"
+              value={especialidad}
+              placeholder='Elige una especialidad'
+              onChange={ (evt) => updateEspecialidad(evt)}
+              styles={{
+                menuList: styles => ({ ...styles, height: '200px'}),
+              }}
+            />
           </div>
         </div>
         <div className="inputInfo">
@@ -47,7 +56,7 @@ export default function Formulario ({}){
                   margin="normal"
                   id="date-picker-dialog"
                   format="dd/MM/yyyy"
-                  value={selectedDate}
+                  value={horario}
                   onChange={handleDateChange}
                   KeyboardButtonProps={{
                     'aria-label': 'change date',
@@ -64,9 +73,13 @@ export default function Formulario ({}){
             <Select
               options={turnos}
               name="turno"
-              value={valor}
+              value={turno}
               placeholder='Elige un turno'
-              onChange={(evt) => setValor(evt)}/>
+              onChange={(evt) => updateTurno(evt)}
+              styles={{
+                menu: styles => ({ ...styles, position: 'absolute' }),
+              }}
+              />
           </div>
         </div>
       </Derecha>

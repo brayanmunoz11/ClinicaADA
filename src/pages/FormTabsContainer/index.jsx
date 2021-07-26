@@ -155,7 +155,8 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "100vh",
     display: "grid",
-    gridTemplateRows: "auto 1fr auto"
+    gridTemplateRows: "auto 1fr auto",
+    overflow: "hidden"
   },
   button: {
     marginRight: theme.spacing(1)
