@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Home from 'pages/Home'
 import LoginRegistro from 'pages/LoginRegistro'
 import Clinica from 'pages/Clinica'
-// import MenuClinica from 'components/menuClinica'
+import ClinicaDoctor from 'pages/ClinicaDoctor'
 
 // import { createBrowserHistory } from "history";
 // const history = createBrowserHistory();
@@ -21,6 +21,9 @@ function App() {
         </Route>
         <Route path="/Clinica">
           <Clinica />
+        </Route>
+        <Route path="/ClinicaDoctor">
+          <ClinicaDoctor />
         </Route>
         <Route path="/">
           <Home />

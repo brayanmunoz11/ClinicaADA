@@ -28,7 +28,7 @@ export default function LoginRegistro ({}){
       .then(res => {
         console.log(res)
         setLoading(false)
-        return (res) ? history.push('/Clinica') : null
+        return (res.valid) ? history.push(res.path) : null
       })
   }
 

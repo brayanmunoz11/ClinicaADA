@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { PerfilContainer, PerfilC, PerfilClose, PerfilInfo, PerfilImage, LinkB } from './style'
+import { PerfilContainer, PerfilC, PerfilClose, PerfilInfo, PerfilImage, LinkB } from './styles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserAlt } from '@fortawesome/free-solid-svg-icons'
 

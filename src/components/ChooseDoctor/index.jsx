@@ -3,8 +3,9 @@ import { DoctoresContainer } from './styles'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Tabla from 'components/Tabla'
 
-export default function ChooseDoctor ({}){
+export default function ChooseDoctor ({updateDoctor}){
 
   const doctores = [
     {
@@ -50,6 +51,8 @@ export default function ChooseDoctor ({}){
     borrarSeleccion()
 
     const row = event.target.parentNode.parentNode.parentNode.parentNode.parentNode
+    updateDoctor(row.id)
+    // console.log(row.id)
     const checkBoxes = document.getElementsByName('Checkbox')
 
     setCheck(!check)
@@ -75,7 +78,7 @@ export default function ChooseDoctor ({}){
   return (<>
     <DoctoresContainer>
       <div className="nose">
-        <PerfectScrollbar>
+        <Tabla>
           <div className="tablaDoctores">
             <table>
               <thead>
@@ -89,7 +92,7 @@ export default function ChooseDoctor ({}){
               <tbody>
                 {
                   doctores.map((doctor, index) =>
-                    <tr key={index}>
+                    <tr key={index} id={doctor.doctor}>
                       <td>{doctor.doctor}</td>
                       <td>{doctor.horario}</td>
                       <td>
@@ -112,8 +115,7 @@ export default function ChooseDoctor ({}){
               </tbody>
             </table>
           </div>
-        </PerfectScrollbar>
-
+        </Tabla>
       </div>
     </DoctoresContainer>
   </>)

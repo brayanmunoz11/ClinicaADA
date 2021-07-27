@@ -65,7 +65,9 @@ export default function TabsWrappedLabel({tabState}) {
         />
       </TabPanel>
       <TabPanel value={tabState} index="two">
-        <ChooseDoctor/>
+        <ChooseDoctor
+          updateDoctor={updateDoctor}
+        />
       </TabPanel>
       <TabPanel value={tabState} index="three">
         <Comfirm

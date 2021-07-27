@@ -203,6 +203,10 @@ export default function CustomizedSteppers() {
     }
   }
 
+  // const enviarForm = (evt) => {
+  //   console.log(evt.target.textContent)
+  // }
+
   return (
     <div className={classes.root}>
       <Stepper
@@ -233,6 +237,7 @@ export default function CustomizedSteppers() {
               color="primary"
               onClick={handleNext}
               className={classes.button}
+              // onClick={(activeStep === 2) ? enviarForm : handleNext}
             >
               {activeStep === steps.length - 1 ? "Finalizar" : "Siguiente"}
             </Button>
