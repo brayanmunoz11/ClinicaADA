@@ -62,9 +62,14 @@ export const TablesContainer = styled.div`
     color: #999;
     font-size: 15px;
     line-height: 1.4;
+    /* width: 230px;
+    max-width: 230px; */
   }
   td:first-child, th:first-child {
     padding-left: 20px;
+    padding-right: 20px;
+    width: 230px;
+    max-width: 230px;
   }
   thead {
     position: sticky;

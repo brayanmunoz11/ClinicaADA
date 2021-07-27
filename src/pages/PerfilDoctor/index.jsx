@@ -3,9 +3,14 @@ import PerfilComponent from 'components/perfil'
 import { Container, TablaContainer } from './styles'
 import Tabla from 'components/Tabla'
 import getCitas from 'services/getCitas.js'
+import terminarCita from 'services/terminarCita'
 
 export default function PerfilDoctor({ }) {
   const [citas, setCitas] = useState([])
+  const concluirCita = (idCita) => {
+    setCitas((prev) => prev.filter(el => el.idCita !== idCita))
+    terminarCita({idCita})
+  }
 
   useEffect(()=> {
     getCitas()
@@ -26,17 +31,21 @@ export default function PerfilDoctor({ }) {
                     <th>Horario</th>
                     <th>Paciente</th>
                     <th className="selecc">Perfil</th>
+                    <th>Concluir</th>
                   </tr>
                 </thead>
                 <tbody>
                   {
-                    citas.map((doctor, index) =>
-                      <tr key={index} id={doctor.doctor}>
-                        <td>{doctor.fecha}</td>
-                        <td>{doctor.turno}</td>
-                        <td>{doctor.paciente}</td>
+                    citas.map(cita =>
+                      <tr key={cita.idCita}>
+                        <td>{cita.fecha}</td>
+                        <td>{cita.turno}</td>
+                        <td>{cita.paciente}</td>
                         <td>
                           <button>Ver Perfil</button>
+                        </td>
+                        <td>
+                          <button onClick={() => concluirCita(cita.idCita)}>Concluir</button>
                         </td>
                       </tr>
                     )
