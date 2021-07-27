@@ -17,7 +17,10 @@ export default function MenuClinica({}) {
     else if(tipo === 'doctor') {
       setPath('/ClinicaDoctor')
     }
-    console.log(path)
+    else if(tipo === 'administrador') {
+      setPath('/ClinicaAdministrador')
+    }
+    // console.log(path)
   }, [tipo])
   return (
     <>

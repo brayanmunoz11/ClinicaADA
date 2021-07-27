@@ -14,11 +14,11 @@ export default function Clinica ({}){
           <Route path="/Clinica/Formulario">
             <FormTabsContainer />
           </Route>
-          <Route path="/Clinica">
-            <Perfil />
-          </Route>
           <Route path="/Clinica/Config">
             <h1>Configuraciones</h1>
+          </Route>
+          <Route path="/Clinica">
+            <Perfil />
           </Route>
         </Switch>
     </div>

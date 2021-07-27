@@ -6,6 +6,7 @@ import Home from 'pages/Home'
 import LoginRegistro from 'pages/LoginRegistro'
 import Clinica from 'pages/Clinica'
 import ClinicaDoctor from 'pages/ClinicaDoctor'
+import ClinicaAdministrador from 'pages/ClinicaAdministrador'
 
 // import { createBrowserHistory } from "history";
 // const history = createBrowserHistory();
@@ -24,6 +25,9 @@ function App() {
         </Route>
         <Route path="/ClinicaDoctor">
           <ClinicaDoctor />
+        </Route>
+        <Route path="/ClinicaAdministrador">
+          <ClinicaAdministrador />
         </Route>
         <Route path="/">
           <Home />

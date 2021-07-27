@@ -11,12 +11,14 @@ function sendLogin({formData}) {
   .then(res => {
     (res.valid) ? sessionStorage.setItem('usuario', JSON.stringify(res.user)): null
     if(res.user.tipoUsuario === 'doctor') {
-      path = 'ClinicaDoctor'
+      path = '/ClinicaDoctor'
     }
     else if (res.user.tipoUsuario === 'paciente') {
       path = '/Clinica'
     }
-
+    else if (res.user.tipoUsuario === 'administrador') {
+      path = '/ClinicaAdministrador'
+    }
     return {
       valid: res.valid,
       path
