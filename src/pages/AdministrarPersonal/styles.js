@@ -87,4 +87,12 @@ export const AnadirContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  button {
+    background: ${props => props.theme.colors.primary};
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 1.3em;
+    padding: 10px 20px;
+  }
 `

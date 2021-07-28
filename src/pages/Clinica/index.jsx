@@ -5,6 +5,7 @@ import FormTabsContainer from 'pages/FormTabsContainer'
 import MenuClinica from 'components/menuClinica'
 import Perfil from 'pages/Perfil'
 import './styles.css'
+import Config from 'pages/Config'
 
 export default function Clinica ({}){
   return (<>
@@ -12,7 +13,7 @@ export default function Clinica ({}){
       <MenuClinica />
         <Switch>
           <Route path="/ClinicaPaciente/Config">
-            <h1>Configuraciones</h1>
+            <Config/>
           </Route>
           <Route path="/ClinicaPaciente/Formulario">
             <FormTabsContainer />

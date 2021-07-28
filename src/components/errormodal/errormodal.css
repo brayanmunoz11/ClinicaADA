@@ -57,7 +57,7 @@
   animation: equis1 .8s ease-in-out;
 }
 
-h1 {
+.grayContainer h1 {
   text-align: center;
   color: #1bd3da;
   font-size: 1.8em;

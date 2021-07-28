@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import FormTabsContainer from 'pages/FormTabsContainer'
 import PerfilDoctor from 'pages/PerfilDoctor'
 import MenuClinica from 'components/menuClinica'
+import Config from 'pages/Config'
 
 export default function ClinicaDoctor({ }) {
   return (<>
@@ -13,7 +14,7 @@ export default function ClinicaDoctor({ }) {
           <FormTabsContainer />
         </Route> */}
         <Route path="/Clinica/Config">
-          <h1>Configuraciones</h1>
+          <Config/>
         </Route>
         <Route path="/ClinicaDoctor">
           <PerfilDoctor />

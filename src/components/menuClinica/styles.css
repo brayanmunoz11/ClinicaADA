@@ -21,6 +21,7 @@
   font-size: 3em;
   color: rgb(62, 63, 63);
   transition: 0.3s;
+  text-decoration: none;
 }
 
 .menu-clinica-container .menu-clinica ul a:hover {
@@ -29,4 +30,7 @@
 
 .menuActive {
   color: white;
+}
+.menu-clinica-container .menu-clinica ul p {
+  font-size: .3em;
 }

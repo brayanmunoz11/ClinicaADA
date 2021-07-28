@@ -6,6 +6,7 @@ import MenuClinica from 'components/menuClinica'
 import AdministrarPersonal from 'pages/AdministrarPersonal'
 import AdministrarPaciente from 'pages/AdministrarPaciente'
 import AdministrarCamas from 'pages/AdministrarCamas'
+import Config from 'pages/Config'
 
 export default function ClinicaAdministrador({ }) {
   return (<>
@@ -13,7 +14,7 @@ export default function ClinicaAdministrador({ }) {
       <MenuClinica />
       <Switch>
         <Route path="/Clinica/Config">
-          <h1>Configuraciones</h1>
+          <Config/>
         </Route>
         <Route path="/ClinicaAdministrador/AdministrarCamas">
           <AdministrarCamas />
