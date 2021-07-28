@@ -16,13 +16,29 @@ import {Link} from 'react-router-dom'
 
 function Home ({}){
   const [user, setUser] = useState(sessionStorage.getItem('usuario'))
-
-  useEffect(()=>{
-    // setUser(sessionStorage.getItem('usuario'))
-    // if(user !== null && user !== undefined) {
-    // }
-    // console.log(tyoeuser)
-  },[])
+  const [path, setPath] = useState('/Login')
+  var tipo = ''
+  useEffect(() => {
+    if(user === 'null' || user === null) {
+      console.log(user)
+    }
+    else {
+      ala()
+    }
+  }, [])
+  const ala = () => {
+    console.log('gura')
+    tipo = JSON.parse(sessionStorage.getItem('usuario')).tipoUsuario
+    if(tipo === 'paciente') {
+      setPath('/ClinicaPaciente')
+    }
+    else if(tipo === 'doctor') {
+      setPath('/ClinicaDoctor')
+    }
+    else if(tipo === 'administrador') {
+      setPath('/ClinicaAdministrador')
+    }
+  }
 
   return (<>
     <div className="HomeContainer">
@@ -43,7 +59,7 @@ function Home ({}){
             </div>
             <div className="contacto-header">
               <h1>Central de citas: <a href=""> (01) XXX XXXX</a></h1>
-              <h1><Link to={(user !== 'null' && user !== null) ? '/Clinica' : '/Login'}> Clinica Online</Link></h1>
+              <h1><Link to={(user !== 'null' && user !== null) ? path : '/Login'}> Clinica Online</Link></h1>
             </div>
           </div>
           <div className="menu" >

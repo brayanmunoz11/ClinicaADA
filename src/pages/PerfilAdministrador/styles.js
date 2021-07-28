@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const Container = styled.div`
   width: 100%;
@@ -10,10 +11,30 @@ export const Container = styled.div`
     height: fit-content;
   }
   `
-export const TablaContainer = styled.div`
+export const ButtonsContainer = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
-  overflow: auto;
-  height: 100%;
-  padding: 0 80px 0px 0px;
+
+  .container {
+    width: 70%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  `
+export const Button = styled(Link)`
+  background-color: ${props => props.theme.colors.primary};
+  height: 40px;
+  width: 50%;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
 `

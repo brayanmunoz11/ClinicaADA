@@ -9,14 +9,14 @@ export default function ClinicaDoctor({ }) {
     <div className="clinicaContainer">
       <MenuClinica />
       <Switch>
-        <Route path="/Clinica/Formulario">
+        {/* <Route path="/Clinica/Formulario">
           <FormTabsContainer />
+        </Route> */}
+        <Route path="/Clinica/Config">
+          <h1>Configuraciones</h1>
         </Route>
         <Route path="/ClinicaDoctor">
           <PerfilDoctor />
-        </Route>
-        <Route path="/Clinica/Config">
-          <h1>Configuraciones</h1>
         </Route>
       </Switch>
     </div>

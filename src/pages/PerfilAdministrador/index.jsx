@@ -1,27 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import PerfilComponent from 'components/perfil'
-import { Container, TablaContainer } from './styles'
-import Tabla from 'components/Tabla'
-import getCitas from 'services/getCitas.js'
-import terminarCita from 'services/terminarCita'
+import { Container, ButtonsContainer, Button } from './styles'
 
 export default function PerfilAdministrador({ }) {
-  const [citas, setCitas] = useState([])
-  const concluirCita = (idCita) => {
-    setCitas((prev) => prev.filter(el => el.idCita !== idCita))
-    terminarCita({idCita})
-  }
-
-  useEffect(()=> {
-    getCitas()
-      .then(setCitas)
-  },[])
 
   return (<>
     <Container>
       <PerfilComponent />
       <ButtonsContainer>
-        
+        <div className="container">
+          <Button to='/ClinicaAdministrador/AdministrarPersonal'>Administrar Personal</Button>
+          <Button to='/ClinicaAdministrador/AdministrarPacientes'>Administrar Pacientes</Button>
+          <Button to='/ClinicaAdministrador/AdministrarCamas'>Administrar camas de hospitalizacion</Button>
+        </div>
       </ButtonsContainer>
     </Container>
   </>)

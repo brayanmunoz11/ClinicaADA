@@ -14,7 +14,7 @@ function sendLogin({formData}) {
       path = '/ClinicaDoctor'
     }
     else if (res.user.tipoUsuario === 'paciente') {
-      path = '/Clinica'
+      path = '/ClinicaPaciente'
     }
     else if (res.user.tipoUsuario === 'administrador') {
       path = '/ClinicaAdministrador'

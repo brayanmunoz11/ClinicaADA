@@ -12,7 +12,7 @@ export default function MenuClinica({}) {
 
   useEffect(() => {
     if(tipo === 'paciente') {
-      setPath('/Clinica')
+      setPath('/ClinicaPaciente')
     }
     else if(tipo === 'doctor') {
       setPath('/ClinicaDoctor')
@@ -30,10 +30,10 @@ export default function MenuClinica({}) {
             <li><Link to={path}><FontAwesomeIcon icon={faUserAlt}/></Link></li>
             {
               (tipo === 'paciente')
-              ? <li><Link to='/Clinica/Formulario'><FontAwesomeIcon icon={faStickyNote}/></Link></li>
+              ? <li><Link to='/ClinicaPaciente/Formulario'><FontAwesomeIcon icon={faStickyNote}/></Link></li>
               : null
             }
-            <li><Link to='/Clinica/Config'><FontAwesomeIcon icon={faCog}/></Link></li>
+            <li><Link to='/ClinicaPaciente/Config'><FontAwesomeIcon icon={faCog}/></Link></li>
             <li><Link to='/'><FontAwesomeIcon icon={faHome}/></Link></li>
           </ul>
         </nav>

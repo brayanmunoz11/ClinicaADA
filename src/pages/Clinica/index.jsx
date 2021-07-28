@@ -11,13 +11,13 @@ export default function Clinica ({}){
     <div className="clinicaContainer">
       <MenuClinica />
         <Switch>
-          <Route path="/Clinica/Formulario">
-            <FormTabsContainer />
-          </Route>
-          <Route path="/Clinica/Config">
+          <Route path="/ClinicaPaciente/Config">
             <h1>Configuraciones</h1>
           </Route>
-          <Route path="/Clinica">
+          <Route path="/ClinicaPaciente/Formulario">
+            <FormTabsContainer />
+          </Route>
+          <Route path="/ClinicaPaciente">
             <Perfil />
           </Route>
         </Switch>

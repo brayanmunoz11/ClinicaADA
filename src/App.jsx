@@ -8,9 +8,6 @@ import Clinica from 'pages/Clinica'
 import ClinicaDoctor from 'pages/ClinicaDoctor'
 import ClinicaAdministrador from 'pages/ClinicaAdministrador'
 
-// import { createBrowserHistory } from "history";
-// const history = createBrowserHistory();
-
 function App() {
 
   return (<>
@@ -20,7 +17,7 @@ function App() {
         <Route path="/Login">
           <LoginRegistro />
         </Route>
-        <Route path="/Clinica">
+        <Route path="/ClinicaPaciente">
           <Clinica />
         </Route>
         <Route path="/ClinicaDoctor">
