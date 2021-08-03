@@ -4,18 +4,30 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowAltCircleLeft} from '@fortawesome/free-solid-svg-icons'
 import Tabla from 'components/Tabla'
 import getCamas from 'services/getCamas'
+import {Link} from 'react-router-dom'
+import Anadir from 'components/anadir'
+import ButtonAnadir from 'components/buttonAnadir'
 
 export default function AdministrarCamas ({}){
   const [camas, setCamas] = useState([])
+  const [anadir, setAnadir] = useState(false)
+
   useEffect(()=> {
     getCamas()
       .then(setCamas)
   },[])
 
   return (<>
+    {
+      (anadir)
+      ? <Anadir type='Camas' setAnadir={setAnadir} setCamas={setCamas}/>
+      : null
+    }
     <Container>
       <TitleContainer>
-        <FontAwesomeIcon icon={faArrowAltCircleLeft} className='icon'/>
+        <Link to='/ClinicaAdministrador'>
+          <FontAwesomeIcon icon={faArrowAltCircleLeft} className='icon'/>
+        </Link>
         <h1>Administrar Camas</h1>
       </TitleContainer>
       <PacienteContainer>
@@ -55,7 +67,7 @@ export default function AdministrarCamas ({}){
           </Tabla>
         </TablaContainer>
         <AnadirContainer>
-          <button>Añadir Cama</button>
+          <ButtonAnadir type='Camas' setAnadir={setAnadir}/>
         </AnadirContainer>
       </PacienteContainer>
     </Container>

@@ -1,21 +1,32 @@
-import React, { useState, useEffect  } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, TitleContainer, PacienteContainer, BuscadorContainer, TablaContainer, AnadirContainer } from './styles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowAltCircleLeft} from '@fortawesome/free-solid-svg-icons'
 import Tabla from 'components/Tabla'
 import getPacientes from 'services/listarPacientes'
+import {Link} from 'react-router-dom'
+import ButtonAnadir from 'components/buttonAnadir'
+import Anadir from 'components/anadir'
 
 export default function AdministrarPaciente ({}){
   const [pacientes, setPacientes] = useState([])
+  const [anadir, setAnadir] = useState(false)
   useEffect(()=> {
     getPacientes()
       .then(setPacientes)
   },[])
 
   return (<>
+    {
+      (anadir)
+      ? <Anadir type='Paciente'  setAnadir={setAnadir} setPacientes={setPacientes}/>
+      : null
+    }
     <Container>
       <TitleContainer>
-        <FontAwesomeIcon icon={faArrowAltCircleLeft} className='icon'/>
+        <Link to='/ClinicaAdministrador'>
+          <FontAwesomeIcon icon={faArrowAltCircleLeft} className='icon'/>
+        </Link>
         <h1>Administrar Pacientes</h1>
       </TitleContainer>
       <PacienteContainer>
@@ -57,7 +68,7 @@ export default function AdministrarPaciente ({}){
           </Tabla>
         </TablaContainer>
         <AnadirContainer>
-          <button>Añadir Paciente</button>
+          <ButtonAnadir type='Paciente' setAnadir={setAnadir}/>
         </AnadirContainer>
       </PacienteContainer>
     </Container>

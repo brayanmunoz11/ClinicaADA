@@ -4,18 +4,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowAltCircleLeft} from '@fortawesome/free-solid-svg-icons'
 import Tabla from 'components/Tabla'
 import getAllDoctores from 'services/getAllDoctores'
+import {Link} from 'react-router-dom'
+import ButtonAnadir from 'components/buttonAnadir'
+import Anadir from 'components/anadir'
 
 export default function AdministrarPersonal ({}){
   const [doctores, setDoctores] = useState([])
+  const [anadir, setAnadir] = useState(false)
   useEffect(()=> {
     getAllDoctores()
       .then(setDoctores)
   },[])
 
   return (<>
+    {
+      (anadir)
+      ? <Anadir type='Personal'  setAnadir={setAnadir} setDoctores={setDoctores}/>
+      : null
+    }
     <Container>
       <TitleContainer>
-        <FontAwesomeIcon icon={faArrowAltCircleLeft} className='icon'/>
+        <Link to='/ClinicaAdministrador'>
+          <FontAwesomeIcon icon={faArrowAltCircleLeft} className='icon'/>
+        </Link>
         <h1>Administrar Personal</h1>
       </TitleContainer>
       <PacienteContainer>
@@ -44,8 +55,6 @@ export default function AdministrarPersonal ({}){
                         <td>{doctor.sexo}</td>
                         <td>{doctor.especialidad}</td>
                         <td>{doctor.turno}</td>
-                        {/* <td>{doctor.tipoSeguro}</td>
-                        <td>{doctor.centro}</td> */}
                         <td>
                           <button>Eliminar</button>
                         </td>
@@ -61,7 +70,7 @@ export default function AdministrarPersonal ({}){
           </Tabla>
         </TablaContainer>
         <AnadirContainer>
-          <button>Añadir Doctor</button>
+          <ButtonAnadir type='Personal' setAnadir={setAnadir}/>
         </AnadirContainer>
       </PacienteContainer>
     </Container>

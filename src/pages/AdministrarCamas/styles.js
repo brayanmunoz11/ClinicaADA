@@ -18,6 +18,7 @@ export const TitleContainer = styled.div`
   .icon {
     font-size: 3em;
     margin-right: 20px;
+    color: ${props => props.theme.colors.primary};
   }
 `
 
@@ -36,6 +37,8 @@ export const BuscadorContainer = styled.div`
 
 export const TablaContainer = styled.div`
   margin: 40px 0;
+  overflow: hidden;
+  max-height: calc(100vh - 400px);
   h1 {
     padding-left: 20px;
     font-size: 1.5em;
