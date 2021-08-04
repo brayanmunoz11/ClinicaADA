@@ -5,21 +5,19 @@ import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
 import { FormularioContainer, Derecha, Izquierda, Centro } from './styles'
+import Context from '../../context/languageContext';
+import { useContext } from 'react';
 
 export default function Formulario ({ especialidad, updateEspecialidad, horario, updateHHorario,turno, updateTurno, updateExtra}){
 
   const handleDateChange = (date) => {
     updateHHorario(date)
   };
+  const {language, setLanguage, texts} = useContext(Context)
 
   const Especialidad = [
     { value: 'cardiologia', label: 'Cardiologia' },
     { value: 'traumatologia', label: 'Traumatologia' },
-    { value: 'oncologia', label: 'Oncologia' },
-    { value: 'oncologia', label: 'Oncologia' },
-    { value: 'oncologia', label: 'Oncologia' },
-    { value: 'oncologia', label: 'Oncologia' },
-    { value: 'oncologia', label: 'Oncologia' },
     { value: 'oncologia', label: 'Oncologia' }
   ]
   const turnos = [
@@ -32,13 +30,13 @@ export default function Formulario ({ especialidad, updateEspecialidad, horario,
     <FormularioContainer>
       <Derecha>
         <div className="inputInfo">
-          <h2>Especialidad</h2>
+          <h2>{texts[language].Especialidad}</h2>
           <div className="select">
             <Select
               options={Especialidad}
               name="especialidad"
               value={especialidad}
-              placeholder='Elige una especialidad'
+              placeholder={texts[language].EligeEspecialidad}
               onChange={ (evt) => updateEspecialidad(evt)}
               styles={{
                 menuList: styles => ({ ...styles, height: '200px'}),
@@ -47,7 +45,7 @@ export default function Formulario ({ especialidad, updateEspecialidad, horario,
           </div>
         </div>
         <div className="inputInfo">
-          <h2>Fecha</h2>
+          <h2>{texts[language].Fecha}</h2>
           <div className="select">
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <Grid container justifyContent="space-around">
@@ -68,13 +66,13 @@ export default function Formulario ({ especialidad, updateEspecialidad, horario,
           </div>
         </div>
         <div className="inputInfo">
-          <h2>Turno</h2>
+          <h2>{texts[language].Turno}</h2>
           <div className="select">
             <Select
               options={turnos}
               name="turno"
               value={turno}
-              placeholder='Elige un turno'
+              placeholder={texts[language].EligeTurno}
               onChange={(evt) => updateTurno(evt)}
               styles={{
                 menu: styles => ({ ...styles, position: 'absolute' }),
@@ -88,7 +86,7 @@ export default function Formulario ({ especialidad, updateEspecialidad, horario,
       </Centro>
       <Izquierda>
         <div className="extraInfo">
-          <h2>Informacion extra</h2>
+          <h2>{texts[language].Extra}</h2>
           <textarea name="" id="" cols="30" rows="10"></textarea>
         </div>
       </Izquierda>

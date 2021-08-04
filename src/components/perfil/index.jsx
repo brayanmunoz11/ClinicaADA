@@ -2,17 +2,15 @@ import React, {useEffect, useState} from 'react'
 import { PerfilContainer, PerfilC, PerfilClose, PerfilInfo, PerfilImage, LinkB } from './styles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserAlt } from '@fortawesome/free-solid-svg-icons'
-
-export default function Perfil ({}){
+import Context from '../../context/languageContext';
+import { useContext } from 'react';
+export default function Perfil (){
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('usuario')))
+  const {language, setLanguage, texts} = useContext(Context)
 
   const cerraSession = () => {
     sessionStorage.setItem('usuario', 'null')
   }
-
-  // useEffect(()=> {
-  //   console.log(user)
-  // },[])
   return (<>
     <PerfilContainer>
       <PerfilC>
@@ -21,11 +19,11 @@ export default function Perfil ({}){
         </PerfilImage>
         <PerfilInfo>
           <div className="info">
-            <p>Nombre</p>
+            <p>{texts[language].Nombre}</p>
             <p>{user.nombre}</p>
           </div>
           <div className="info">
-            <p>Apellido</p>
+            <p>{texts[language].Apellido}</p>
             <p>{user.apellido}</p>
           </div>
           <div className="info">
@@ -38,7 +36,7 @@ export default function Perfil ({}){
           </div>
         </PerfilInfo>
         <PerfilClose>
-          <LinkB to='/' onClick={cerraSession}>Cerrar Sesion</LinkB>
+          <LinkB to='/' onClick={cerraSession}>{texts[language].Cerrar}</LinkB>
         </PerfilClose>
       </PerfilC>
     </PerfilContainer>

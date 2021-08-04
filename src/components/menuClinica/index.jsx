@@ -5,10 +5,13 @@ import './styles.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserAlt, faStickyNote, faCog, faHome } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
+import Context from '../../context/languageContext';
+import { useContext } from 'react';
 
 export default function MenuClinica({}) {
   const tipo = JSON.parse(sessionStorage.getItem('usuario')).tipoUsuario
   const [path, setPath] = useState('')
+  const {language, setLanguage, texts} = useContext(Context)
 
   useEffect(() => {
     if(tipo === 'paciente') {
@@ -30,7 +33,7 @@ export default function MenuClinica({}) {
             <li>
               <Link to={path}>
                 <FontAwesomeIcon icon={faUserAlt}/>
-                <p>Perfil</p>
+                <p>{texts[language].Perfil}</p>
               </Link>
             </li>
             {
@@ -38,7 +41,7 @@ export default function MenuClinica({}) {
               ? <li>
                   <Link to='/ClinicaPaciente/Formulario'>
                     <FontAwesomeIcon icon={faStickyNote}/>
-                    <p>Formulario de cita</p>
+                    <p>{texts[language].Formulario}</p>
                   </Link>
                 </li>
               : null
@@ -46,13 +49,13 @@ export default function MenuClinica({}) {
             <li>
               <Link to='/ClinicaPaciente/Config'>
                 <FontAwesomeIcon icon={faCog}/>
-                <p>Configuraciones</p>
+                <p>{texts[language].Configuraciones}</p>
               </Link>
             </li>
             <li>
               <Link to='/'>
                 <FontAwesomeIcon icon={faHome}/>
-                <p>Volver al Home</p>
+                <p>{texts[language].Home}</p>
               </Link>
             </li>
           </ul>

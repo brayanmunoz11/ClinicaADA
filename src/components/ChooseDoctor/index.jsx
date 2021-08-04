@@ -5,52 +5,15 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Tabla from 'components/Tabla'
 import getDoctores from "services/getDoctores";
-
+import Context from '../../context/languageContext';
+import { useContext } from 'react';
 export default function ChooseDoctor ({updateDoctor, especialidad, turno}){
   const [doctores, setDoctores] = useState([])
+  const {language, setLanguage, texts} = useContext(Context)
   useEffect(()=> {
-    console.log('jj')
     getDoctores({especialidad, turno})
       .then(setDoctores)
   },[])
-
-  // const doctores = [
-  //   {
-  //     doctor: 'doctor1',
-  //     horario: 'horario1',
-  //     perfil: 'url1'
-  //   },
-  //   {
-  //     doctor: 'doctor2',
-  //     horario: 'horario2',
-  //     perfil: 'url2'
-  //   },
-  //   {
-  //     doctor: 'doctor3',
-  //     horario: 'horario3',
-  //     perfil: 'url3'
-  //   },
-  //   {
-  //     doctor: 'doctor4',
-  //     horario: 'horario4',
-  //     perfil: 'url4'
-  //   },
-  //   {
-  //     doctor: 'doctor5',
-  //     horario: 'horario5',
-  //     perfil: 'url5'
-  //   },
-  //   {
-  //     doctor: 'doctor6',
-  //     horario: 'horario6',
-  //     perfil: 'url6'
-  //   },
-  //   {
-  //     doctor: 'doctor7',
-  //     horario: 'horario7',
-  //     perfil: 'url7'
-  //   }
-  // ]
 
   const [check, setCheck] = useState(false);
 
@@ -91,9 +54,9 @@ export default function ChooseDoctor ({updateDoctor, especialidad, turno}){
               <thead>
                 <tr>
                   <th>Doctor</th>
-                  <th>Horario</th>
-                  <th>Perfil</th>
-                  <th className="selecc">Seleccionar</th>
+                  <th>{texts[language].Horario}</th>
+                  <th>{texts[language].Perfil}</th>
+                  <th className="selecc">{texts[language].Seleccionar}</th>
                 </tr>
               </thead>
               <tbody>

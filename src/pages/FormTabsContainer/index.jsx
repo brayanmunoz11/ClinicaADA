@@ -12,7 +12,8 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import StepConnector from "@material-ui/core/StepConnector";
 import Button from "@material-ui/core/Button";
 import FormTabs from 'components/FormTabs'
-
+import Context from '../../context/languageContext';
+import { useContext } from 'react';
 const useQontoStepIconStyles = makeStyles({
   root: {
     color: "#eaeaf0",
@@ -39,7 +40,6 @@ const useQontoStepIconStyles = makeStyles({
 function QontoStepIcon(props) {
   const classes = useQontoStepIconStyles();
   const { active, completed } = props;
-
   return (
     <div
       className={clsx(classes.root, {
@@ -173,14 +173,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function getSteps() {
-  return ["Ingresa Datos", "Selecciona el doctor", "Confirma la consulta"];
+function getSteps(texts, language) {
+  return [texts[language].Ingresa, texts[language].Selecciona, texts[language].Confirma];
 }
 
 export default function CustomizedSteppers() {
+  const { language, setLanguage, texts } = useContext(Context)
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
-  const steps = getSteps();
+  const steps = getSteps(texts, language);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -229,7 +230,7 @@ export default function CustomizedSteppers() {
               onClick={handleBack}
               className={classes.button}
             >
-              Atras
+              {texts[language].Atras}
             </Button>
             <Button
               disabled={activeStep === 2}
@@ -237,9 +238,9 @@ export default function CustomizedSteppers() {
               color="primary"
               onClick={handleNext}
               className={classes.button}
-              // onClick={(activeStep === 2) ? enviarForm : handleNext}
+            // onClick={(activeStep === 2) ? enviarForm : handleNext}
             >
-              {activeStep === steps.length - 1 ? "Finalizar" : "Siguiente"}
+              {activeStep === steps.length - 1 ? texts[language].Finalizar : texts[language].Siguiente}
             </Button>
           </div>
         </div>
