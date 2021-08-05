@@ -8,7 +8,14 @@ import Clinica from 'pages/Clinica'
 import ClinicaDoctor from 'pages/ClinicaDoctor'
 import ClinicaAdministrador from 'pages/ClinicaAdministrador'
 import { LanguageContext } from './context/languageContext'
+import { useState } from 'react'
+import { useEffect } from 'react'
 function App() {
+
+  const [cam, cambiarFont] = useState()
+  useEffect(()=> {
+    console.log(cam)
+  },[cam])
 
   return (<>
     {/* <h1>prasddsuebaasd</h1> */}
@@ -19,7 +26,7 @@ function App() {
             <LoginRegistro />
           </Route>
           <Route path="/ClinicaPaciente">
-            <Clinica />
+            <Clinica cambiarFont={cambiarFont}/>
           </Route>
           <Route path="/ClinicaDoctor">
             <ClinicaDoctor />

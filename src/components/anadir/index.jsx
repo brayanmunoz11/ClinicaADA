@@ -11,6 +11,7 @@ import createDoctor from '../../services/crearDoctor'
 import createCama from '../../services/crearCama'
 import createPaciente from '../../services/crearPaciente'
 import getPacientes from '../../services/listarPacientes'
+import setFont2 from '../../services/setFont';
 
 const Especialidad = [
   { value: 'cardiologia', label: 'Cardiologia' },
@@ -80,6 +81,12 @@ export default function Anadir({ type, setAnadir, setDoctores, setPacientes, set
         })
     }
   }, [])
+  const [font, setFont] = useState(localStorage.getItem('fontFamily'))
+  useEffect(()=> {
+    if(font !== null) {
+      setFont2(font)
+    }
+  },[])
 
   return (<>
     <Container>

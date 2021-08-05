@@ -7,13 +7,13 @@ import Perfil from 'pages/Perfil'
 import './styles.css'
 import Config from 'pages/Config'
 
-export default function Clinica ({}){
+export default function Clinica ({cambiarFont}){
   return (<>
     <div className="clinicaContainer">
       <MenuClinica />
         <Switch>
           <Route path="/ClinicaPaciente/Config">
-            <Config/>
+            <Config  cambiarFont={cambiarFont}/>
           </Route>
           <Route path="/ClinicaPaciente/Formulario">
             <FormTabsContainer />

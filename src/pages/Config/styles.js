@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const ConfigContainer = styled.div`
   display: grid;
   grid-template-rows: auto 1fr;
+  /* position: relative; */
   .titleContainer {
     margin: 20px 0 50px 20px;
     display: flex;

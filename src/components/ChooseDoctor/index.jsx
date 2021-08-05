@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { DoctoresContainer } from './styles'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -7,13 +7,18 @@ import Tabla from 'components/Tabla'
 import getDoctores from "services/getDoctores";
 import Context from '../../context/languageContext';
 import { useContext } from 'react';
-export default function ChooseDoctor ({updateDoctor, especialidad, turno}){
+import setFont2 from '../../services/setFont';
+export default function ChooseDoctor({ updateDoctor, especialidad, turno }) {
   const [doctores, setDoctores] = useState([])
-  const {language, setLanguage, texts} = useContext(Context)
-  useEffect(()=> {
-    getDoctores({especialidad, turno})
-      .then(setDoctores)
-  },[])
+  const { language, setLanguage, texts } = useContext(Context)
+  useEffect(() => {
+    getDoctores({ especialidad, turno })
+      .then(res => {
+        setDoctores(res)
+
+        setFont2(font)
+      })
+  }, [])
 
   const [check, setCheck] = useState(false);
 
@@ -28,7 +33,7 @@ export default function ChooseDoctor ({updateDoctor, especialidad, turno}){
     setCheck(!check)
 
     checkBoxes.forEach(checkbox => {
-      if(check){
+      if (check) {
         checkbox.removeAttribute('disabled')
       }
       else {
@@ -44,6 +49,13 @@ export default function ChooseDoctor ({updateDoctor, especialidad, turno}){
     const rows = document.querySelectorAll('.on')
     rows.forEach(row => row.classList.remove('on'))
   }
+  const [font, setFont] = useState(localStorage.getItem('fontFamily'))
+  useEffect(() => {
+    if (font !== null) {
+      setFont2(font)
+    }
+  }, [])
+
 
   return (<>
     <DoctoresContainer>
@@ -62,8 +74,8 @@ export default function ChooseDoctor ({updateDoctor, especialidad, turno}){
               <tbody>
                 {
                   doctores.map((doctor, index) =>
-                    <tr key={doctor.idDoc}>
-                      <td>{doctor.nombre}</td>
+                    <tr key={doctor.idDoc} id={doctor.idDoc}>
+                      <td>{doctor.nombre + ' ' + doctor.apellido}</td>
                       <td>{doctor.turno}</td>
                       <td>
                         <button>Ver Perfil</button>

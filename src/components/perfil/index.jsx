@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserAlt } from '@fortawesome/free-solid-svg-icons'
 import Context from '../../context/languageContext';
 import { useContext } from 'react';
+import setFont2 from '../../services/setFont';
+
 export default function Perfil (){
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('usuario')))
   const {language, setLanguage, texts} = useContext(Context)
@@ -11,6 +13,14 @@ export default function Perfil (){
   const cerraSession = () => {
     sessionStorage.setItem('usuario', 'null')
   }
+
+  const [font, setFont] = useState(localStorage.getItem('fontFamily'))
+  useEffect(()=> {
+    if(font !== null) {
+      setFont2(font)
+    }
+  },[])
+
   return (<>
     <PerfilContainer>
       <PerfilC>

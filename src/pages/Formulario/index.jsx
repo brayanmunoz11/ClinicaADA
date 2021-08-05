@@ -1,5 +1,5 @@
 import 'date-fns';
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Select from 'react-select'
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
@@ -7,6 +7,7 @@ import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers'
 import { FormularioContainer, Derecha, Izquierda, Centro } from './styles'
 import Context from '../../context/languageContext';
 import { useContext } from 'react';
+import setFont2 from '../../services/setFont';
 
 export default function Formulario ({ especialidad, updateEspecialidad, horario, updateHHorario,turno, updateTurno, updateExtra}){
 
@@ -25,6 +26,12 @@ export default function Formulario ({ especialidad, updateEspecialidad, horario,
     {value: 'tarde', label: 'Tarde'},
     {value: 'noche', label: 'Noche'}
   ]
+  const [font, setFont] = useState(localStorage.getItem('fontFamily'))
+  useEffect(()=> {
+    if(font !== null) {
+      setFont2(font)
+    }
+  },[])
 
   return (<>
     <FormularioContainer>

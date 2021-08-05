@@ -1,7 +1,14 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import createCita from 'services/createCita'
+import setFont2 from '../../services/setFont';
 
 export default function Comfirm ({especialidad, horario, turno, doctor}){
+  const [font, setFont] = useState(localStorage.getItem('fontFamily'))
+  useEffect(()=> {
+    if(font !== null) {
+      setFont2(font)
+    }
+  },[])
   const enviarForm = () => {
     const iduser = JSON.parse(sessionStorage.getItem('usuario')).id
 
@@ -10,9 +17,8 @@ export default function Comfirm ({especialidad, horario, turno, doctor}){
       especialidad,
       fecha: horario.toString(),
       turno,
-      idDoctor: 2055
+      idDoctor: doctor
     })
-    // .then()
   }
 
   return (<>

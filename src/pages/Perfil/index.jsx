@@ -14,7 +14,7 @@ export default function Perfil({ }) {
   const {language, setLanguage, texts} = useContext(Context)
 
   useEffect(() => {
-    console.log(texts)
+    // console.log(texts)
     listCitas({ estado: 'programada' })
       .then(setCitasPro)
     listCitas({ estado: 'terminada' })
