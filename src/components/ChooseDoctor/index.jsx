@@ -50,11 +50,13 @@ export default function ChooseDoctor({ updateDoctor, especialidad, turno }) {
     rows.forEach(row => row.classList.remove('on'))
   }
   const [font, setFont] = useState(localStorage.getItem('fontFamily'))
-  useEffect(() => {
-    if (font !== null) {
-      setFont2(font)
+  const [size, setSize] = useState(localStorage.getItem('fontSize'))
+  useEffect(()=> {
+    if(font !== null) {
+      setFont2(font, size)
     }
-  }, [])
+  },[])
+
 
 
   return (<>

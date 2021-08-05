@@ -7,6 +7,7 @@ import getPacientes from 'services/listarPacientes'
 import {Link} from 'react-router-dom'
 import ButtonAnadir from 'components/buttonAnadir'
 import Anadir from 'components/anadir'
+import setFont2 from '../../services/setFont';
 
 export default function AdministrarPaciente ({}){
   const [pacientes, setPacientes] = useState([])
@@ -14,6 +15,13 @@ export default function AdministrarPaciente ({}){
   useEffect(()=> {
     getPacientes()
       .then(setPacientes)
+  },[])
+  const [font, setFont] = useState(localStorage.getItem('fontFamily'))
+  const [size, setSize] = useState(localStorage.getItem('fontSize'))
+  useEffect(()=> {
+    if(font !== null) {
+      setFont2(font, size)
+    }
   },[])
 
   return (<>

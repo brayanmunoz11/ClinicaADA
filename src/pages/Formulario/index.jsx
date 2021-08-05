@@ -27,9 +27,10 @@ export default function Formulario ({ especialidad, updateEspecialidad, horario,
     {value: 'noche', label: 'Noche'}
   ]
   const [font, setFont] = useState(localStorage.getItem('fontFamily'))
+  const [size, setSize] = useState(localStorage.getItem('fontSize'))
   useEffect(()=> {
     if(font !== null) {
-      setFont2(font)
+      setFont2(font, size)
     }
   },[])
 

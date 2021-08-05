@@ -5,11 +5,13 @@ import setFont2 from '../../services/setFont';
 
 export default function Tabla({children}) {
   const [font, setFont] = useState(localStorage.getItem('fontFamily'))
+  const [size, setSize] = useState(localStorage.getItem('fontSize'))
   useEffect(()=> {
     if(font !== null) {
-      setFont2(font)
+      setFont2(font, size)
     }
   },[])
+
 
   return (<>
     <TableContainer>

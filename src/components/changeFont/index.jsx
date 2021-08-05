@@ -14,7 +14,8 @@ export default function ChangeFont({ setChange, cambiarFont }) {
     evt.preventDefault()
     cambiarFont(fontFamily.current.value)
     localStorage.setItem('fontFamily', fontFamily.current.value)
-    setFont2(fontFamily.current.value)
+    // localStorage.setItem('fontSize', fontSize.current.value)
+    setFont2(fontFamily.current.value, fontSize.current.value)
     // cambiarFont(fontFamily.current.value)
   }
   const resetSize = () => {
@@ -34,14 +35,14 @@ export default function ChangeFont({ setChange, cambiarFont }) {
             <FontAwesomeIcon icon={faTimes} onClick={() => setChange(false)} className='icon' />
           </div>
           <form action="" id="formato" onSubmit={nose}>
-            <div className="formatoItem formato1">
+            {/* <div className="formatoItem formato1">
               <div className="item">
                 <p>Font Size</p>
                 <p className="formatoP">Tamaño de fuente del editor</p>
-                <input type="number" name="" id="" min="1" max="30" pattern="^[0-9]+" />
+                <input type="number" name="" id="" min="1" max="30" pattern="^[0-9]+" ref={fontSize}/>
               </div>
               <button type='button' onClick={resetSize}>reset</button>
-            </div>
+            </div> */}
             <div className="formatoItem formato3">
               <div className="item">
                 <p>Font Family</p>

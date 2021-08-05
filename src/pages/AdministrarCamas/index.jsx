@@ -7,6 +7,7 @@ import getCamas from 'services/getCamas'
 import {Link} from 'react-router-dom'
 import Anadir from 'components/anadir'
 import ButtonAnadir from 'components/buttonAnadir'
+import setFont2 from '../../services/setFont';
 
 export default function AdministrarCamas ({}){
   const [camas, setCamas] = useState([])
@@ -15,6 +16,14 @@ export default function AdministrarCamas ({}){
   useEffect(()=> {
     getCamas()
       .then(setCamas)
+  },[])
+
+  const [font, setFont] = useState(localStorage.getItem('fontFamily'))
+  const [size, setSize] = useState(localStorage.getItem('fontSize'))
+  useEffect(()=> {
+    if(font !== null) {
+      setFont2(font, size)
+    }
   },[])
 
   return (<>
