@@ -90,7 +90,7 @@ export const AnadirContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  button {
+  .button {
     background: ${props => props.theme.colors.primary};
     border: none;
     cursor: pointer;

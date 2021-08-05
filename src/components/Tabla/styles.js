@@ -30,7 +30,7 @@ export const TableContainer = styled.div`
     padding: 0 20px;
     box-sizing: border-box;
 
-    button {
+    .button {
       background: ${props=> props.theme.colors.primary};
       border: none;
       outline: none;
