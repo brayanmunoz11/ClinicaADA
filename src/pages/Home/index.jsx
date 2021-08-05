@@ -59,7 +59,7 @@ function Home ({}){
             </div>
             <div className="contacto-header">
               <h1>Central de citas: <a href=""> (01) XXX XXXX</a></h1>
-              <h1><Link to={(user !== 'null' && user !== null) ? path : '/Login'}> Clinica Online</Link></h1>
+              <h1><Link to={(user !== 'null' && user !== null) ? path : '/Login'}>INgresar a la Clinica Online</Link></h1>
             </div>
           </div>
           <div className="menu" >

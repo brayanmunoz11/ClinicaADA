@@ -87,6 +87,9 @@ export const TablaContainer = styled.div`
     top: 0;
     background-color: #fff;
   }
+  /* .paciente {
+    width: 300px;
+  } */
 `
 
 export const AnadirContainer = styled.div`

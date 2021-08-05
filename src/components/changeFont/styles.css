@@ -76,7 +76,7 @@
 .containerRes {
   width: 100%;
 }
-.icon {
+.formatoContainer .icon {
   font-size: 3em;
   margin-right: 20px;
   cursor: pointer;
