@@ -15,7 +15,7 @@ export default function ChangeFont({ setChange, cambiarFont }) {
     cambiarFont(fontFamily.current.value)
     localStorage.setItem('fontFamily', fontFamily.current.value)
     // localStorage.setItem('fontSize', fontSize.current.value)
-    setFont2(fontFamily.current.value, fontSize.current.value)
+    setFont2(fontFamily.current.value)
     // cambiarFont(fontFamily.current.value)
   }
   const resetSize = () => {

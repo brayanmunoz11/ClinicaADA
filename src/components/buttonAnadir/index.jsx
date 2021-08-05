@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default function ButtonAnadir ({type, setAnadir}){
+export default function ButtonAnadir ({type, setAnadir, children}){
   const changeAnadir = () => {
     setAnadir(true)
   }
   return (<>
-    <button onClick={changeAnadir}>Añadir {type}</button>
+    <button onClick={changeAnadir}>{children}</button>
   </>)
 }

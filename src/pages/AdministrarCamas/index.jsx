@@ -8,10 +8,13 @@ import {Link} from 'react-router-dom'
 import Anadir from 'components/anadir'
 import ButtonAnadir from 'components/buttonAnadir'
 import setFont2 from '../../services/setFont';
+import Context from '../../context/languageContext';
+import { useContext } from 'react';
 
 export default function AdministrarCamas ({}){
   const [camas, setCamas] = useState([])
   const [anadir, setAnadir] = useState(false)
+  const {language, setLanguage, texts} = useContext(Context)
 
   useEffect(()=> {
     getCamas()
@@ -37,7 +40,7 @@ export default function AdministrarCamas ({}){
         <Link to='/ClinicaAdministrador'>
           <FontAwesomeIcon icon={faArrowAltCircleLeft} className='icon'/>
         </Link>
-        <h1>Administrar Camas</h1>
+        <h1>{texts[language].AdministrarCamas}</h1>
       </TitleContainer>
       <PacienteContainer>
         <BuscadorContainer>
@@ -49,11 +52,11 @@ export default function AdministrarCamas ({}){
               <table>
                 <thead>
                   <tr>
-                    <th className='small'>Cama</th>
-                    <th className='small'>Sala</th>
-                    <th className='small'>Ocupada</th>
-                    <th>Paciente</th>
-                    <th>Cambiar estado</th>
+                    <th className='small'>{texts[language].Cama}</th>
+                    <th className='small'>{texts[language].Sala}</th>
+                    <th className='small'>{texts[language].Ocupada}</th>
+                    <th>{texts[language].Paciente}</th>
+                    {/* <th>Cambiar estado</th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -64,9 +67,9 @@ export default function AdministrarCamas ({}){
                         <td>{cama.sala}</td>
                         <td>{cama.estado}</td>
                         <td>{cama.nombre}</td>
-                        <td>
+                        {/* <td>
                           <button>Editar</button>
-                        </td>
+                        </td> */}
                       </tr>
                     )
                   }
@@ -76,7 +79,9 @@ export default function AdministrarCamas ({}){
           </Tabla>
         </TablaContainer>
         <AnadirContainer>
-          <ButtonAnadir type='Camas' setAnadir={setAnadir}/>
+          <ButtonAnadir type='Camas' setAnadir={setAnadir}>
+            {texts[language].AnadirCama}
+          </ButtonAnadir>
         </AnadirContainer>
       </PacienteContainer>
     </Container>

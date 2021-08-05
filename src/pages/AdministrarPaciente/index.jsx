@@ -8,10 +8,13 @@ import {Link} from 'react-router-dom'
 import ButtonAnadir from 'components/buttonAnadir'
 import Anadir from 'components/anadir'
 import setFont2 from '../../services/setFont';
+import Context from '../../context/languageContext';
+import { useContext } from 'react';
 
 export default function AdministrarPaciente ({}){
   const [pacientes, setPacientes] = useState([])
   const [anadir, setAnadir] = useState(false)
+  const {language, setLanguage, texts} = useContext(Context)
   useEffect(()=> {
     getPacientes()
       .then(setPacientes)
@@ -35,7 +38,7 @@ export default function AdministrarPaciente ({}){
         <Link to='/ClinicaAdministrador'>
           <FontAwesomeIcon icon={faArrowAltCircleLeft} className='icon'/>
         </Link>
-        <h1>Administrar Pacientes</h1>
+        <h1>{texts[language].AdministrarPacientes}</h1>
       </TitleContainer>
       <PacienteContainer>
         <BuscadorContainer>
@@ -47,12 +50,12 @@ export default function AdministrarPaciente ({}){
               <table>
                 <thead>
                   <tr>
-                    <th>Nombre</th>
-                    <th className='sexo'>Sexo</th>
-                    <th className='vigencia'>Vigencia</th>
-                    <th>Tipo de Seguro</th>
-                    <th>Centro asistencial</th>
-                    <th className='editar'>Editar</th>
+                    <th>{texts[language].Nombre}</th>
+                    <th className='sexo'>{texts[language].Sexo}</th>
+                    <th className='vigencia'>{texts[language].Vigencia}</th>
+                    <th>{texts[language].TipoSeguro}</th>
+                    <th>{texts[language].CentroAsistencial}</th>
+                    {/* <th className='editar'>Editar</th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -64,9 +67,9 @@ export default function AdministrarPaciente ({}){
                         <td>{paciente.vigencia}</td>
                         <td>{paciente.tipoSeguro}</td>
                         <td>{paciente.centro}</td>
-                        <td>
+                        {/* <td>
                           <button>Editar</button>
-                        </td>
+                        </td> */}
                       </tr>
                     )
                   }
@@ -76,7 +79,9 @@ export default function AdministrarPaciente ({}){
           </Tabla>
         </TablaContainer>
         <AnadirContainer>
-          <ButtonAnadir type='Paciente' setAnadir={setAnadir}/>
+        <ButtonAnadir type='Paciente' setAnadir={setAnadir}>
+            {texts[language].AnadirPaciente}
+          </ButtonAnadir>
         </AnadirContainer>
       </PacienteContainer>
     </Container>

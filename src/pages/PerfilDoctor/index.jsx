@@ -4,9 +4,12 @@ import { Container, TablaContainer } from './styles'
 import Tabla from 'components/Tabla'
 import getCitas from 'services/getCitas.js'
 import terminarCita from 'services/terminarCita'
+import Context from '../../context/languageContext';
+import { useContext } from 'react';
 
 export default function PerfilDoctor({ }) {
   const [citas, setCitas] = useState([])
+  const {language, setLanguage, texts} = useContext(Context)
   const concluirCita = (idCita) => {
     setCitas((prev) => prev.filter(el => el.idCita !== idCita))
     terminarCita({idCita})
@@ -27,11 +30,11 @@ export default function PerfilDoctor({ }) {
               <table>
                 <thead>
                   <tr>
-                    <th>Fecha</th>
-                    <th>Horario</th>
-                    <th>Paciente</th>
-                    <th className="selecc">Perfil</th>
-                    <th>Concluir</th>
+                    <th>{texts[language].Fecha}</th>
+                    <th>{texts[language].Horario}</th>
+                    <th>{texts[language].Paciente}</th>
+                    {/* <th className="selecc">Perfil</th> */}
+                    <th>{texts[language].Concluir}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -41,9 +44,9 @@ export default function PerfilDoctor({ }) {
                         <td>{cita.fecha}</td>
                         <td>{cita.turno}</td>
                         <td>{cita.paciente}</td>
-                        <td>
+                        {/* <td>
                           <button>Ver Perfil</button>
-                        </td>
+                        </td> */}
                         <td>
                           <button onClick={() => concluirCita(cita.idCita)}>Concluir</button>
                         </td>
