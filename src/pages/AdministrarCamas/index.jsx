@@ -22,6 +22,8 @@ export default function AdministrarCamas({ }) {
   const [usuario, setUsuario] = useState([])
   const { language, setLanguage, texts } = useContext(Context)
 
+  const [seccion, setSeccion] = useState('')
+
   useEffect(() => {
     getCamas()
       .then(setCamas)
@@ -41,8 +43,8 @@ export default function AdministrarCamas({ }) {
     const sala = document.querySelector('#sala')
     const ocupada = document.querySelector('#ocupada')
     const paciente = document.querySelector('#paciente')
-    const row = evt.target.parentNode.parentNode
-
+    // const row = evt.target.parentNode.parentNode
+    // setSeccion(row.id)
     changeCama({
       idCama: row.id,
       sala: sala.childNodes[2].value,
@@ -99,7 +101,7 @@ export default function AdministrarCamas({ }) {
                       <tr key={cama.idcamas} id={cama.idcamas}>
                         <td>{cama.idcamas}</td>
                         {
-                          (editar)
+                          (editar && seccion == cama.idcamas)
                             ? <>
                               <td>
                                 <Select
@@ -154,7 +156,11 @@ export default function AdministrarCamas({ }) {
                               <td>{cama.estado}</td>
                               <td className='paciente'>{cama.nombre}</td>
                               <td>
-                                <button onClick={() => setEditar(!editar)}>Editar</button>
+                                <button onClick={(evt) => {
+                                  const row = evt.target.parentNode.parentNode
+                                  setSeccion(row.id)
+                                  setEditar(!editar)
+                                }}>Editar</button>
                               </td>
                             </>
                         }
