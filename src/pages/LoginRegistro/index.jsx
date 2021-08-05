@@ -116,11 +116,14 @@ export default function LoginRegistro({ }) {
                     <input type="text" name="dni" placeholder="DNI" autoComplete="off" required />
                   </div>
                   <div className="uc password">
+                    <input type="text" name="sexo" placeholder="Sexo (M-F)" autoComplete="off" required />
+                  </div>
+                  <div className="uc usuario apellido">
                     <input type="password" name="password" placeholder="Contraseña" required />
+                    <input type="password" name="password" placeholder="Confirmar" required />
                   </div>
-                  <div className="uc password2">
-                    <input type="password" name="password" placeholder="Confirmar Contraseña" required />
-                  </div>
+                  {/* <div className="uc password2">
+                  </div> */}
                   <button>Registrarse</button>
                 </form>
               </div>
