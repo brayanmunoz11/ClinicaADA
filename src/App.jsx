@@ -10,11 +10,14 @@ import ClinicaAdministrador from 'pages/ClinicaAdministrador'
 import { LanguageContext } from './context/languageContext'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import Login from 'pages/Login'
+import Register from 'pages/Register'
+
 function App() {
 
   const [cam, cambiarFont] = useState()
   useEffect(()=> {
-    console.log(cam)
+    // console.log(cam)
   },[cam])
 
   return (<>
@@ -23,7 +26,10 @@ function App() {
       <Router>
         <Switch>
           <Route path="/Login">
-            <LoginRegistro />
+            <Login />
+          </Route>
+          <Route path="/Register">
+            <Register />
           </Route>
           <Route path="/ClinicaPaciente">
             <Clinica cambiarFont={cambiarFont}/>

@@ -1,12 +1,17 @@
 import {API_URL} from './API_KEYS.js'
 
-function sendRegistro({formData}) {
+function sendRegistro(json) {
   return fetch(`${API_URL}/signup`, {
     method: 'POST',
-    body: formData,
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(json),
   })
   .then(res => res.json())
   .then(res => {
+    console.log(res)
     if (res.message === 'user created') {
       sessionStorage.setItem('usuario', JSON.stringify(res.user))
       // history.push('/Clinica')
