@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { ErrorMessage } from "@hookform/error-message";
@@ -15,7 +15,7 @@ import getInfoDNI from 'services/getInfoDNI';
 export default function RegisterForm({ }) {
   let history = useHistory();
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(false)
+  const [errorM, setErrorM] = useState(false)
   const [message, setMessage] = useState('')
 
   const [datesDNI, setDatesDNI] = useState({
@@ -24,8 +24,9 @@ export default function RegisterForm({ }) {
     materno: ''
   })
 
-  const { handleSubmit, register, formState: { errors } } = useForm({
+  const { handleSubmit, register, setError, watch, clearErrors, formState: { errors } } = useForm({
     mode: 'onBlur',
+    reValidateMode: 'onChange',
     criteriaMode: "all"
   })
 
@@ -48,14 +49,15 @@ export default function RegisterForm({ }) {
     //     if (res === 'user created') {
     //       return history.push('/ClinicaPaciente')
     //     } else {
-    //       setError(true)
+    //       setErrorM(true)
     //       setMessage(res)
     //     }
     //   })
   }
+  const password = watch("password", "");
 
   const dni = register('dni', {
-    required: 'username is required',
+    required: 'Ingrese un dni',
     minLength: {
       value: 8,
       message: 'El dni deben ser 8 digitos'
@@ -70,6 +72,7 @@ export default function RegisterForm({ }) {
   const getInfo = (evt) => {
     const dni = evt.target.value
     if (dni.length === 8) {
+      clearErrors('dni')
       // getInfoDNI(dni)
       //   .then(res => {
       //     setDatesDNI(res)
@@ -91,15 +94,26 @@ export default function RegisterForm({ }) {
       })
     }
   }
+  const validatePassword = (evt) => {
+    if (password === evt.target.value) {
+      clearErrors("passwordC")
+    } else {
+      setError('passwordC', {
+        type: 'manual',
+        message: 'No coincide'
+      })
+    }
+  }
 
   const nombres = register('name')
   const apellidoP = register('apellidoP')
   const apellidoM = register('apellidoM')
+  const passwordC = register('passwordC')
 
   return (
     <>
       {(loading) ? <Loader /> : null}
-      {(error) ? <Errormodal setError={setError} message={message} /> : null}
+      {(errorM) ? <Errormodal setErrorM={setErrorM} message={message} /> : null}
       <FormContainer>
         <Form onSubmit={handleSubmit(onSumbit)}>
           <Title>Registro</Title>
@@ -143,7 +157,6 @@ export default function RegisterForm({ }) {
               errors={errors}
               name="name"
               render={({ messages }) => {
-                // console.log("messages", messages);
                 return messages
                   ? Object.entries(messages).map(([type, message]) => (
                     <p key={type}>{message}</p>
@@ -187,7 +200,6 @@ export default function RegisterForm({ }) {
               errors={errors}
               name="correo"
               render={({ messages }) => {
-                // console.log("messages", messages);
                 return messages
                   ? Object.entries(messages).map(([type, message]) => (
                     <p key={type}>{message}</p>
@@ -199,7 +211,6 @@ export default function RegisterForm({ }) {
               name='password'
               label="Contraseña"
               {...register('password', {
-                required: 'password is required',
                 minLength: {
                   value: 3,
                   message: 'La contraseña debe tener 8 digitos como minimo(por ahora solo 123 xfa)'
@@ -210,7 +221,6 @@ export default function RegisterForm({ }) {
               errors={errors}
               name="password"
               render={({ messages }) => {
-                // console.log("messages", messages);
                 return messages
                   ? Object.entries(messages).map(([type, message]) => (
                     <p key={type}>{message}</p>
@@ -221,26 +231,14 @@ export default function RegisterForm({ }) {
             <Input
               name='passwordC'
               label="Confirmar contraseña"
-              {...register('passwordC', {
-                required: 'password is required',
-                minLength: {
-                  value: 3,
-                  message: 'La contraseña debe tener 8 digitos como minimo(por ahora solo 123 xfa)'
-                }
-              })}
-            />
-            <ErrorMessage
-              errors={errors}
-              name="passwordC"
-              render={({ messages }) => {
-                // console.log("messages", messages);
-                return messages
-                  ? Object.entries(messages).map(([type, message]) => (
-                    <p key={type}>{message}</p>
-                  ))
-                  : null;
+              onChange={(evt) => {
+                passwordC.onChange(evt)
+                validatePassword(evt)
               }}
+              onBlur={passwordC.onBlur}
+              ref={passwordC.ref}
             />
+            {errors.passwordC && <p>{errors.passwordC.message}</p>}
           </InputRegisterContainer>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <Button type='submit'>Registrate</Button>

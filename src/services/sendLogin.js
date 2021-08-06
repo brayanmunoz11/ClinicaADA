@@ -1,11 +1,15 @@
 import {API_URL} from './API_KEYS.js'
 // import {Link, useHistory} from 'react-router-dom'
 
-function sendLogin({formData}) {
+function sendLogin(json) {
   let path = '';
   return fetch(`${API_URL}/signin`, {
     method: 'POST',
-    body: formData,
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(json),
   })
   .then(res => res.json())
   .then(res => {
@@ -21,6 +25,7 @@ function sendLogin({formData}) {
     }
     return {
       valid: res.valid,
+      message: res.message,
       path
     }
   });

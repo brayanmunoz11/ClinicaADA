@@ -1,9 +1,9 @@
 import React from 'react'
 import './errormodal.css'
 
-export default function Errormodal({ setError, message }) {
+export default function Errormodal({ setErrorM, message }) {
   const cerrarModal = () => {
-    setError(false)
+    setErrorM(false)
   }
 
   return (
