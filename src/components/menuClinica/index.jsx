@@ -1,8 +1,8 @@
-import React, { useEffect, useContext, useState } from 'react'
+import React, { useEffect, useContext, useState, useRef } from 'react'
 import './styles.css'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserAlt, faStickyNote, faCog, faHome } from '@fortawesome/free-solid-svg-icons'
+import { faUserAlt, faStickyNote, faCog, faHome, faSignOutAlt, faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 import Context from '../../context/languageContext';
 import logoC from 'img/logo.png'
 
@@ -10,6 +10,7 @@ export default function MenuClinica({ }) {
   const tipo = JSON.parse(sessionStorage.getItem('usuario')).tipoUsuario
   const [path, setPath] = useState('')
   const { language, setLanguage, texts } = useContext(Context)
+  const menuClinica = useRef()
 
   useEffect(() => {
     if (tipo === 'paciente') {
@@ -24,16 +25,20 @@ export default function MenuClinica({ }) {
     // console.log(path)
   }, [tipo])
 
+  const cerraSession = () => {
+    sessionStorage.setItem('usuario', 'null')
+  }
+
   const changeMenu = (evt) => {
-    console.log(evt.target)
+    menuClinica.current.classList.toggle('small')
   }
 
   return (
     <>
-      <div className="menu-clinica-container">
+      <div className="menu-clinica-container" ref={menuClinica}>
         <div className="logoMenu" onClick={changeMenu}>
           <figure className="logo">
-            <img src={logoC} alt="logo"/>
+            <img src={logoC} alt="logo" />
           </figure>
           <div className="logoName">
             <p>Hospital <span>Hololive</span></p>
@@ -44,15 +49,21 @@ export default function MenuClinica({ }) {
             <div className="up">
               <li>
                 <Link to={path}>
-                  <FontAwesomeIcon icon={faUserAlt} className='icon'/>
+                  <FontAwesomeIcon icon={faUserAlt} className='icon' />
                   <p>{texts[language].Perfil}</p>
+                </Link>
+              </li>
+              <li>
+                <Link to='/ClinicaPaciente/Consultas'>
+                  <FontAwesomeIcon icon={faCalendarAlt} className='icon' />
+                  <p>{texts[language].Consultas}</p>
                 </Link>
               </li>
               {
                 (tipo === 'paciente')
                   ? <li>
                     <Link to='/ClinicaPaciente/Formulario'>
-                      <FontAwesomeIcon icon={faStickyNote} className='icon'/>
+                      <FontAwesomeIcon icon={faStickyNote} className='icon' />
                       <p>{texts[language].Formulario}</p>
                     </Link>
                   </li>
@@ -60,15 +71,21 @@ export default function MenuClinica({ }) {
               }
               <li>
                 <Link to='/ClinicaPaciente/Config'>
-                  <FontAwesomeIcon icon={faCog} className='icon'/>
+                  <FontAwesomeIcon icon={faCog} className='icon' />
                   <p>{texts[language].Configuraciones}</p>
                 </Link>
               </li>
             </div>
             <div className="down">
               <li>
+                <Link to='/' onClick={cerraSession}>
+                  <FontAwesomeIcon icon={faSignOutAlt} className='icon' />
+                  <p>{texts[language].Cerrar}</p>
+                </Link>
+              </li>
+              <li>
                 <Link to='/'>
-                  <FontAwesomeIcon icon={faHome} className='icon'/>
+                  <FontAwesomeIcon icon={faHome} className='icon' />
                   <p>{texts[language].Home}</p>
                 </Link>
               </li>

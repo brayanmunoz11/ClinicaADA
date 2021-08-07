@@ -48,6 +48,7 @@ export function LanguageContext ({children}) {
       AnadirPaciente: 'Añadir Paciente',
       AnadirPersonal: 'Añadir Personal',
       AnadirCama: 'Añadir Cama',
+      Consultas: 'Consultas'
     },
     en: {
       Perfil: 'Profile',
@@ -91,6 +92,7 @@ export function LanguageContext ({children}) {
       AnadirPaciente: 'Add Patient',
       AnadirPersonal: 'Add Staff',
       AnadirCama: 'Add Bed',
+      Consultas: 'Appointments'
     }
   }
 

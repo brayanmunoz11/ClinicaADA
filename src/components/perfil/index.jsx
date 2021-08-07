@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import { PerfilContainer, PerfilC, PerfilClose, PerfilInfo, PerfilImage, LinkB } from './styles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserAlt } from '@fortawesome/free-solid-svg-icons'
 import Context from '../../context/languageContext';
-import { useContext } from 'react';
 import setFont2 from '../../services/setFont';
 
 export default function Perfil (){
@@ -16,6 +15,7 @@ export default function Perfil (){
 
   const [font, setFont] = useState(localStorage.getItem('fontFamily'))
   const [size, setSize] = useState(localStorage.getItem('fontSize'))
+
   useEffect(()=> {
     if(font !== null) {
       setFont2(font, size)
@@ -46,9 +46,9 @@ export default function Perfil (){
             <p>{user.usuario}</p>
           </div>
         </PerfilInfo>
-        <PerfilClose>
+        {/* <PerfilClose>
           <LinkB to='/' onClick={cerraSession}>{texts[language].Cerrar}</LinkB>
-        </PerfilClose>
+        </PerfilClose> */}
       </PerfilC>
     </PerfilContainer>
   </>)

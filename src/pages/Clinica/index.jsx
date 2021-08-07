@@ -4,6 +4,7 @@ import Formulario from 'pages/Formulario'
 import FormTabsContainer from 'pages/FormTabsContainer'
 import MenuClinica from 'components/menuClinica'
 import Perfil from 'pages/Perfil'
+import PerfilAll from 'pages/PerfilAll'
 import './styles.css'
 import Config from 'pages/Config'
 
@@ -18,8 +19,11 @@ export default function Clinica ({cambiarFont}){
           <Route path="/ClinicaPaciente/Formulario">
             <FormTabsContainer />
           </Route>
-          <Route path="/ClinicaPaciente">
+          <Route path="/ClinicaPaciente/Consultas">
             <Perfil />
+          </Route>
+          <Route path="/ClinicaPaciente">
+            <PerfilAll />
           </Route>
         </Switch>
     </div>

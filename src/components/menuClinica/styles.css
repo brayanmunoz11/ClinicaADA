@@ -2,6 +2,9 @@
   width: 230px;
   background: linear-gradient(to right bottom, #aff0f5 0%, #def4f8 40%);
   /* height: 100vh; */
+  transition: .2s;
+  overflow: hidden;
+
 }
 .menu-clinica-container .logoMenu {
   width: 100%;
@@ -10,18 +13,20 @@
   align-items: center;
   justify-content: space-evenly;
   cursor: pointer;
+  transition: .2s;
 }
 .menu-clinica-container .logoMenu .logo {
   height: 60%;
+  transition: .2s;
 }
 .menu-clinica-container .logoMenu .logo img {
   height: 100%;
+  transition: .2s;
 }
 
 .menu-clinica-container .logoName{
   color: rgb(78, 102, 243);
   width: min-content;
-  transition: .4s;
   font-size: 1.4em;
 }
 .menu-clinica-container .logoName p, .menu-clinica-container .logoName span {
@@ -72,4 +77,21 @@
   font-size: .5em;
   height: fit-content;
   text-align: left;
+  transition: .3s;
+  white-space: nowrap;
+}
+
+.menu-clinica-container.small {
+  width: 70px;
+}
+.menu-clinica-container.small .logoMenu {
+  /* overflow: hidden; */
+
+}
+.menu-clinica-container.small .logoMenu .logoName {
+  display: none;
+  /* visibility: hidden; */
+}
+.menu-clinica-container.small .menu-clinica ul p{
+  /* display: none; */
 }
