@@ -32,6 +32,7 @@ export default function RegisterForm({ }) {
 
   const onSumbit = (data, e) => {
     e.preventDefault()
+    setLoading(true)
     const newUser = {
       nombre: data.nombre || datesDNI.nombres,
       apellidoP: data.apellidoP || datesDNI.paterno,
@@ -42,22 +43,20 @@ export default function RegisterForm({ }) {
       contrasena: data.password,
       tipoUsuario: 'paciente'
     }
-    console.log(newUser)
-    // sendRegistro(newUser)
-    //   .then(res => {
-    //     setLoading(false)
-    //     if (res === 'user created') {
-    //       return history.push('/ClinicaPaciente')
-    //     } else {
-    //       setErrorM(true)
-    //       setMessage(res)
-    //     }
-    //   })
+    sendRegistro(newUser)
+      .then(res => {
+        setLoading(false)
+        if (res === 'user created') {
+          return history.push('/ClinicaPaciente')
+        } else {
+          setErrorM(true)
+          setMessage(res)
+        }
+      })
   }
   const password = watch("password", "");
 
   const dni = register('dni', {
-    required: 'Ingrese un dni',
     minLength: {
       value: 8,
       message: 'El dni deben ser 8 digitos'
@@ -73,19 +72,17 @@ export default function RegisterForm({ }) {
     const dni = evt.target.value
     if (dni.length === 8) {
       clearErrors('dni')
-      // getInfoDNI(dni)
-      //   .then(res => {
-      //     setDatesDNI(res)
-      //     console.log(res)
-      //   })
-      setDatesDNI({
-        dni: '72188379',
-        materno: "ROJAS",
-        nombres: "OSCAR FERNANDO",
-        paterno: "CABELLOS",
-        sexo: "M",
-      })
-
+      getInfoDNI(dni)
+        .then(res => {
+          (res !== undefined) ? setDatesDNI(res) : console.log('avion dijo el camion')
+        })
+      // setDatesDNI({
+      //   dni: '72188379',
+      //   materno: "ROJAS",
+      //   nombres: "OSCAR FERNANDO",
+      //   paterno: "CABELLOS",
+      //   sexo: "M",
+      // })
     } else {
       setDatesDNI({
         nombres: '',

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import './styles.css'
 import cancerIcon from 'img/cancerIcon.png'
 import cardioIcon from 'img/cardioIcon.png'
 import firma from 'img/firma.png'
 import ginecoIcon from 'img/ginecoIcon.png'
-import logo from 'img/logo.png'
+import logoC from 'img/logo.png'
 import logoRecortado from 'img/logoRecortado.png'
 import pediatriaIcon from 'img/pediatriaIcon.png'
 import staff1 from 'img/staff1.jpg'
@@ -12,14 +12,16 @@ import staff2 from 'img/staff2.png'
 import staff3 from 'img/staff3.png'
 import staff4 from 'img/staff4.png'
 import stomatchIcon from 'img/stomatchIcon.png'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars, faTimes, faVirus } from '@fortawesome/free-solid-svg-icons'
 
-function Home ({}){
+function Home({ }) {
   const [user, setUser] = useState(sessionStorage.getItem('usuario'))
   const [path, setPath] = useState('/Login')
   var tipo = ''
   useEffect(() => {
-    if(user === 'null' || user === null) {
+    if (user === 'null' || user === null) {
       console.log(user)
     }
     else {
@@ -27,34 +29,61 @@ function Home ({}){
     }
   }, [])
   const ala = () => {
-    console.log('gura')
     tipo = JSON.parse(sessionStorage.getItem('usuario')).tipoUsuario
-    if(tipo === 'paciente') {
+    if (tipo === 'paciente') {
       setPath('/ClinicaPaciente')
     }
-    else if(tipo === 'doctor') {
+    else if (tipo === 'doctor') {
       setPath('/ClinicaDoctor')
     }
-    else if(tipo === 'administrador') {
+    else if (tipo === 'administrador') {
       setPath('/ClinicaAdministrador')
     }
   }
 
+  const menuContainer = useRef()
+  const menu = useRef()
+  const extra = useRef()
+  const logo = useRef()
+  const logoContainer = useRef()
+  const menuOffCanvas = useRef()
+
+  window.onscroll = () => {
+    if (window.pageYOffset > 0) {
+      menuContainer.current.classList.add("menuContainer-on");
+      menu.current.classList.add("menu-on");
+      extra.current.classList.add("extra-on");
+      logo.current.classList.add("active");
+      logoContainer.current.classList.add("logo-on");
+    } else {
+      menuContainer.current.classList.remove("menuContainer-on");
+      menu.current.classList.remove("menu-on");
+      extra.current.classList.remove("extra-on");
+      logo.current.classList.remove("active");
+      logoContainer.current.classList.remove("logo-on");
+    }
+  }
+  const abrirMenu = () => {
+    menuOffCanvas.current.classList.toggle("menuNoVisible");
+  }
+
   return (<>
     <div className="HomeContainer">
-      <div className="menu-container" >
+      <div className="menu-container" ref={menuContainer}>
         <div className="abrirMenu">
           <p>
+            <FontAwesomeIcon icon={faBars} className='icon' onClick={abrirMenu} />
           </p>
         </div>
-        <div className="menuExtra" id="menu" >
+        <div className="menuExtra" id="menu" ref={menuOffCanvas}>
           <div className="cerrarMenu">
             <p>
+              <FontAwesomeIcon icon={faTimes} className='icon' onClick={abrirMenu} />
             </p>
           </div>
-          <div className="extra" >
+          <div className="extra" ref={extra}>
             <div className="covid">
-              {/* <fa-icon [icon]="faVirus"></fa-icon> */}
+              <FontAwesomeIcon icon={faVirus} />
               <h1>COVID-19</h1>
             </div>
             <div className="contacto-header">
@@ -62,7 +91,7 @@ function Home ({}){
               <h1><Link to={(user !== 'null' && user !== null) ? path : '/Login'}>Ingresar al hospital Online</Link></h1>
             </div>
           </div>
-          <div className="menu" >
+          <div className="menu" ref={menu}>
             <nav>
               <ul>
                 <li><a href="">Especialidades</a></li>
@@ -73,26 +102,29 @@ function Home ({}){
             </nav>
           </div>
         </div>
-        <div className="logo-container">
+        <div className="logo-container" ref={logoContainer}>
           <figure className="logo">
-            {/* <img src={logo} alt="logo"/> */}
+            <img src={logoC} alt="logo" ref={logo} />
           </figure>
+          <div className="logoName">
+            <p>Hospital <span>Hololive</span></p>
+          </div>
         </div>
       </div>
 
-{/* <!-- FIN MENU --> */}
+      {/* <!-- FIN MENU --> */}
 
-{/* <!-- INICIO HEADER --> */}
+      {/* <!-- INICIO HEADER --> */}
 
       <header className="header">
         <div className="header1 headers" ></div>
-        <div className="header2 headers" style={{visibility: 'hidden', opacity: 0}}></div>
-        <div className="header3 headers" style={{visibility: 'hidden', opacity: 0}}></div>
+        <div className="header2 headers" style={{ visibility: 'hidden', opacity: 0 }}></div>
+        <div className="header3 headers" style={{ visibility: 'hidden', opacity: 0 }}></div>
       </header>
 
-{/* <!-- FIN HEADER --> */}
+      {/* <!-- FIN HEADER --> */}
 
-{/* <!-- INICIO ESPECIALIDADES --> */}
+      {/* <!-- INICIO ESPECIALIDADES --> */}
 
       <section className="especialidades-container">
         <h1>Nuestras Especialidades</h1>
@@ -104,7 +136,7 @@ function Home ({}){
               </div>
               <div className="central cardiologia">
                 <figure>
-                  <img src={cardioIcon} alt=""/>
+                  <img src={cardioIcon} alt="" />
                 </figure>
                 <h1>Cardiologia</h1>
               </div>
@@ -118,7 +150,7 @@ function Home ({}){
               </div>
               <div className="central">
                 <figure>
-                  <img src={cancerIcon} alt=""/>
+                  <img src={cancerIcon} alt="" />
                 </figure>
                 <h1>Oncologia</h1>
               </div>
@@ -132,7 +164,7 @@ function Home ({}){
               </div>
               <div className="central">
                 <figure>
-                  <img src={stomatchIcon} alt=""/>
+                  <img src={stomatchIcon} alt="" />
                 </figure>
                 <h1>Gastroenterologia</h1>
               </div>
@@ -146,7 +178,7 @@ function Home ({}){
               </div>
               <div className="central">
                 <figure>
-                  <img src={ginecoIcon} alt=""/>
+                  <img src={ginecoIcon} alt="" />
                 </figure>
                 <h1>Ginecologia</h1>
               </div>
@@ -160,7 +192,7 @@ function Home ({}){
               </div>
               <div className="central">
                 <figure>
-                  <img src={pediatriaIcon} alt=""/>
+                  <img src={pediatriaIcon} alt="" />
                 </figure>
                 <h1>Pediatria</h1>
               </div>
@@ -175,9 +207,9 @@ function Home ({}){
         </a>
       </section>
 
-{/* <!-- FIN ESPECIALIDADES --> */}
+      {/* <!-- FIN ESPECIALIDADES --> */}
 
-{/* <!-- INICIO STAFF --> */}
+      {/* <!-- INICIO STAFF --> */}
 
       <section className="staff-container">
         <h1>Nuestro STAFF</h1>
@@ -250,22 +282,22 @@ function Home ({}){
                     {/* <p>Conoce más <fa-icon [icon]="faChevronCircleRight"></fa-icon></p> */}
                   </div>
                 </div>
-                <figure><img src={staff3} /></figure>
+                <figure><img src={staff4} /></figure>
               </div>
             </a>
           </div>
 
         </div>
-        <a href="" style={{textDecoration: 'none'}} >
+        <a href="" style={{ textDecoration: 'none' }} >
           <div className="masDoc">
             {/* <h1>Conoce a todo nuestro Staff <fa-icon [icon]="faChevronCircleRight"></fa-icon></h1> */}
           </div>
         </a>
       </section>
 
-{/* <!-- FIN STAFF --> */}
+      {/* <!-- FIN STAFF --> */}
 
-{/* <!-- INICIO FOOTER --> */}
+      {/* <!-- INICIO FOOTER --> */}
 
       <footer className="footer-container">
         <div className="footer-main">
@@ -290,7 +322,7 @@ function Home ({}){
           <div className="footer-contact" >
             <h2 className="footer-title">Contáctenos</h2>
             <form action="">
-              <input className="input" type="email" name="email" id="email" placeholder="Correo electrónico"/>
+              <input className="input" type="email" name="email" id="email" placeholder="Correo electrónico" />
               <input className="button" type="submit" value="Enviar" />
             </form>
           </div>
