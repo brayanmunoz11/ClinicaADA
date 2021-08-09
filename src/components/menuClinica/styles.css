@@ -28,6 +28,7 @@
   color: rgb(78, 102, 243);
   width: min-content;
   font-size: 1.4em;
+  text-align: center;
 }
 .menu-clinica-container .logoName p, .menu-clinica-container .logoName span {
   font-family: 'Sansita', sans-serif;
