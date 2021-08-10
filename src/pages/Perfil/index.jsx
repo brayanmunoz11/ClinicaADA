@@ -30,7 +30,7 @@ export default function Perfil({ }) {
 
   return (<>
     <Container>
-      <PerfilComponent/>
+      {/* <PerfilComponent/> */}
       <TablesContainer>
         <div className="programadas">
           <h1>{texts[language].CitasProgra}</h1>

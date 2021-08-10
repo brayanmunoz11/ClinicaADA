@@ -48,7 +48,7 @@ const reducer = (state, action) => {
 export default function useForm ({initialEspecialidad = '', initialHorario = new Date(), initialTurno = '', initialDoctor = '', initialExtra = ''} = {})  {
   const [state, dispatch] = useReducer(reducer, {
     especialidad: initialEspecialidad,
-    horario: initialHorario,
+    horario: {fecha: `${initialHorario.getDate()}/${initialHorario.getMonth()+1}/${initialHorario.getFullYear()}`, date: initialHorario},
     turno: initialTurno,
     doctor: initialDoctor,
     extra: initialExtra,

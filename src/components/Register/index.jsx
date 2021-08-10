@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { ErrorMessage } from "@hookform/error-message";
 
-import { InputRegisterContainer, Apellidos, ApellidosContainer } from './styles'
+import { InputRegisterContainer, Apellidos, ApellidosContainer, MessageError } from './styles'
 import { Form, FormContainer, Title, Button } from './../Login/styles'
 import Errormodal from 'components/errormodal/errormodal'
 import Loader from 'components/loader'
@@ -33,6 +33,7 @@ export default function RegisterForm({ }) {
   const onSumbit = (data, e) => {
     e.preventDefault()
     setLoading(true)
+    const fecha = new Date()
     const newUser = {
       nombre: data.nombre || datesDNI.nombres,
       apellidoP: data.apellidoP || datesDNI.paterno,
@@ -41,6 +42,7 @@ export default function RegisterForm({ }) {
       sexo: datesDNI.sexo,
       correo: data.correo,
       contrasena: data.password,
+      vigencia: `${fecha.getDate()}/${fecha.getMonth()+1}/${fecha.getFullYear()+1}`,
       tipoUsuario: 'paciente'
     }
     sendRegistro(newUser)
@@ -126,22 +128,19 @@ export default function RegisterForm({ }) {
               }}
               onBlur={dni.onBlur}
               ref={dni.ref}
-            />
-            <ErrorMessage
-              errors={errors}
-              name="dni"
-              maxLength='8'
-              render={({ messages }) => {
-                console.log("messages", messages);
-                return messages
-                  ? Object.entries(messages).map(([type, message], index) => (
-                    <span key={index}>
-                      <p>{message}</p>
-                    </span>
-                  ))
-                  : null;
-              }}
-            />
+            >
+              <ErrorMessage
+                errors={errors}
+                name="dni"
+                maxLength='8'
+                render={({ messages }) => {
+                  // document.getElementsByName(errors.dni.ref.name)[0].classList.add('on')
+                  return messages
+                    ? <MessageError><p>{messages.minLength}</p></MessageError>
+                    : null;
+                }}
+              />
+            </Input>
             <Input
               name='name'
               label='Nombre'
@@ -192,18 +191,15 @@ export default function RegisterForm({ }) {
                   message: 'El correo debe seguir el patron xxxx@xxxx.xxxx'
                 }
               })}
-            />
-            <ErrorMessage
-              errors={errors}
-              name="correo"
-              render={({ messages }) => {
-                return messages
-                  ? Object.entries(messages).map(([type, message]) => (
-                    <p key={type}>{message}</p>
-                  ))
-                  : null;
-              }}
-            />
+            >
+              <ErrorMessage
+                errors={errors}
+                name="correo"
+                render={({ messages }) => {
+                  return messages ? <MessageError><p>{messages.pattern}</p></MessageError> : null;
+                }}
+              />
+            </Input>
             <Input
               name='password'
               label="Contraseña"
@@ -213,18 +209,15 @@ export default function RegisterForm({ }) {
                   message: 'La contraseña debe tener 8 digitos como minimo(por ahora solo 123 xfa)'
                 }
               })}
-            />
-            <ErrorMessage
-              errors={errors}
-              name="password"
-              render={({ messages }) => {
-                return messages
-                  ? Object.entries(messages).map(([type, message]) => (
-                    <p key={type}>{message}</p>
-                  ))
-                  : null;
-              }}
-            />
+            >
+              <ErrorMessage
+                errors={errors}
+                name="password"
+                render={({ messages }) => {
+                  return messages ? <MessageError><p>{messages.minLength}</p></MessageError> : null
+                }}
+              />
+            </Input>
             <Input
               name='passwordC'
               label="Confirmar contraseña"
@@ -234,8 +227,9 @@ export default function RegisterForm({ }) {
               }}
               onBlur={passwordC.onBlur}
               ref={passwordC.ref}
-            />
-            {errors.passwordC && <p>{errors.passwordC.message}</p>}
+            >
+              {errors.passwordC && <MessageError> <p>{errors.passwordC.message}</p></MessageError>}
+            </Input>
           </InputRegisterContainer>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <Button type='submit'>Registrate</Button>

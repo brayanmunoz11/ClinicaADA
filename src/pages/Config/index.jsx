@@ -39,10 +39,6 @@ export default function Config({ cambiarFont }) {
         <h1>{texts[language].Configuraciones}</h1>
       </div>
       <div className="container">
-        {/* <div className="configItem">
-          <FontAwesomeIcon icon={faEye} className='icon'/>
-          <p>Modo Daltonico</p>
-        </div> */}
         <div className="configItem" onClick={cambiarIdioma}>
           <FontAwesomeIcon icon={faLanguage} className='icon' />
           <p>{texts[language].CambiarIdioma}</p>

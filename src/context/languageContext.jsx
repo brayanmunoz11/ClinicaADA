@@ -3,7 +3,8 @@ import React, {useState, useEffect} from 'react'
 const Context = React.createContext({})
 
 export function LanguageContext ({children}) {
-  const [language, setLanguage] = useState('en')
+  // const lan = JSON.parse(localStorage.getItem(''))
+  const [language, setLanguage] = useState('es')
 
   const texts = {
     es: {

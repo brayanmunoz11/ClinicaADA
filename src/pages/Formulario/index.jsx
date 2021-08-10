@@ -12,7 +12,8 @@ import setFont2 from '../../services/setFont';
 export default function Formulario ({ especialidad, updateEspecialidad, horario, updateHHorario,turno, updateTurno, updateExtra}){
 
   const handleDateChange = (date) => {
-    updateHHorario(date)
+    const fecha = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`
+    updateHHorario({fecha, date})
   };
   const {language, setLanguage, texts} = useContext(Context)
 
@@ -47,7 +48,7 @@ export default function Formulario ({ especialidad, updateEspecialidad, horario,
               placeholder={texts[language].EligeEspecialidad}
               onChange={ (evt) => updateEspecialidad(evt)}
               styles={{
-                menuList: styles => ({ ...styles, height: '200px'}),
+                menuList: styles => ({ ...styles, maHeight: '200px'}),
               }}
             />
           </div>
@@ -62,7 +63,7 @@ export default function Formulario ({ especialidad, updateEspecialidad, horario,
                   margin="normal"
                   id="date-picker-dialog"
                   format="dd/MM/yyyy"
-                  value={horario}
+                  value={horario.date}
                   onChange={handleDateChange}
                   KeyboardButtonProps={{
                     'aria-label': 'change date',

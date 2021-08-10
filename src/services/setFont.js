@@ -1,5 +1,5 @@
 export default function setFont(fontFamily, fontSize) {
-  console.log(fontFamily)
+  // console.log(fontFamily)
   const nyan = document.querySelectorAll('*')
   nyan.forEach(nya => {
     if (nya.tagName == 'SCRIPT') {

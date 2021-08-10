@@ -26,7 +26,7 @@ export default function ChooseDoctor({ updateDoctor, especialidad, turno }) {
     borrarSeleccion()
 
     const row = event.target.parentNode.parentNode.parentNode.parentNode.parentNode
-    updateDoctor(row.id)
+    updateDoctor({id: row.id, name: row.childNodes[0].textContent})
     // console.log(row.id)
     const checkBoxes = document.getElementsByName('Checkbox')
 
@@ -77,7 +77,7 @@ export default function ChooseDoctor({ updateDoctor, especialidad, turno }) {
                 {
                   doctores.map((doctor, index) =>
                     <tr key={doctor.idDoc} id={doctor.idDoc}>
-                      <td>{doctor.nombre + ' ' + doctor.apellido}</td>
+                      <td>{doctor.nombre + ' ' + doctor.apellidoP}</td>
                       <td>{doctor.turno}</td>
                       <td>
                         <button>Ver Perfil</button>

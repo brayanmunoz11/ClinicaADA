@@ -5,26 +5,30 @@ export const ConfigContainer = styled.div`
   grid-template-rows: auto 1fr;
   /* position: relative; */
   .titleContainer {
-    margin: 20px 0 50px 20px;
+    margin: 20px;
     display: flex;
     justify-content: flex-start;
     color: ${props => props.theme.colors.primary};
   }
   .container {
     display: flex;
-    margin: 20px 50px;
+    flex-direction: column;
+    margin: 20px 0;
     .configItem {
-      width: 200px;
-      height: 200px;
-      border: 1px solid ${props => props.theme.colors.primary};
-      margin-right: 30px;
+      padding: 0 20px;
+      width: 100%;
+      height: 100px;
       cursor: pointer;
       display: flex;
-      justify-content: space-evenly;
+      justify-content: flex-start;
       align-items: center;
-      flex-direction: column;
       .icon {
         font-size: 4em;
+        width: 80px;
+        margin-right: 20px;
+      }
+      :hover {
+        background-color: #E8E8E8;
       }
     }
   }

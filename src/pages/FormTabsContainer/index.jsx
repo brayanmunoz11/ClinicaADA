@@ -19,7 +19,8 @@ const useQontoStepIconStyles = makeStyles({
     color: "#eaeaf0",
     display: "flex",
     height: 22,
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: 'transparent'
   },
   active: {
     color: "#784af4"
@@ -156,7 +157,8 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
     display: "grid",
     gridTemplateRows: "auto 1fr auto",
-    overflow: "hidden"
+    overflow: "hidden",
+    backgroundColor: 'transparent'
   },
   button: {
     marginRight: theme.spacing(1)
@@ -214,6 +216,7 @@ export default function CustomizedSteppers() {
         alternativeLabel
         activeStep={activeStep}
         connector={<ColorlibConnector />}
+        style={{ backgroundColor: 'transparent' }}
       >
         {steps.map((label) => (
           <Step key={label}>
@@ -221,8 +224,15 @@ export default function CustomizedSteppers() {
           </Step>
         ))}
       </Stepper>
-      <FormTabs tabState={changeStep()} />
-      <div className={classes.buttonC}>
+      <FormTabs
+        tabState={changeStep()}
+        handleBack={handleBack}
+        handleNext={handleNext}
+        steps={steps}
+        activeStep={activeStep}
+        setActiveStep={setActiveStep}
+      />
+      {/* <div className={classes.buttonC}>
         <div>
           <div>
             <Button
@@ -244,7 +254,7 @@ export default function CustomizedSteppers() {
             </Button>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

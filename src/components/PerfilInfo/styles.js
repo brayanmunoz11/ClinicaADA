@@ -1,19 +1,5 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import styled from "styled-components"
 
-export const PerfilContainer = styled.div`
-  height: 100%;
-  width: 100%;
-  display: grid;
-  padding: 20px 30px;
-  grid-template-columns: 330px 1fr 300px;
-  grid-gap: 20px;
-`
-export const TopPerfil = styled.div`
-  display: grid;
-  grid-template-rows: 140px auto;
-  grid-gap: 40px;
-`
 export const InfoPerfil = styled.div`
   background-color: #fff;
   display: flex;
@@ -47,7 +33,8 @@ export const InfoPerfil = styled.div`
       font-size: 16px;
     }
   }
-  `
+`
+
 export const TopInputs = styled.div`
   /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
   height: fit-content;
@@ -96,39 +83,4 @@ export const TopInputs = styled.div`
       }
     }
   }
-`
-export const MiddlePerfil = styled.div`
-  display: grid;
-`
-export const BottomPerfil = styled.div`
-  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-  background-color: #fff;
-  border-radius: 10px; */
-  height: 400px;
-  
-`
-export const ButtonContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* padding-top: 20px; */
-  button {
-    width: 100%;
-    height: 40px;
-    border: none;
-    background-color: ${props => props.theme.colors.secondary};
-    color: #fff;
-    font-size: .9em;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 1px;
-    border-radius: 7px;
-    cursor: pointer;
-  }
-`
-export const Input = styled.input`
-  height: 40px;
-  font-size: 1em;
-  padding: 5px;
 `
