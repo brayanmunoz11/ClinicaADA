@@ -114,6 +114,7 @@ export default function LoginForm({ }) {
             <span style={{ marginTop: '10px', fontSize: '12px' }}>
               ¿No te acuerdas tu contraseña?
             </span>
+            <span style={{ marginTop: '10px', fontSize: '12px' }}><Link to='/'>Volver al Home</Link></span>
           </div>
         </Form>
       </FormContainer>

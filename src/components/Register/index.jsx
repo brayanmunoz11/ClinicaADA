@@ -234,6 +234,7 @@ export default function RegisterForm({ }) {
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <Button type='submit'>Registrate</Button>
             <span style={{ marginTop: '10px', fontSize: '12px' }}>¿Ya tienes una cuenta? <Link to='/login'>Logeate</Link></span>
+            <span style={{ marginTop: '10px', fontSize: '12px' }}><Link to='/'>Volver al Home</Link></span>
           </div>
         </Form>
       </FormContainer>
