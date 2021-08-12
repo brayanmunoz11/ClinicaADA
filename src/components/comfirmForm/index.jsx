@@ -5,7 +5,7 @@ import { faCalendarAlt, faCloudMoon, faTag, faUserMd } from '@fortawesome/free-s
 import createCita from 'services/createCita'
 import setFont2 from 'services/setFont';
 import Errormodal from 'components/errormodal/errormodal'
-import Loader from 'components/Loader'
+import Loader from 'components/loader'
 
 export default function Comfirm({ especialidad, horario, turno, doctor }) {
   const [errorModal, setErrorM] = useState(false)
