@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState, useRef } from 'react'
 import './styles.css'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserAlt, faStickyNote, faCog, faHome, faSignOutAlt, faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
+import { faUserAlt, faCog, faHome, faSignOutAlt, faCalendarAlt, faNotesMedical } from '@fortawesome/free-solid-svg-icons'
 import Context from '../../context/languageContext';
 import logoC from 'img/logo.png'
 
@@ -63,7 +63,7 @@ export default function MenuClinica({ }) {
                 (tipo === 'paciente')
                   ? <li>
                     <Link to='/ClinicaPaciente/Formulario'>
-                      <FontAwesomeIcon icon={faStickyNote} className='icon' />
+                      <FontAwesomeIcon icon={faNotesMedical} className='icon' />
                       <p>{texts[language].Formulario}</p>
                     </Link>
                   </li>

@@ -104,7 +104,7 @@ export default function RegisterForm({ }) {
     }
   }
 
-  const nombres = register('name')
+  const nombres = register('nombre')
   const apellidoP = register('apellidoP')
   const apellidoM = register('apellidoM')
   const passwordC = register('passwordC')
@@ -142,7 +142,7 @@ export default function RegisterForm({ }) {
               />
             </Input>
             <Input
-              name='name'
+              name='nombre'
               label='Nombre'
               value={datesDNI.nombres}
               onChange={nombres.onChange}
@@ -151,7 +151,7 @@ export default function RegisterForm({ }) {
             />
             <ErrorMessage
               errors={errors}
-              name="name"
+              name="nombre"
               render={({ messages }) => {
                 return messages
                   ? Object.entries(messages).map(([type, message]) => (

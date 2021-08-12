@@ -1,33 +1,46 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { ConfirmContainer, ConfirmSubContainer, ConfirmTitle, ConfirmDates, ConfirmButton, ConfirmItem } from './styles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarAlt, faCloudMoon, faTag, faUserMd } from '@fortawesome/free-solid-svg-icons'
 import createCita from 'services/createCita'
 import setFont2 from 'services/setFont';
+import Errormodal from 'components/errormodal/errormodal'
+import Loader from 'components/Loader'
 
-export default function Comfirm ({especialidad, horario, turno, doctor}){
-  console.log(doctor)
+export default function Comfirm({ especialidad, horario, turno, doctor }) {
+  const [errorModal, setErrorM] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [font, setFont] = useState(localStorage.getItem('fontFamily'))
   const [size, setSize] = useState(localStorage.getItem('fontSize'))
-  useEffect(()=> {
-    if(font !== null) {
+  useEffect(() => {
+    if (font !== null) {
       setFont2(font, size)
     }
-  },[])
+  }, [])
 
   const enviarForm = () => {
-    const iduser = JSON.parse(sessionStorage.getItem('usuario')).id
-
+    // setLoading(true)
+    // const iduser = JSON.parse(sessionStorage.getItem('usuario')).id
     // createCita({
     //   idPaciente: iduser,
     //   especialidad,
-    //   fecha: horario.toString(),
+    //   fecha: horario.fecha,
     //   turno,
-    //   idDoctor: doctor
+    //   idDoctor: doctor.id
+    // }).then(res => {
+    //   setLoading(false)
+    //   setErrorM(true)
     // })
+    setErrorM(true)
   }
 
   return (<>
+    {(loading) ? <Loader /> : null}
+    {
+      (errorModal)
+        ? <Errormodal setErrorM={setErrorM} message='La cita se creo exitosamente' type='confirmCita' />
+        : null
+    }
     <ConfirmContainer>
       <ConfirmSubContainer>
         <ConfirmTitle>

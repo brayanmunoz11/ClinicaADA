@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import Formulario from 'pages/Formulario'
 import FormTabsContainer from 'pages/FormTabsContainer'
 import MenuClinica from 'components/menuClinica'
-import Perfil from 'pages/Perfil'
+import Citas from 'pages/Citas'
 import PerfilAll from 'pages/PerfilAll'
 import './styles.css'
 import Config from 'pages/Config'
@@ -20,7 +20,7 @@ export default function Clinica ({cambiarFont}){
             <FormTabsContainer />
           </Route>
           <Route path="/ClinicaPaciente/Consultas">
-            <Perfil />
+            <Citas />
           </Route>
           <Route path="/ClinicaPaciente">
             <PerfilAll />

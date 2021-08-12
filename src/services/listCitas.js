@@ -1,9 +1,9 @@
 import {API_URL} from './API_KEYS.js'
 
-function listCitas({estado}) {
+function listCitas() {
   const iduser = JSON.parse(sessionStorage.getItem('usuario')).id
-  return fetch(`${API_URL}/citasUserPro/${iduser}/${estado}`)
+  return fetch(`${API_URL}/citasUser/${iduser}`)
     .then(res => res.json())
-    .then(res => res.citas);
+    .then(res => res);
 }
 export default listCitas

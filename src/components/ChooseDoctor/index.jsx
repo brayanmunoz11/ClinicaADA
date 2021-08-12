@@ -12,6 +12,7 @@ export default function ChooseDoctor({ updateDoctor, especialidad, turno }) {
   const [doctores, setDoctores] = useState([])
   const { language, setLanguage, texts } = useContext(Context)
   useEffect(() => {
+    updateDoctor('')
     getDoctores({ especialidad, turno })
       .then(res => {
         setDoctores(res)
