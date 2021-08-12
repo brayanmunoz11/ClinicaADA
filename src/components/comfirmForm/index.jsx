@@ -19,19 +19,19 @@ export default function Comfirm({ especialidad, horario, turno, doctor }) {
   }, [])
 
   const enviarForm = () => {
-    // setLoading(true)
-    // const iduser = JSON.parse(sessionStorage.getItem('usuario')).id
-    // createCita({
-    //   idPaciente: iduser,
-    //   especialidad,
-    //   fecha: horario.fecha,
-    //   turno,
-    //   idDoctor: doctor.id
-    // }).then(res => {
-    //   setLoading(false)
-    //   setErrorM(true)
-    // })
-    setErrorM(true)
+    setLoading(true)
+    const iduser = JSON.parse(sessionStorage.getItem('usuario')).id
+    createCita({
+      idPaciente: iduser,
+      especialidad,
+      fecha: horario.fecha,
+      turno,
+      idDoctor: doctor.id
+    }).then(res => {
+      setLoading(false)
+      setErrorM(true)
+    })
+    // setErrorM(true)
   }
 
   return (<>
