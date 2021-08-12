@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Container, CitasContainer, CitaContainer, CitasDates, CitasItem, CitaTitle, CitasSeccion, CitasTitle } from './styles'
+import Loader from 'components/loader'
 import listCitas from 'services/listCitas';
 import Context from '../../context/languageContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarAlt, faCloudMoon, faTag, faUserMd } from '@fortawesome/free-solid-svg-icons'
-import Loader from 'components/Loader'
 
 export default function Citas({ }) {
   const [citasPro, setCitasPro] = useState([])
