@@ -3,7 +3,7 @@ function getInfoDNI(dni) {
     mode: 'no-cors',
     method: 'POST',
     headers: {
-      'Access-Control-Allow-Origin': '*',
+      // 'Access-Control-Allow-Origin': '*',
       Accept: 'application/json, text/plain, */*',
       'Content-Type': 'application/json',
       // Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjgyNzEzMzMsImlzcyI6ImxvY2FsaG9zdCIsInVzZXJfaWQiOjQyODl9.E0-cvVnBr6KuZAeT__0ANCRIP9iq1Oa0r1XQeFYeBrU'
