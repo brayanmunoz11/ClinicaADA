@@ -15,11 +15,11 @@ export default function Tabla({children}) {
 
   return (<>
     <TableContainer>
-      <PerfectScrollbar>
+      {/* <PerfectScrollbar> */}
         <div className="table">
           {children}
         </div>
-      </PerfectScrollbar>
+      {/* </PerfectScrollbar> */}
     </TableContainer>
   </>)
 }

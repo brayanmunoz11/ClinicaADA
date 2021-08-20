@@ -23,7 +23,7 @@ export const TitleContainer = styled.div`
 `
 
 export const PacienteContainer = styled.div`
-  width: 80%;
+  width: 90%;
   display: grid;
   margin: auto;
   grid-template-rows: 50px 1fr 100px;
@@ -36,60 +36,77 @@ export const BuscadorContainer = styled.div`
 `
 
 export const TablaContainer = styled.div`
-  margin: 40px 0;
-  overflow: hidden;
-  max-height: calc(100vh - 400px);
-  h1 {
-    padding-left: 20px;
-    font-size: 1.5em;
-    text-align: left;
-    width: 100%;
-    color: ${props=> props.theme.colors.primary};
-    font-family: 'Roboto Mono', monospace;
-  }
-  table {
-    border-collapse: collapse;
-    width: 100%;
-    /* height: 40vh; */
-  }
-  th {
-    color: ${props=> props.theme.colors.primary}
-  }
-  th, td {
-    font-family: 'Roboto Mono', monospace;
-    text-align: left;
-    padding-top: 16px;
-    padding-bottom: 16px;
-  }
-  tr {
-    border-bottom: 1px solid #ccc;
-    padding: 0 20px;
-    box-sizing: border-box;
-  }
-  td {
-    color: #999;
-    font-size: 15px;
-    line-height: 1.4;
-  }
-  .sexo{
-    width: 100px;
-    /* max-width: 100px; */
-  }
-  .editar, .vigencia {
-    width: 160px;
-  }
-
-  thead {
-    position: sticky;
-    top: 0;
+  /* margin: 40px 0; */
+  overflow: auto;
+  max-height: calc(100vh - 300px);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  /* flex-wrap: wrap; */
+  /* flex-flow: row-wrap; */
+  /* justify-content: space-evenly; */
+  grid-gap: 40px;
+  .pacienteContainer {
+    justify-self: center;
+    width: 300px;
+    height: 250px;
+    margin: 20px 10px;
+    background-color: #afa;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
     background-color: #fff;
+    border-radius: 10px;
+    transition: .3s;
+    /* padding: 10px 15px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    .pacienteInfo {
+      margin: 20px 10px;
+    }
+    .infoItem {
+      display: flex;
+      justify-content: space-between;
+      text-align: right;
+      margin-bottom: 10px;
+      p:first-child {
+        font-weight: bold;
+        color: ${props => props.theme.colors.primary};
+      }
+    }
+  }
+  .pacienteOpciones {
+    h1 {
+      margin-left: 10px;
+      font-size: 1.2em;
+      text-transform: uppercase;
+      color: ${props => props.theme.colors.primary};
+    }
+  }
+  .opcion {
+    cursor: pointer;
+    display: flex;
+    padding: 10px 10px;
+    transition: .3s;
+    .icon {
+      width: 20px;
+      margin: 0 10px 0 0;
+      color: ${props => props.theme.colors.primary};
+      pointer-events: none;
+      font-size: 1.1em;
+    }
+    p {
+      pointer-events: none;
+    }
+    &:hover {
+      background-color: #ccc;
+    }
   }
 `
 
 export const AnadirContainer = styled.div`
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   .button {
     background: ${props => props.theme.colors.primary};
     border: none;

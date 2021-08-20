@@ -80,7 +80,7 @@ export default function AdministrarCamas({ }) {
       </TitleContainer>
       <PacienteContainer>
         <BuscadorContainer>
-          <input type="text" />
+          {/* <input type="text" /> */}
         </BuscadorContainer>
         <TablaContainer>
           <Tabla>
@@ -156,7 +156,7 @@ export default function AdministrarCamas({ }) {
                               <td>{cama.estado}</td>
                               <td className='paciente'>{cama.nombre}</td>
                               <td>
-                                <button onClick={(evt) => {
+                                <button className='button' onClick={(evt) => {
                                   const row = evt.target.parentNode.parentNode
                                   setSeccion(row.id)
                                   setEditar(!editar)

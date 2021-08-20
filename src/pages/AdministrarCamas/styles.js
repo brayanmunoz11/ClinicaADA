@@ -44,16 +44,15 @@ export const TablaContainer = styled.div`
     font-size: 1.5em;
     text-align: left;
     width: 100%;
-    color: ${props=> props.theme.colors.primary};
+    color: ${props => props.theme.colors.primary};
     font-family: 'Roboto Mono', monospace;
   }
   table {
     border-collapse: collapse;
     width: 100%;
-    /* height: 40vh; */
   }
   th {
-    color: ${props=> props.theme.colors.primary}
+    color: ${props => props.theme.colors.primary}
   }
   th, td {
     font-family: 'Roboto Mono', monospace;
@@ -70,6 +69,16 @@ export const TablaContainer = styled.div`
     color: #999;
     font-size: 15px;
     line-height: 1.4;
+    .button {
+        background: ${props => props.theme.colors.primary};
+        border: none;
+        outline: none;
+        color: #fff;
+        padding: 10px 15px;
+        font-size: 1em;
+        cursor: pointer;
+        width: 150px;
+      }
   }
   .sexo{
     width: 100px;
@@ -85,18 +94,14 @@ export const TablaContainer = styled.div`
   thead {
     position: sticky;
     top: 0;
-    background-color: #fff;
   }
-  /* .paciente {
-    width: 300px;
-  } */
 `
 
 export const AnadirContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  button {
+  .button {
     background: ${props => props.theme.colors.primary};
     border: none;
     cursor: pointer;

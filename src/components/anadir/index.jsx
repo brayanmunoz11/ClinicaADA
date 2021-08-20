@@ -16,11 +16,6 @@ import setFont2 from '../../services/setFont';
 const Especialidad = [
   { value: 'cardiologia', label: 'Cardiologia' },
   { value: 'traumatologia', label: 'Traumatologia' },
-  { value: 'oncologia', label: 'Oncologia' },
-  { value: 'oncologia', label: 'Oncologia' },
-  { value: 'oncologia', label: 'Oncologia' },
-  { value: 'oncologia', label: 'Oncologia' },
-  { value: 'oncologia', label: 'Oncologia' },
   { value: 'oncologia', label: 'Oncologia' }
 ]
 const turnos = [
@@ -32,8 +27,6 @@ const sexo = [
   { value: 'M', label: 'Masculino' },
   { value: 'F', label: 'Femenino' }
 ]
-
-
 
 export default function Anadir({ type, setAnadir, setDoctores, setPacientes, setCamas }) {
   const [horario, setHorario] = useState()
@@ -68,7 +61,7 @@ export default function Anadir({ type, setAnadir, setDoctores, setPacientes, set
   }
 
   useEffect(() => {
-    if(type === 'Camas') {
+    if (type === 'Camas') {
       getPacientes()
         .then(res => {
           setUsuario(prev => prev.concat(res.map(user => {
@@ -83,11 +76,11 @@ export default function Anadir({ type, setAnadir, setDoctores, setPacientes, set
   }, [])
   const [font, setFont] = useState(localStorage.getItem('fontFamily'))
   const [size, setSize] = useState(localStorage.getItem('fontSize'))
-  useEffect(()=> {
-    if(font !== null) {
+  useEffect(() => {
+    if (font !== null) {
       setFont2(font, size)
     }
-  },[])
+  }, [])
 
   return (<>
     <Container>
@@ -103,15 +96,19 @@ export default function Anadir({ type, setAnadir, setDoctores, setPacientes, set
                 ? <>
                   <div className="formItem">
                     <label htmlFor="nombre">Nombre</label>
-                    <input type="text" name='nombre' autoComplete='off' />
+                    <input type="text" name='nombre' autoComplete='off' required/>
                   </div>
                   <div className="formItem">
-                    <label htmlFor="apellido">Apellido</label>
-                    <input type="text" name='apellido' autoComplete='off' />
+                    <label htmlFor="apellidoP">Apellido Paterno</label>
+                    <input type="text" name='apellidoP' autoComplete='off' required/>
+                  </div>
+                  <div className="formItem">
+                    <label htmlFor="apellidoM">Apellido Materno</label>
+                    <input type="text" name='apellidoM' autoComplete='off' required/>
                   </div>
                   <div className="formItem">
                     <label htmlFor="usuario">DNI</label>
-                    <input type="text" name='usuario' autoComplete='off' />
+                    <input type="text" name='usuario' autoComplete='off' required/>
                   </div>
                   <div className="formItem">
                     <label htmlFor="sexo">Sexo</label>
@@ -146,11 +143,11 @@ export default function Anadir({ type, setAnadir, setDoctores, setPacientes, set
                   {/* <h2>Credenciales</h2> */}
                   <div className="formItem">
                     <label htmlFor="correo">Correo</label>
-                    <input type="text" name='correo' autoComplete='off' />
+                    <input type="text" name='correo' autoComplete='off' required/>
                   </div>
                   <div className="formItem">
                     <label htmlFor="contraseña">Contraseña</label>
-                    <input type="password" name='contrasena' />
+                    <input type="password" name='contrasena' required/>
                   </div>
                   <button className='button'>Enviar</button>
                 </>
@@ -161,15 +158,19 @@ export default function Anadir({ type, setAnadir, setDoctores, setPacientes, set
                 ? <>
                   <div className="formItem">
                     <label htmlFor="nombre">Nombre</label>
-                    <input type="text" name='nombre' />
+                    <input type="text" name='nombre' required/>
                   </div>
                   <div className="formItem">
-                    <label htmlFor="apellido">Apellido</label>
-                    <input type="text" name='apellido' autoComplete='off' />
+                    <label htmlFor="apellidoP">Apellido Paterno</label>
+                    <input type="text" name='apellidoP' autoComplete='off' required/>
                   </div>
                   <div className="formItem">
-                    <label htmlFor="usuario">DNI</label>
-                    <input type="text" name='usuario' autoComplete='off' />
+                    <label htmlFor="apellidoM">Apellido Materno</label>
+                    <input type="text" name='apellidoM' autoComplete='off' required/>
+                  </div>
+                  <div className="formItem">
+                    <label htmlFor="dni">DNI</label>
+                    <input type="text" name='dni' autoComplete='off' required/>
                   </div>
                   <div className="formItem">
                     <label htmlFor="sexo">Sexo</label>
@@ -226,11 +227,11 @@ export default function Anadir({ type, setAnadir, setDoctores, setPacientes, set
                   {/* <h2>Credenciales</h2> */}
                   <div className="formItem">
                     <label htmlFor="correo">Correo</label>
-                    <input type="text" name='correo' autoComplete='off' />
+                    <input type="text" name='correo' autoComplete='off' required/>
                   </div>
                   <div className="formItem">
                     <label htmlFor="contrasena">Contraseña</label>
-                    <input type="password" name='contrasena' autoComplete='off' />
+                    <input type="password" name='contrasena' autoComplete='off' required/>
                   </div>
                   <button className='button'>Enviar</button>
                 </> : null
@@ -246,7 +247,7 @@ export default function Anadir({ type, setAnadir, setDoctores, setPacientes, set
                       // value={especialidad}
                       placeholder='Elige un paciente'
                       styles={{
-                        menuList: styles => ({ ...styles, maxHeight: '200px'}),
+                        menuList: styles => ({ ...styles, maxHeight: '200px' }),
                       }}
                     />
                   </div>

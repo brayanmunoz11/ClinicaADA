@@ -11,6 +11,7 @@ import setFont2 from '../../services/setFont';
 export default function ChooseDoctor({ updateDoctor, especialidad, turno }) {
   const [doctores, setDoctores] = useState([])
   const { language, setLanguage, texts } = useContext(Context)
+
   useEffect(() => {
     updateDoctor('')
     getDoctores({ especialidad, turno })
@@ -27,7 +28,7 @@ export default function ChooseDoctor({ updateDoctor, especialidad, turno }) {
     borrarSeleccion()
 
     const row = event.target.parentNode.parentNode.parentNode.parentNode.parentNode
-    updateDoctor({id: row.id, name: row.childNodes[0].textContent})
+    updateDoctor({ id: row.id, name: row.childNodes[0].textContent })
     // console.log(row.id)
     const checkBoxes = document.getElementsByName('Checkbox')
 
@@ -52,11 +53,11 @@ export default function ChooseDoctor({ updateDoctor, especialidad, turno }) {
   }
   const [font, setFont] = useState(localStorage.getItem('fontFamily'))
   const [size, setSize] = useState(localStorage.getItem('fontSize'))
-  useEffect(()=> {
-    if(font !== null) {
+  useEffect(() => {
+    if (font !== null) {
       setFont2(font, size)
     }
-  },[])
+  }, [])
 
 
 

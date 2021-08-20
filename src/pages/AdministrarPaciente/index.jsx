@@ -1,50 +1,51 @@
-import React, { useState, useEffect } from 'react'
-import { Container, TitleContainer, PacienteContainer, BuscadorContainer, TablaContainer, AnadirContainer } from './styles'
-import 'date-fns';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons'
-import Tabla from 'components/Tabla'
-import getPacientes from 'services/listarPacientes'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowAltCircleLeft, faIdBadge, faTrash, faUserEdit } from '@fortawesome/free-solid-svg-icons'
+import { Container, TitleContainer, PacienteContainer, BuscadorContainer, TablaContainer, AnadirContainer } from './styles'
 import ButtonAnadir from 'components/buttonAnadir'
 import Anadir from 'components/anadir'
-import setFont2 from '../../services/setFont';
+import EditarPaciente from 'components/editarPaciente';
+import ModalProfile from 'components/modalProfile';
+import getPacientes from 'services/listarPacientes'
+import setFont2 from 'services/setFont';
 import Context from '../../context/languageContext';
-import { useContext } from 'react';
-import Select from 'react-select'
-import Grid from '@material-ui/core/Grid';
-import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
-import changePaciente from '../../services/changePaciente';
+import deleteUser from 'services/deleteUser'
+
 export default function AdministrarPaciente({ }) {
+  const [pacientesTotal, setPacientesTotal] = useState([])
   const [pacientes, setPacientes] = useState([])
+  const [paciente, setPaciente] = useState('')
+
   const [anadir, setAnadir] = useState(false)
-  const { language, setLanguage, texts } = useContext(Context)
   const [editar, setEditar] = useState(false)
+  const [profile, setProfile] = useState(false)
+
+  const { language, setLanguage, texts } = useContext(Context)
   const [usuario, setUsuario] = useState([])
 
-  const [seccion, setSeccion] = useState('')
-
-  const [horario, setHorario] = useState()
-  const handleDateChange = (date) => {
-    setHorario(date)
-  };
   useEffect(() => {
     getPacientes()
-      .then(setPacientes)
+      .then(res => {
+        setPacientes(res)
+        setPacientesTotal(res)
+      })
   }, [])
+
   const [font, setFont] = useState(localStorage.getItem('fontFamily'))
   const [size, setSize] = useState(localStorage.getItem('fontSize'))
+  const editarPaciente = (evt) => {
+    const idpac = evt.target.parentNode.parentNode.parentNode.id
+    setPaciente(pacientes.find(paciente => paciente.id == idpac))
+    setEditar(true)
+  }
+
   useEffect(() => {
     if (font !== null) {
       setFont2(font, size)
     }
   }, [])
-  const sexo = [
-    { value: 'M', label: 'Masculino' },
-    { value: 'F', label: 'Femenino' }
-  ]
+
   useEffect(() => {
     getPacientes()
       .then(res => {
@@ -57,24 +58,35 @@ export default function AdministrarPaciente({ }) {
         })))
       })
   }, [])
-  const editarPaciente = (evt) => {
-    setEditar(!editar)
 
-    const nombre = document.querySelector('#nombre')
-    const sexo = document.querySelector('#sexo')
-    const tipo = document.querySelector('#tipo')
-    const centro = document.querySelector('#centro')
-    const row = evt.target.parentNode.parentNode
-    setSeccion(row.id)
-    // changePaciente({
-    //   id: row.id,
-    //   nombre: nombre.value,
-    //   sexo: sexo.childNodes[2].value,
-    //   tipo: tipo.childNodes[2].value,
-    //   centro: centro.childNodes[2].value
-    // }).then(setPacientes)
+  const actualizarArray = (evt) => {
+    let pac = pacientesTotal.filter(paciente => paciente['nombre'].includes(evt.target.value))
+    setPacientes(pac)
   }
+  const handleProfile = (evt) => {
+    const idpac = evt.target.parentNode.parentNode.parentNode.id
+    const usuarioEle = pacientes.find(paciente => paciente.id == idpac);
+    setPaciente(usuarioEle)
+    setProfile(true)
+  }
+  const deletePaciente = (evt) => {
+    const idpac = evt.target.parentNode.parentNode.parentNode.id
+    setPacientes(pacientes.filter(paciente => paciente.id != idpac))
+    setPacientesTotal(pacientes.filter(paciente => paciente.id != idpac))
+    deleteUser(idpac)
+  }
+
   return (<>
+    {
+      (profile)
+        ? <ModalProfile dni={paciente.dni} setProfile={setProfile} />
+        : null
+    }
+    {
+      (editar)
+        ? <EditarPaciente setEditar={setEditar} paciente={paciente} />
+        : null
+    }
     {
       (anadir)
         ? <Anadir type='Paciente' setAnadir={setAnadir} setPacientes={setPacientes} />
@@ -89,129 +101,42 @@ export default function AdministrarPaciente({ }) {
       </TitleContainer>
       <PacienteContainer>
         <BuscadorContainer>
-          <input type="text" />
+          <input type="text" onChange={actualizarArray} placeholder='Filtrar por nombre' />
         </BuscadorContainer>
         <TablaContainer>
-          <Tabla>
-            <div className="tablapacientees">
-              <table>
-                <thead>
-                  <tr>
-                    <th>{texts[language].Nombre}</th>
-                    <th>{texts[language].Sexo}</th>
-                    <th>{texts[language].Vigencia}</th>
-                    <th>{texts[language].TipoSeguro}</th>
-                    <th>{texts[language].CentroAsistencial}</th>
-                    <th className='editar'>Editar</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {
-                    pacientes.map((paciente, index) =>
-                      <tr key={paciente.id} id={paciente.id}>
-                        {
-                          (editar && seccion == paciente.id)
-                            ? <>
-                              <td>
-                              <input type="text" id='nombre' />
-                                {/* <Select
-                                  options={usuario}
-                                  name="paciente"
-                                  // value={especialidad}
-                                  placeholder='Elige un paciente'
-                                  id='nombre'
-                                  styles={{
-                                    menuList: styles => ({ ...styles, maxHeight: '200px' }),
-                                    control: styles => ({ ...styles, width: 'calc(100% - 40px)' })
-                                  }}
-                                /> */}
-                              </td>
-                              <td>
-                                <Select
-                                  options={sexo}
-                                  name="sexo"
-                                  // value={especialidad}
-                                  placeholder='Elige un sexo'
-                                  id='sexo'
-                                  styles={{
-                                    control: styles => ({ ...styles, width: 'calc(100% - 40px)' })
-                                  }}
-                                />
-                              </td>
-                              <td>
-                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                  <Grid container justifyContent="space-around">
-                                    <KeyboardDatePicker
-                                      name="fecha"
-                                      margin="normal"
-                                      id="date-picker-dialog"
-                                      format="dd/MM/yyyy"
-                                      value={horario}
-                                      onChange={handleDateChange}
-                                      KeyboardButtonProps={{
-                                        'aria-label': 'change date',
-                                      }}
-                                      style={{ width: '100%' }}
-                                    />
-                                  </Grid>
-                                </MuiPickersUtilsProvider></td>
-                              <td>
-                                <Select
-                                  options={[
-                                    { value: 'Titular', label: 'Titular' },
-                                    { value: 'No Titular', label: 'No titular' }
-                                  ]}
-                                  name="sala"
-                                  // value={especialidad}
-                                  placeholder='Elige una sala'
-                                  id='tipo'
-                                  styles={{
-                                    control: styles => ({ ...styles, width: 'calc(100% - 40px)' })
-                                  }}
-                                />
-                              </td>
-                              <td>
-                                <Select
-                                  options={[
-                                    { value: 'UNMSM', label: 'UNMSM' },
-                                    { value: 'PUCP', label: 'PUCP' }
-                                  ]}
-                                  name="sala"
-                                  // value={especialidad}
-                                  placeholder='Elige una sala'
-                                  id='centro'
-                                  styles={{
-                                    control: styles => ({ ...styles, width: 'calc(100% - 40px)' })
-                                  }}
-                                />
-                              </td>
-                              <td>
-                                <button className='button' onClick={editarPaciente}>Aceptar</button>
-                                <button className='button' onClick={() => setEditar(false)}>Cancelar</button>
-                              </td>
-                            </>
-                            : <>
-                              <td>{paciente.nombre}</td>
-                              <td>{paciente.sexo}</td>
-                              <td>{paciente.vigencia}</td>
-                              <td>{paciente.tipoSeguro}</td>
-                              <td>{paciente.centro}</td>
-                              <td>
-                                <button className='button' onClick={(evt) => {
-                                  const row = evt.target.parentNode.parentNode
-                                  setSeccion(row.id)
-                                  setEditar(!editar)
-                                }}>Editar</button>
-                              </td>
-                            </>
-                        }
-                      </tr>
-                    )
-                  }
-                </tbody>
-              </table>
-            </div>
-          </Tabla>
+          {
+            pacientes.map((paciente) =>
+              <div className="pacienteContainer" key={paciente.id} id={paciente.id}>
+                <div className="pacienteInfo">
+                  <div className="infoItem">
+                    <p>Paciente: </p>
+                    <p>{paciente.nombre}</p>
+                  </div>
+                  <div className="infoItem">
+                    <p>DNI: </p>
+                    <p>{paciente.dni}</p>
+                  </div>
+                </div>
+                <div className="pacienteOpciones">
+                  <h1>Opciones</h1>
+                  <div className="opciones">
+                    <div className="opcion" onClick={handleProfile}>
+                      <FontAwesomeIcon icon={faIdBadge} className='icon' />
+                      <p>Ver Perfil</p>
+                    </div>
+                    <div className="opcion" onClick={editarPaciente}>
+                      <FontAwesomeIcon icon={faUserEdit} className='icon' />
+                      <p>Editar</p>
+                    </div>
+                    <div className="opcion" onClick={deletePaciente}>
+                      <FontAwesomeIcon icon={faTrash} className='icon' />
+                      <p>Eliminar</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )
+          }
         </TablaContainer>
         <AnadirContainer>
           <ButtonAnadir type='Paciente' setAnadir={setAnadir}>

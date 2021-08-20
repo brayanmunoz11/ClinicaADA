@@ -10,13 +10,13 @@ export default function PerfilAdministrador({ }) {
   return (<>
     <Container>
       <PerfilComponent />
-      <ButtonsContainer>
+      {/* <ButtonsContainer>
         <div className="container">
           <Button to='/ClinicaAdministrador/AdministrarPersonal'>{texts[language].AdministrarPersonal}</Button>
           <Button to='/ClinicaAdministrador/AdministrarPacientes'>{texts[language].AdministrarPacientes}</Button>
           <Button to='/ClinicaAdministrador/AdministrarCamas'>{texts[language].AdministrarCamas}</Button>
         </div>
-      </ButtonsContainer>
+      </ButtonsContainer> */}
     </Container>
   </>)
 }

@@ -23,42 +23,42 @@ export default function PerfilDoctor({ }) {
   return (<>
     <Container>
       <PerfilComponent />
-      <TablaContainer>
-        <div className="ContainertablaPacientes">
-          <Tabla>
-            <div className="tablaDoctores">
-              <table>
-                <thead>
-                  <tr>
-                    <th>{texts[language].Fecha}</th>
-                    <th>{texts[language].Horario}</th>
-                    <th>{texts[language].Paciente}</th>
-                    {/* <th className="selecc">Perfil</th> */}
-                    <th>{texts[language].Concluir}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {
-                    citas.map(cita =>
-                      <tr key={cita.idCita}>
-                        <td>{cita.fecha}</td>
-                        <td>{cita.turno}</td>
-                        <td>{cita.paciente}</td>
-                        {/* <td>
-                          <button>Ver Perfil</button>
-                        </td> */}
-                        <td>
-                          <button onClick={() => concluirCita(cita.idCita)}>Concluir</button>
-                        </td>
-                      </tr>
-                    )
-                  }
-                </tbody>
-              </table>
-            </div>
-          </Tabla>
-        </div>
-      </TablaContainer>
     </Container>
   </>)
 }
+      // <TablaContainer>
+      //   <div className="ContainertablaPacientes">
+      //     <Tabla>
+      //       <div className="tablaDoctores">
+      //         <table>
+      //           <thead>
+      //             <tr>
+      //               <th>{texts[language].Fecha}</th>
+      //               <th>{texts[language].Horario}</th>
+      //               <th>{texts[language].Paciente}</th>
+      //               {/* <th className="selecc">Perfil</th> */}
+      //               <th>{texts[language].Concluir}</th>
+      //             </tr>
+      //           </thead>
+      //           <tbody>
+      //             {
+      //               citas.map(cita =>
+      //                 <tr key={cita.idCita}>
+      //                   <td>{cita.fecha}</td>
+      //                   <td>{cita.turno}</td>
+      //                   <td>{cita.paciente}</td>
+      //                   {/* <td>
+      //                     <button>Ver Perfil</button>
+      //                   </td> */}
+      //                   <td>
+      //                     <button onClick={() => concluirCita(cita.idCita)}>Concluir</button>
+      //                   </td>
+      //                 </tr>
+      //               )
+      //             }
+      //           </tbody>
+      //         </table>
+      //       </div>
+      //     </Tabla>
+      //   </div>
+      // </TablaContainer>

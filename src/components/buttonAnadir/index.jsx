@@ -5,6 +5,6 @@ export default function ButtonAnadir ({type, setAnadir, children}){
     setAnadir(true)
   }
   return (<>
-    <button onClick={changeAnadir}>{children}</button>
+    <button onClick={changeAnadir} className='button'>{children}</button>
   </>)
 }

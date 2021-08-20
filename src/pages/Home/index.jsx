@@ -22,7 +22,6 @@ function Home({ }) {
   var tipo = ''
   useEffect(() => {
     if (user === 'null' || user === null) {
-      console.log(user)
     }
     else {
       ala()

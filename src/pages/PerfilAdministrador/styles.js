@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom'
 
 export const Container = styled.div`
   width: 100%;
-  display: grid;
-  grid-template-columns: 30% 1fr;
+
   .ContainertablaPacientes {
     width: 100%;
     overflow: auto;

@@ -82,7 +82,6 @@ export const TablaContainer = styled.div`
   thead {
     position: sticky;
     top: 0;
-    background-color: #fff;
   }
 `
 
