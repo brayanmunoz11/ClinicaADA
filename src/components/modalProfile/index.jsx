@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Container, ProfileContainer } from './styles';
 import Perfil from 'components/perfil'
-import Loader from 'components/Loader'
+import Loader from 'components/loader'
 import getInfoPaciente from 'services/getInfoPaciente';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
