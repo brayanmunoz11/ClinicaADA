@@ -18,6 +18,6 @@ import {API_URL} from './API_KEYS.js'
 function getInfoDNI(dni) {
   return fetch(`${API_URL}/pac/${dni}`)
     .then(res => res.json())
-    .then(res => console.log(res))
+    .then(res => res)
 }
 export default getInfoDNI

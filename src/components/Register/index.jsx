@@ -19,9 +19,9 @@ export default function RegisterForm({ }) {
   const [message, setMessage] = useState('')
 
   const [datesDNI, setDatesDNI] = useState({
-    nombres: '',
-    paterno: '',
-    materno: ''
+    noNombres: '',
+    apePaterno: '',
+    apeMaterno: ''
   })
 
   const { handleSubmit, register, setError, watch, clearErrors, formState: { errors } } = useForm({
@@ -78,18 +78,11 @@ export default function RegisterForm({ }) {
         .then(res => {
           (res !== undefined) ? setDatesDNI(res) : console.log('avion dijo el camion')
         })
-      // setDatesDNI({
-      //   dni: '72188379',
-      //   materno: "ROJAS",
-      //   nombres: "OSCAR FERNANDO",
-      //   paterno: "CABELLOS",
-      //   sexo: "M",
-      // })
     } else {
       setDatesDNI({
-        nombres: '',
-        paterno: '',
-        materno: ''
+        noNombres: '',
+        apePaterno: '',
+        apeMaterno: ''
       })
     }
   }
@@ -144,7 +137,7 @@ export default function RegisterForm({ }) {
             <Input
               name='nombre'
               label='Nombre'
-              value={datesDNI.nombres}
+              value={datesDNI.noNombres}
               onChange={nombres.onChange}
               onBlur={nombres.onBlur}
               ref={nombres.ref}
@@ -165,7 +158,7 @@ export default function RegisterForm({ }) {
                 <Input
                   name='apellidoP'
                   label='Apellido Paterno'
-                  value={datesDNI.paterno}
+                  value={datesDNI.apePaterno}
                   apellido={true}
                   onChange={apellidoP.onChange}
                   onBlur={apellidoP.onBlur}
@@ -174,7 +167,7 @@ export default function RegisterForm({ }) {
                 <Input
                   name='apellidoM'
                   label='Apellido Materno'
-                  value={datesDNI.materno}
+                  value={datesDNI.apeMaterno}
                   apellido={true}
                   onChange={apellidoM.onChange}
                   onBlur={apellidoM.onBlur}
