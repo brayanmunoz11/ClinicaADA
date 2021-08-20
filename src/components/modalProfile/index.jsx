@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Container, ProfileContainer } from './styles';
-import Perfil from 'components/Perfil'
+import Perfil from 'components/perfil'
 import Loader from 'components/Loader'
 import getInfoPaciente from 'services/getInfoPaciente';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
