@@ -4,10 +4,12 @@ export const Container = styled.div`
   height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr;
+  position: relative;
+  z-index: 10;
 `
 
 export const TitleContainer = styled.div`
-  margin: 20px 0 50px 20px;
+  margin: 20px 0 20px 20px;
   display: flex;
   justify-content: flex-start;
   color: ${props => props.theme.colors.primary};
@@ -28,28 +30,31 @@ export const PacienteContainer = styled.div`
   margin: auto;
   grid-template-rows: 50px 1fr 100px;
   height: 100%;
-
+  place-items: center;
 `
 
 export const BuscadorContainer = styled.div`
-
+width: 100%;
+  input {
+    width: 200px;
+  }
 `
 
 export const TablaContainer = styled.div`
-  /* margin: 40px 0; */
   overflow: auto;
   max-height: calc(100vh - 300px);
+  padding: 0 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  /* flex-wrap: wrap; */
-  /* flex-flow: row-wrap; */
-  /* justify-content: space-evenly; */
-  grid-gap: 40px;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  grid-gap: 20px;
+  width: 100%;
+  /* height: 100%; */
   .pacienteContainer {
     justify-self: center;
-    width: 300px;
-    height: 250px;
-    margin: 20px 10px;
+    width: 230px;
+    /* height: 250px; */
+    /* margin: 20px 10px 0 10px; */
+    margin-top: 10px;
     background-color: #afa;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
     background-color: #fff;
@@ -60,13 +65,15 @@ export const TablaContainer = styled.div`
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
+    /* height: fit-content; */
     .pacienteInfo {
       margin: 20px 10px;
     }
     .infoItem {
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
-      text-align: right;
+      text-align: left;
       margin-bottom: 10px;
       p:first-child {
         font-weight: bold;

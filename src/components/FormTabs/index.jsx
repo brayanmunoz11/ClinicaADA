@@ -58,10 +58,6 @@ export default function TabsWrappedLabel({ tabState, handleBack, handleNext, ste
       ? handleNext()
       : null
   }
-  useEffect(() => {
-    console.log(activeStep)
-  }, [])
-
   return (<>
     <div style={{ overflow: (tabState === 'one') ? 'unset' : 'auto' }}>
       <TabPanel value={tabState} index="one">

@@ -22,7 +22,6 @@ export default function MenuClinica({ }) {
     else if (tipo === 'administrador') {
       setPath('/ClinicaAdministrador')
     }
-    // console.log(path)
   }, [tipo])
 
   const cerraSession = () => {

@@ -29,7 +29,6 @@ export default function ChooseDoctor({ updateDoctor, especialidad, turno }) {
 
     const row = event.target.parentNode.parentNode.parentNode.parentNode.parentNode
     updateDoctor({ id: row.id, name: row.childNodes[0].textContent })
-    // console.log(row.id)
     const checkBoxes = document.getElementsByName('Checkbox')
 
     setCheck(!check)

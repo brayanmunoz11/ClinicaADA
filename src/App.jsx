@@ -16,9 +16,6 @@ import Register from 'pages/Register'
 function App() {
 
   const [cam, cambiarFont] = useState()
-  useEffect(()=> {
-    // console.log(cam)
-  },[cam])
 
   return (<>
     {/* <h1>prasddsuebaasd</h1> */}

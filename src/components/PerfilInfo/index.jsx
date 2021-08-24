@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { InfoPerfil, TopInputs } from './styles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCloudMoon, faEnvelope, faFingerprint, faHospitalAlt, faHourglassHalf, faIdCard, faTag, faVenusMars } from '@fortawesome/free-solid-svg-icons'
+import { faBirthdayCake, faCloudMoon, faEnvelope, faFingerprint, faHospitalAlt, faHourglassHalf, faIdCard, faMapMarkedAlt, faTag, faVenusMars } from '@fortawesome/free-solid-svg-icons'
 // import Context from '../../context/languageContext';
 // import setFont2 from '../../services/setFont';
 
@@ -32,7 +32,7 @@ export default function PerfilInfo({user}) {
     <TopInputs>
       <div className="info">
         <div className="infoTitle">
-          <p>Informacion extra</p>
+          <p>Informacion Personal</p>
         </div>
         <div className="infoItem">
           <div className="left">
@@ -59,6 +59,24 @@ export default function PerfilInfo({user}) {
           </div>
           <div className="right">
             <p>{user.email}</p>
+          </div>
+        </div>
+        <div className="infoItem">
+          <div className="left">
+            <FontAwesomeIcon icon={faMapMarkedAlt} className='icon' />
+            <p>DIRECCION</p>
+          </div>
+          <div className="right">
+            <p>{user.direccion}</p>
+          </div>
+        </div>
+        <div className="infoItem">
+          <div className="left">
+            <FontAwesomeIcon icon={faBirthdayCake} className='icon' />
+            <p>FECHA DE NACIMIENTO</p>
+          </div>
+          <div className="right">
+            <p>{user.fechanac}</p>
           </div>
         </div>
         {

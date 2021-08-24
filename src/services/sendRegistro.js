@@ -11,7 +11,6 @@ function sendRegistro(json) {
   })
   .then(res => res.json())
   .then(res => {
-    console.log(res)
     if (res.message === 'user created') {
       sessionStorage.setItem('usuario', JSON.stringify(res.user))
       // history.push('/Clinica')

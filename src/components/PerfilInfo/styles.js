@@ -78,8 +78,13 @@ export const TopInputs = styled.div`
         margin-right: 20px;
         width: 28px;
       }
+      .right {
+        width: 70%;
+
+      }
       .right p {
         font-size: .9em;
+        text-align: right;
       }
     }
   }

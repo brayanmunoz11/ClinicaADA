@@ -30,6 +30,7 @@ export default function Formulario ({ especialidad, updateEspecialidad, horario,
   const [font, setFont] = useState(localStorage.getItem('fontFamily'))
   const [size, setSize] = useState(localStorage.getItem('fontSize'))
   useEffect(()=> {
+    console.log(turno)
     if(font !== null) {
       setFont2(font, size)
     }

@@ -1,86 +1,91 @@
-import React, { useEffect } from 'react'
-import { Container, AnadirContainer, TitleContainer, FormContainer } from './styles'
+import React from 'react'
+import { Container, AnadirContainer, TitleContainer, FormContainer, MessageError } from './styles'
+import { useForm } from 'react-hook-form'
+import { ErrorMessage } from "@hookform/error-message";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileAlt, faTimes } from '@fortawesome/free-solid-svg-icons'
-import Select from 'react-select'
-import Grid from '@material-ui/core/Grid';
-import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
-import { useState } from 'react'
-import createDoctor from '../../services/crearDoctor'
-import createCama from '../../services/crearCama'
-import createPaciente from '../../services/crearPaciente'
-import getPacientes from '../../services/listarPacientes'
-import setFont2 from '../../services/setFont';
+import AnadirCamas from 'components/anadirCamas'
+import AnadirPersonal from 'components/anadirPersonal'
+import AnadirPaciente from 'components/anadirPaciente'
+import createDoctor from 'services/crearDoctor'
+import createCama from 'services/crearCama'
+import createPaciente from 'services/crearPaciente'
+import useGetInfoDNI from '../../hooks/useGetInfoDNI'
 
-const Especialidad = [
-  { value: 'cardiologia', label: 'Cardiologia' },
-  { value: 'traumatologia', label: 'Traumatologia' },
-  { value: 'oncologia', label: 'Oncologia' }
-]
-const turnos = [
-  { value: 'mañana', label: 'Mañana' },
-  { value: 'tarde', label: 'Tarde' },
-  { value: 'noche', label: 'Noche' }
-]
-const sexo = [
-  { value: 'M', label: 'Masculino' },
-  { value: 'F', label: 'Femenino' }
-]
-
-export default function Anadir({ type, setAnadir, setDoctores, setPacientes, setCamas }) {
-  const [horario, setHorario] = useState()
-  const [usuario, setUsuario] = useState([])
+export default function Anadir({ type, setAnadir, setPacientesTotal, setPacientes }) {
+  const { getInfo, datesDNI } = useGetInfoDNI('')
+  const { handleSubmit, register, setError, watch, clearErrors, control, formState: { errors } } = useForm({
+    mode: 'onBlur',
+    reValidateMode: 'onChange',
+    criteriaMode: "all"
+  })
 
   const SERVICES = {
-    Personal: (formData) => createDoctor(formData).then(res => {
-      setDoctores(res)
-      setAnadir(false)
-    }),
-    Paciente: (formData) => createPaciente(formData).then(res => {
-      setPacientes(res)
-      setAnadir(false)
-    }),
-    Camas: (formData) => createCama(formData).then(res => {
-      setCamas(res)
-      setAnadir(false)
-    }),
+    Personal: (data) => {
+      data.especialidad = data.especialidad.value
+      data.turno = data.turno.value
+      data.nombre = datesDNI.noNombres
+      data.apellidoP = datesDNI.apePaterno
+      data.apellidoM = datesDNI.apeMaterno
+      data.sexo = datesDNI.idSexo
+      data.direccion = datesDNI.deDireccion
+      data.fechanac = datesDNI.feNacimiento.split('T')[0]
+
+      createDoctor(data).then(res => {
+        setPacientesTotal(res)
+        setPacientes(res)
+        setAnadir(false)
+      })
+    },
+    Paciente: (data) => {
+      data.tipoSeguro = data.tipoSeguro.value
+      data.centro = data.centro.value
+      data.nombre = datesDNI.noNombres
+      data.apellidoP = datesDNI.apePaterno
+      data.apellidoM = datesDNI.apeMaterno
+      data.sexo = datesDNI.idSexo
+      data.direccion = datesDNI.deDireccion
+      data.fechanac = datesDNI.feNacimiento.split('T')[0]
+
+      createPaciente(data).then(res => {
+        setPacientesTotal(res)
+        setPacientes(res)
+        setAnadir(false)
+      })
+    },
+    Camas: (data) => {
+      data.paciente = data.paciente.value
+      data.sala = data.sala.value
+      createCama(data).then(res => {
+        setPacientesTotal(res)
+        setPacientes(res)
+        setAnadir(false)
+      })
+    },
   }
-  const handleDateChange = (date) => {
-    setHorario(date)
-  };
 
   const changeAnadir = () => {
     setAnadir(false)
   }
 
-  const enviarForm = (evt) => {
-    evt.preventDefault()
-    const formData = new FormData(evt.target)
-    SERVICES[type](formData)
+  const enviarForm = (data, evt) => {
+    evt.preventDefault();
+    SERVICES[type](data)
   }
 
-  useEffect(() => {
-    if (type === 'Camas') {
-      getPacientes()
-        .then(res => {
-          setUsuario(prev => prev.concat(res.map(user => {
-            const userN = {
-              value: user.id,
-              label: user.nombre
-            }
-            return userN
-          })))
-        })
+  const validateNumbers = (evt) => {
+    var ch = String.fromCharCode(evt.which);
+    if (!(/[0-9]/.test(ch))) {
+      evt.preventDefault();
     }
-  }, [])
-  const [font, setFont] = useState(localStorage.getItem('fontFamily'))
-  const [size, setSize] = useState(localStorage.getItem('fontSize'))
-  useEffect(() => {
-    if (font !== null) {
-      setFont2(font, size)
+  }
+
+  const dni = register('dni', {
+    minLength: {
+      value: 8,
+      message: 'El dni deben ser 8 digitos'
     }
-  }, [])
+  })
 
   return (<>
     <Container>
@@ -90,194 +95,163 @@ export default function Anadir({ type, setAnadir, setDoctores, setPacientes, set
           <FontAwesomeIcon icon={faTimes} onClick={changeAnadir} className='icon' />
         </TitleContainer>
         <FormContainer>
-          <form onSubmit={enviarForm}>
+          <form onSubmit={handleSubmit(enviarForm)}>
             {
-              (type === 'Personal')
+              (type !== 'Camas')
                 ? <>
-                  <div className="formItem">
-                    <label htmlFor="nombre">Nombre</label>
-                    <input type="text" name='nombre' autoComplete='off' required/>
-                  </div>
-                  <div className="formItem">
-                    <label htmlFor="apellidoP">Apellido Paterno</label>
-                    <input type="text" name='apellidoP' autoComplete='off' required/>
-                  </div>
-                  <div className="formItem">
-                    <label htmlFor="apellidoM">Apellido Materno</label>
-                    <input type="text" name='apellidoM' autoComplete='off' required/>
-                  </div>
-                  <div className="formItem">
-                    <label htmlFor="usuario">DNI</label>
-                    <input type="text" name='usuario' autoComplete='off' required/>
-                  </div>
-                  <div className="formItem">
-                    <label htmlFor="sexo">Sexo</label>
-                    <Select
-                      options={sexo}
-                      name="sexo"
-                      // value={especialidad}
-                      placeholder='Elige un sexo'
-                    />
-                  </div>
-                  <div className="formItem">
-                    <label htmlFor="especialidad">Especialidad</label>
-                    <Select
-                      options={Especialidad}
-                      name="especialidad"
-                      // value={especialidad}
-                      placeholder='Elige una especialidad'
-                      styles={{
-                        menuList: styles => ({ ...styles, height: '200px' }),
-                      }}
-                    />
-                  </div>
-                  <div className="formItem">
-                    <label htmlFor="turno">Turno</label>
-                    <Select
-                      options={turnos}
-                      name="turno"
-                      // value={especialidad}
-                      placeholder='Elige un turno'
-                    />
-                  </div>
-                  {/* <h2>Credenciales</h2> */}
-                  <div className="formItem">
-                    <label htmlFor="correo">Correo</label>
-                    <input type="text" name='correo' autoComplete='off' required/>
-                  </div>
-                  <div className="formItem">
-                    <label htmlFor="contraseña">Contraseña</label>
-                    <input type="password" name='contrasena' required/>
-                  </div>
-                  <button className='button'>Enviar</button>
-                </>
-                : null
-            }
-            {
-              (type === 'Paciente')
-                ? <>
-                  <div className="formItem">
-                    <label htmlFor="nombre">Nombre</label>
-                    <input type="text" name='nombre' required/>
-                  </div>
-                  <div className="formItem">
-                    <label htmlFor="apellidoP">Apellido Paterno</label>
-                    <input type="text" name='apellidoP' autoComplete='off' required/>
-                  </div>
-                  <div className="formItem">
-                    <label htmlFor="apellidoM">Apellido Materno</label>
-                    <input type="text" name='apellidoM' autoComplete='off' required/>
-                  </div>
                   <div className="formItem">
                     <label htmlFor="dni">DNI</label>
-                    <input type="text" name='dni' autoComplete='off' required/>
-                  </div>
-                  <div className="formItem">
-                    <label htmlFor="sexo">Sexo</label>
-                    <Select
-                      options={sexo}
-                      name="sexo"
-                      // value={especialidad}
-                      placeholder='Elige un sexo'
+                    <input
+                      type="text"
+                      name='dni'
+                      autoComplete='off'
+                      required
+                      onKeyPress={validateNumbers}
+                      maxLength='8'
+                      onChange={(evt) => {
+                        dni.onChange(evt)
+                        getInfo(evt)
+                      }}
+                      onBlur={dni.onBlur}
+                      ref={dni.ref}
                     />
-                  </div>
-                  <div className="formItem">
-                    <label htmlFor="vigencia">Vigencia</label>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                      <Grid container justifyContent="space-around">
-                        <KeyboardDatePicker
-                          name="vigencia"
-                          margin="normal"
-                          id="date-picker-dialog"
-                          format="dd/MM/yyyy"
-                          value={horario}
-                          onChange={handleDateChange}
-                          KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                          }}
-                          style={{ width: '100%' }}
-                        />
-                      </Grid>
-                    </MuiPickersUtilsProvider>
-                  </div>
-                  <div className="formItem">
-                    <label htmlFor="tipoSeguro">Tipo de seguro</label>
-                    <Select
-                      options={[
-                        { value: 'Titular', label: 'Titular' },
-                        { value: 'Otro', label: 'Otro' }
-                      ]}
-                      name="tipoSeguro"
-                      // value={especialidad}
-                      placeholder='Elige un turno'
-                    />
-                  </div>
-                  <div className="formItem">
-                    <label htmlFor="centro">Centro Asistencial</label>
-                    <Select
-                      options={[
-                        { value: 'UNMSM', label: 'UNMSM' },
-                        { value: 'PUCP', label: 'PUCP' }
-                      ]}
-                      name="centro"
-                      // value={especialidad}
-                      placeholder='Elige un turno'
-                    />
-                  </div>
-                  {/* <h2>Credenciales</h2> */}
-                  <div className="formItem">
-                    <label htmlFor="correo">Correo</label>
-                    <input type="text" name='correo' autoComplete='off' required/>
-                  </div>
-                  <div className="formItem">
-                    <label htmlFor="contrasena">Contraseña</label>
-                    <input type="password" name='contrasena' autoComplete='off' required/>
-                  </div>
-                  <button className='button'>Enviar</button>
-                </> : null
-            }
-            {
-              (type === 'Camas')
-                ? <>
-                  <div className="formItem">
-                    <label htmlFor="paciente">Paciente</label>
-                    <Select
-                      options={usuario}
-                      name="paciente"
-                      // value={especialidad}
-                      placeholder='Elige un paciente'
-                      styles={{
-                        menuList: styles => ({ ...styles, maxHeight: '200px' }),
+                    <ErrorMessage
+                      errors={errors}
+                      name="dni"
+                      maxLength='8'
+                      render={({ messages }) => {
+                        return messages
+                          ? <MessageError><p>{messages.minLength}</p></MessageError>
+                          : null;
                       }}
                     />
                   </div>
                   <div className="formItem">
-                    <label htmlFor="sala">Sala</label>
-                    <Select
-                      options={[
-                        { value: '1', label: 'Sala 1' },
-                        { value: '2', label: 'Sala 2' }
-                      ]}
-                      name="sala"
-                      // value={especialidad}
-                      placeholder='Elige una sala'
+                    <label htmlFor="nombre">Nombre</label>
+                    <input
+                      type="text"
+                      name='nombre'
+                      disabled required
+                      defaultValue={datesDNI.noNombres}
+                      {...register('nombre')}
                     />
                   </div>
                   <div className="formItem">
-                    <label htmlFor="ocupada">Ocupada</label>
-                    <Select
-                      options={[
-                        { value: 'Ocupada', label: 'Ocupada' },
-                        { value: 'Sin ocupar', label: 'Sin ocupar' }
-                      ]}
-                      name="ocupada"
-                      // value={especialidad}
-                      placeholder='Elige una sala'
+                    <label htmlFor="apellidoP">Apellido Paterno</label>
+                    <input
+                      type="text"
+                      name='apellidoP'
+                      autoComplete='off'
+                      disabled required
+                      defaultValue={datesDNI.apePaterno}
+                      {...register('apellidoP')} />
+                  </div>
+                  <div className="formItem">
+                    <label htmlFor="apellidoM">Apellido Materno</label>
+                    <input
+                      type="text"
+                      name='apellidoM'
+                      autoComplete='off'
+                      disabled required
+                      defaultValue={datesDNI.apeMaterno}
+                      {...register('apellidoM')}
                     />
                   </div>
-                  <button className='button buttonc'>Enviar</button>
+                  <div className="formItem">
+                    <label htmlFor="sexo">Sexo</label>
+                    <input
+                      type="text"
+                      name='sexo'
+                      autoComplete='off' disabled required
+                      {...register('sexo')}
+                      defaultValue={(datesDNI.idSexo === 'M')
+                        ? 'Masculino'
+                        : (datesDNI.idSexo === 'F') ? 'Femenino' : ''} />
+                  </div>
+                  <div className="formItem">
+                    <label htmlFor="fechanac">Fecha de Nacimiento</label>
+                    <input
+                      type="text"
+                      name='fechanac'
+                      autoComplete='off'
+                      disabled required
+                      defaultValue={(datesDNI.feNacimiento != null) ? datesDNI.feNacimiento.split('T')[0] : ''}
+                      {...register('fechanac')}
+                    />
+                  </div>
+                  <div className="formItem">
+                    <label htmlFor="direccion">Direccion</label>
+                    <input
+                      type="text"
+                      name='direccion'
+                      autoComplete='off'
+                      disabled required
+                      defaultValue={datesDNI.deDireccion}
+                      {...register('direccion')}
+                    />
+                  </div>
                 </> : null
             }
+            {(type === 'Personal') ? <AnadirPersonal control={control} errors={errors} /> : null}
+            {(type === 'Paciente') ? <AnadirPaciente control={control} errors={errors} /> : null}
+            {(type === 'Camas') ? <AnadirCamas control={control} errors={errors} /> : <>
+              <h2>Credenciales</h2>
+              <div className="formItem">
+                <label htmlFor="correo">Correo</label>
+                <input
+                  type="text"
+                  name='correo'
+                  autoComplete='off'
+                  // required
+                  {...register('correo', {
+                    pattern: {
+                      value: /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+/g,
+                      message: 'El correo debe seguir el patron xxxx@xxxx.xxxx'
+                    },
+                    required: {
+                      value: true,
+                      message: 'Escriba un correo'
+                    }
+                  })} />
+                <ErrorMessage
+                  errors={errors}
+                  name="correo"
+                  render={({ messages }) => {
+                    return messages ? <MessageError><p>{messages.pattern || messages.required}</p></MessageError> : null;
+                  }}
+                />
+              </div>
+              <div className="formItem">
+                <label htmlFor="contrasena">Contraseña</label>
+                <input
+                  type="password"
+                  name='contrasena'
+                  autoComplete='off'
+                  // required
+                  {...register('password', {
+                    minLength: {
+                      value: 3,
+                      message: 'La contraseña debe tener 8 digitos como minimo(por ahora solo 123 xfa)',
+                    },
+                    required: {
+                      value: true,
+                      message: 'Escriba una contraseña'
+                    }
+                  })}
+                />
+                <ErrorMessage
+                  errors={errors}
+                  name="password"
+                  render={({ messages }) => {
+                    return messages ? <MessageError><p>{messages.minLength || messages.required}</p></MessageError> : null
+                  }}
+                />
+              </div>
+            </>}
+            <div className="buttons">
+              <button className='button buttonc'>Enviar</button>
+              <button className='button buttonc' type='button' onClick={changeAnadir}>Cancelar</button>
+            </div>
           </form>
         </FormContainer>
       </AnadirContainer>

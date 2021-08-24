@@ -1,10 +1,8 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import FormTabsContainer from 'pages/FormTabsContainer'
 import PerfilAdministrador from 'pages/PerfilAdministrador'
 import MenuClinica from 'components/menuClinica'
-import AdministrarPersonal from 'pages/AdministrarPersonal'
-import AdministrarPaciente from 'pages/AdministrarPaciente'
+import Administrar from 'pages/Administrar'
 import AdministrarCamas from 'pages/AdministrarCamas'
 import Config from 'pages/Config'
 
@@ -17,13 +15,13 @@ export default function ClinicaAdministrador({ }) {
           <Config/>
         </Route>
         <Route path="/ClinicaAdministrador/AdministrarCamas">
-          <AdministrarCamas />
+          <Administrar type='Camas'/>
         </Route>
         <Route path="/ClinicaAdministrador/AdministrarPacientes">
-          <AdministrarPaciente />
+          <Administrar type='Paciente'/>
         </Route>
         <Route path="/ClinicaAdministrador/AdministrarPersonal">
-          <AdministrarPersonal />
+          <Administrar type='Personal'/>
         </Route>
         <Route path="/ClinicaAdministrador">
           <PerfilAdministrador/>

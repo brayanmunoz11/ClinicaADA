@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {MessageError as Error} from 'components/Register/styles'
 
 export const Container = styled.div`
   width: 100%;
@@ -79,8 +80,21 @@ export const FormContainer = styled.div`
       height: fit-content;
       position: relative;
     }
+    .buttons {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+    }
     .buttonc {
       margin: 30px auto;
     }
   }
+  .formItem {
+    margin-bottom: 10px;
+    position: relative;
+  }
+`
+export const MessageError = styled(Error)`
+  bottom: -75%;
+  z-index: 111;
 `

@@ -28,7 +28,6 @@ export default function LoginRegistro({ }) {
     setLoading(true)
     SendLogin({ formData })
       .then(res => {
-        console.log(res)
         setLoading(false)
         return (res.valid) ? history.push(res.path) : null
       })
@@ -43,7 +42,6 @@ export default function LoginRegistro({ }) {
       SendRegistro({ formData })
         .then(res => {
           setLoading(false)
-          console.log(res)
           if(res === 'user created') {
             return history.push('/ClinicaPaciente')
           }else {
@@ -58,7 +56,6 @@ export default function LoginRegistro({ }) {
 
   const validarForm = (formdata) => {
     const valores = formdata.getAll('password')
-    console.log(valores)
     if (valores[0] === valores[1]) {
       return true
     }

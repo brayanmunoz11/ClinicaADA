@@ -1,9 +1,13 @@
 import {API_URL} from './API_KEYS.js'
 
-function createDoctor(formData) {
+function createDoctor(json) {
   return fetch(`${API_URL}/crearDoctor`, {
     method: 'POST',
-    body: formData
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(json)
   })
   .then(res => res.json())
   .then(res => res.doctores);

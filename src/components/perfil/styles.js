@@ -5,7 +5,7 @@ export const PerfilContainer = styled.div`
   width: 100%;
   display: grid;
   padding: 20px 30px;
-  grid-template-columns: 330px 1fr;
+  grid-template-columns: 360px 1fr;
   grid-gap: 20px;
   overflow: auto;
 `

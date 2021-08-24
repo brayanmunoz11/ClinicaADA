@@ -35,15 +35,17 @@ export default function RegisterForm({ }) {
     setLoading(true)
     const fecha = new Date()
     const newUser = {
-      nombre: data.nombre || datesDNI.nombres,
-      apellidoP: data.apellidoP || datesDNI.paterno,
-      apellidoM: data.apellidoM || datesDNI.materno,
+      nombre: datesDNI.noNombres,
+      apellidoP: datesDNI.apePaterno,
+      apellidoM: datesDNI.apeMaterno,
       dni: data.dni || datesDNI.dni,
       sexo: datesDNI.sexo,
       correo: data.correo,
       contrasena: data.password,
-      vigencia: `${fecha.getDate()}/${fecha.getMonth()+1}/${fecha.getFullYear()+1}`,
-      tipoUsuario: 'paciente'
+      vigencia: `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear() + 1}`,
+      tipoUsuario: 'paciente',
+      direccion: (datesDNI.deDireccion != null) ? datesDNI.deDireccion : 'No cuenta con direccion',
+      fechanac: datesDNI.feNacimiento.split('T')[0]
     }
     sendRegistro(newUser)
       .then(res => {
@@ -76,7 +78,7 @@ export default function RegisterForm({ }) {
       clearErrors('dni')
       getInfoDNI(dni)
         .then(res => {
-          (res !== undefined) ? setDatesDNI(res) : console.log('avion dijo el camion')
+          (res !== null) ? setDatesDNI(res) : console.log('avion dijo el camion')
         })
     } else {
       setDatesDNI({
@@ -127,7 +129,6 @@ export default function RegisterForm({ }) {
                 name="dni"
                 maxLength='8'
                 render={({ messages }) => {
-                  // document.getElementsByName(errors.dni.ref.name)[0].classList.add('on')
                   return messages
                     ? <MessageError><p>{messages.minLength}</p></MessageError>
                     : null;
