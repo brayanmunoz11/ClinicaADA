@@ -12,7 +12,8 @@ export default function PerfilInfo({user}) {
   return (<>
     <InfoPerfil>
       <figure>
-        <img src="https://m.media-amazon.com/images/I/51-H2JY9eyL._AC_SX466_.jpg" alt="" />
+        {/* <img src="https://m.media-amazon.com/images/I/51-H2JY9eyL._AC_SX466_.jpg" alt="" /> */}
+        <img src="https://image.flaticon.com/icons/png/512/149/149071.png" alt="" />
       </figure>
       <div className="info">
         <div className="infoItem">

@@ -17,7 +17,10 @@ export default function Anadir({ type, setAnadir, setPacientesTotal, setPaciente
   const { handleSubmit, register, setError, watch, clearErrors, control, formState: { errors } } = useForm({
     mode: 'onBlur',
     reValidateMode: 'onChange',
-    criteriaMode: "all"
+    criteriaMode: "all",
+    defaultValues: {
+      vigencia: (type === 'Paciente') ? new Date() : null,
+    }
   })
 
   const SERVICES = {

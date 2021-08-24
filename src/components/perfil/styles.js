@@ -13,6 +13,7 @@ export const TopPerfil = styled.div`
   display: grid;
   grid-template-rows: 140px auto;
   grid-gap: 40px;
+  margin-bottom: 20px;
 `
 
 export const MiddlePerfil = styled.div`
