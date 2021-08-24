@@ -199,8 +199,8 @@ export default function RegisterForm({ }) {
               label="Contraseña"
               {...register('password', {
                 minLength: {
-                  value: 3,
-                  message: 'La contraseña debe tener 8 digitos como minimo(por ahora solo 123 xfa)'
+                  value: 8,
+                  message: 'La contraseña debe tener 8 digitos como minimo'
                 }
               })}
             >

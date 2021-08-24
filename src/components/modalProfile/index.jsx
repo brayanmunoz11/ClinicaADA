@@ -24,7 +24,7 @@ export default function ModalProfile({ dni, setProfile }) {
         ?
         <Container>
           <ProfileContainer>
-            <div className="cerrar" onClick={()=> setProfile(false)}>
+            <div className="cerrar" onClick={() => setProfile(false)}>
               <FontAwesomeIcon icon={faTimes} />
             </div>
             <Perfil user={user} familiares={familiares} />

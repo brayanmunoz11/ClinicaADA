@@ -20,9 +20,10 @@ export default function AdministrarCamas({ }) {
   const [editar, setEditar] = useState(false)
 
   const [usuario, setUsuario] = useState([])
-  const { language, setLanguage, texts } = useContext(Context)
+  // const { language, setLanguage, texts } = useContext(Context)
 
   const [seccion, setSeccion] = useState('')
+
 
   useEffect(() => {
     getCamas()

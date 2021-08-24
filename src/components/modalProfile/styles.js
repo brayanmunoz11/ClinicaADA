@@ -27,5 +27,6 @@ export const ProfileContainer = styled.div`
     color: #000;
     font-size: 2em;
     cursor: pointer;
+    z-index: 11111;
   }
 `

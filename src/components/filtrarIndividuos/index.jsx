@@ -17,6 +17,7 @@ export default function FiltrarIndividuos({ pacientesTotal, setPacientes }) {
   }, [radio])
 
   const actualizarArray = (evt) => {
+    evt.target.value = evt.target.value.toUpperCase()
     let pac = pacientesTotal.filter(paciente => paciente[filterItem].includes(evt.target.value))
     setPacientes(pac)
   }
@@ -40,8 +41,6 @@ export default function FiltrarIndividuos({ pacientesTotal, setPacientes }) {
         </SubContainer>
         <input type="text" onChange={actualizarArray} placeholder={`Filtrar por ${filterItem}`} ref={filter} />
       </FiltrarItem>
-      {/* <FiltrarItem></FiltrarItem>
-      <FiltrarItem></FiltrarItem> */}
     </Container>
   </>)
 }

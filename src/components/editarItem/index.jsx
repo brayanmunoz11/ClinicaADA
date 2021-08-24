@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Container, EditarContainer } from './styles';
 import 'date-fns';
 import Select from 'react-select'
@@ -7,7 +7,8 @@ import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import changeData from 'services/changeData';
 import useGetPacientes from 'hooks/useGetPacientes'
-import { useForm, Controller } from "react-hook-form";                      // value={especialidad}
+import { useForm, Controller } from "react-hook-form";
+import Context from '../../context/languageContext';                   // value={especialidad}
 
 import { ErrorMessage } from "@hookform/error-message";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -21,6 +22,7 @@ const turnos = [
 
 export default function EditarPaciente({ itemActual, setEditar, type, setPacientes, setPacientesTotal }) {
   const { pacientes } = useGetPacientes('')
+  const { language, setLanguage, texts } = useContext(Context)
   const { handleSubmit, register, setError, watch, clearErrors, control, formState: { errors } } = useForm({
     mode: 'onBlur',
     reValidateMode: 'onChange',
@@ -77,11 +79,11 @@ export default function EditarPaciente({ itemActual, setEditar, type, setPacient
             <input type="text" id='dni' defaultValue={itemActual.dni} disabled />
           </div>
           <div className="editarItem">
-            <label htmlFor="nombre">Nombre</label>
+            <label htmlFor="nombre">{texts[language].Nombre}</label>
             <input type="text" id='nombre' defaultValue={itemActual.nombre} disabled />
           </div>
           <div className="editarItem">
-            <label htmlFor="correo">Correo</label>
+            <label htmlFor="correo">{texts[language].Correo}</label>
             <input
               type="text"
               name='correo'
@@ -110,7 +112,7 @@ export default function EditarPaciente({ itemActual, setEditar, type, setPacient
           (type === 'Paciente')
             ? <>
               <div className="editarItem">
-                <label htmlFor="vigencia">Editar Vigencia</label>
+                <label htmlFor="vigencia">{texts[language].Vigencia}</label>
                 <Controller
                   name="vigencia"
                   isClearable
@@ -159,7 +161,7 @@ export default function EditarPaciente({ itemActual, setEditar, type, setPacient
                 />
               </div> */}
               <div className="editarItem">
-                <label htmlFor="centro">Centro Asistencial</label>
+                <label htmlFor="centro">{texts[language].CentroAsistencial}</label>
                 <Controller
                   name="centro"
                   isClearable
@@ -191,7 +193,7 @@ export default function EditarPaciente({ itemActual, setEditar, type, setPacient
               </div>
             </> : (type === 'Personal')
               ? <div className="editarItem">
-                <label htmlFor="Turno">Turno</label>
+                <label htmlFor="Turno">{texts[language].Turno}</label>
                 <Controller
                   name="turno"
                   isClearable
@@ -218,7 +220,7 @@ export default function EditarPaciente({ itemActual, setEditar, type, setPacient
                 />
               </div> : <>
                 <div className="editarItem">
-                  <label htmlFor="sala">Sala</label>
+                  <label htmlFor="sala">{texts[language].Sala}</label>
                   <Controller
                     name="sala"
                     isClearable
@@ -248,7 +250,7 @@ export default function EditarPaciente({ itemActual, setEditar, type, setPacient
                   />
                 </div>
                 <div className="editarItem">
-                  <label htmlFor="paciente">Paciente</label>
+                  <label htmlFor="paciente">{texts[language].Paciente}</label>
                   <Controller
                     name="paciente"
                     isClearable
@@ -281,8 +283,8 @@ export default function EditarPaciente({ itemActual, setEditar, type, setPacient
               </>
         }
         <div className="buttons">
-          <button className='button' type='submit'>Aceptar</button>
-          <button className='button' onClick={() => setEditar(false)}>Cancelar</button>
+          <button className='button' type='submit'>{texts[language].Aceptar}</button>
+          <button className='button' onClick={() => setEditar(false)}>{texts[language].Cancelar}</button>
         </div>
       </EditarContainer>
     </Container>

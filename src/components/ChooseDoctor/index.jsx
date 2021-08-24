@@ -70,7 +70,7 @@ export default function ChooseDoctor({ updateDoctor, especialidad, turno }) {
                 <tr>
                   <th>Doctor</th>
                   <th>{texts[language].Horario}</th>
-                  <th>{texts[language].Perfil}</th>
+                  {/* <th>{texts[language].Perfil}</th> */}
                   <th className="selecc">{texts[language].Seleccionar}</th>
                 </tr>
               </thead>
@@ -80,9 +80,9 @@ export default function ChooseDoctor({ updateDoctor, especialidad, turno }) {
                     <tr key={doctor.idDoc} id={doctor.idDoc}>
                       <td>{doctor.nombre + ' ' + doctor.apellidoP}</td>
                       <td>{doctor.turno}</td>
-                      <td>
+                      {/* <td>
                         <button>Ver Perfil</button>
-                      </td>
+                      </td> */}
                       <td>
                         <FormControlLabel
                           control={

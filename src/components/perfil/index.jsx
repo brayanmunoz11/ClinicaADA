@@ -7,6 +7,8 @@ import setFont2 from '../../services/setFont';
 import PerfilInfo from 'components/PerfilInfo';
 import getCitas from 'services/getCitas.js'
 import terminarCita from 'services/terminarCita'
+import ConcluirCita from '../concluirCita';
+import { set } from 'react-hook-form';
 
 export default function Perfil({
   user = JSON.parse(sessionStorage.getItem('usuario')),
@@ -26,14 +28,17 @@ export default function Perfil({
   const tipoUsuario = user.tipoUsuario;
 
   const [citas, setCitas] = useState([])
+  const [confirm, setConfirm] = useState(false)
+  const [id, setID] = useState(false)
 
   const concluirCita = (idCita) => {
-    setCitas((prev) => prev.filter(el => el.idCita !== idCita))
-    terminarCita({ idCita })
+    setID(idCita)
+    setConfirm(true)
+    // setCitas((prev) => prev.filter(el => el.idCita !== idCita))
+    // terminarCita({ idCita })
   }
 
   useEffect(() => {
-    console.log({user})
     if (tipoUsuario === 'doctor') {
       getCitas()
         .then(setCitas)
@@ -43,8 +48,9 @@ export default function Perfil({
 
   return (<>
     <PerfilContainer>
+      {(confirm) ? <ConcluirCita setConfirm={setConfirm} id={id} setCitas={setCitas}/> : null}
       <TopPerfil>
-        <PerfilInfo user={user}/>
+        <PerfilInfo user={user} />
       </TopPerfil>
       <MiddlePerfil>
         <MiddleContainer>
@@ -114,7 +120,7 @@ export default function Perfil({
                         <th>{texts[language].Fecha}</th>
                         <th>{texts[language].Horario}</th>
                         <th>{texts[language].Paciente}</th>
-                        <th>Perfil</th>
+                        {/* <th>Perfil</th> */}
                         <th>{texts[language].Concluir}</th>
                       </tr>
                     </thead>
@@ -125,9 +131,9 @@ export default function Perfil({
                             <td>{cita.fecha}</td>
                             <td>{cita.turno}</td>
                             <td>{cita.paciente}</td>
-                            <td>
+                            {/* <td>
                               <button className='buttonConcluir'>Ver Perfil</button>
-                            </td>
+                            </td> */}
                             <td>
                               <button onClick={() => concluirCita(cita.idCita)} className='buttonConcluir'>Concluir</button>
                             </td>

@@ -8,6 +8,7 @@ export const PerfilContainer = styled.div`
   grid-template-columns: 360px 1fr;
   grid-gap: 20px;
   overflow: auto;
+  position: relative;
 `
 export const TopPerfil = styled.div`
   display: grid;

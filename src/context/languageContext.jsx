@@ -49,7 +49,15 @@ export function LanguageContext ({children}) {
       AnadirPaciente: 'Añadir Paciente',
       AnadirPersonal: 'Añadir Personal',
       AnadirCama: 'Añadir Cama',
-      Consultas: 'Consultas'
+      Consultas: 'Consultas',
+      Estado: 'Estado',
+      Opciones: 'Opcions',
+      Editar: 'Editar',
+      Eliminar: 'Eliminar',
+      Perfil: 'Ver perfil',
+      Correo: 'Correo',
+      Aceptar: 'Aceptar',
+      Cancelar: 'Cancelar'
     },
     en: {
       Perfil: 'Profile',
@@ -93,7 +101,15 @@ export function LanguageContext ({children}) {
       AnadirPaciente: 'Add Patient',
       AnadirPersonal: 'Add Staff',
       AnadirCama: 'Add Bed',
-      Consultas: 'Appointments'
+      Consultas: 'Appointments',
+      Estado: 'State',
+      Opciones: 'Options',
+      Editar: 'Edit',
+      Eliminar: 'Delete',
+      Perfil: 'See Profile',
+      Correo: 'E-mail',
+      Aceptar: 'Accept',
+      Cancelar: 'Cancel'
     }
   }
 

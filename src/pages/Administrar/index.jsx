@@ -124,7 +124,7 @@ export default function Administrar({ type }) {
       </TitleContainer>
       <PacienteContainer>
         <BuscadorContainer>
-          <FiltrarIndividuos pacientesTotal={pacientesTotal} setPacientes={setPacientes} />
+          {(type !== 'Camas') ? <FiltrarIndividuos pacientesTotal={pacientesTotal} setPacientes={setPacientes} /> : null}
         </BuscadorContainer>
         <TablaContainer>
           {
@@ -133,7 +133,7 @@ export default function Administrar({ type }) {
                 <div className="pacienteContainer" key={paciente.id} id={paciente.id}>
                   <div className="pacienteInfo">
                     <div className="infoItem">
-                      <p>{(type == 'Paciente') ? 'Paciente: ' : 'Doctor: '}</p>
+                      <p>{(type == 'Paciente') ? `${texts[language].Paciente} :`  : 'Doctor: '}</p>
                       <p>{paciente.nombre}</p>
                     </div>
                     <div className="infoItem">
@@ -144,30 +144,30 @@ export default function Administrar({ type }) {
                       (type == 'Personal')
                         ? <>
                           <div className="infoItem">
-                            <p>ESPECIALIDAD: </p>
+                            <p>{`${texts[language].Especialidad} :`}  </p>
                             <p>{paciente.especialidad}</p>
                           </div>
                           <div className="infoItem">
-                            <p>TURNO: </p>
+                            <p>{`${texts[language].Turno} :`} </p>
                             <p>{paciente.turno}</p>
                           </div>
                         </> : null
                     }
                   </div>
                   <div className="pacienteOpciones">
-                    <h1>Opciones</h1>
+                    <h1>{texts[language].Opciones} </h1>
                     <div className="opciones">
                       <div className="opcion" onClick={handleProfile}>
                         <FontAwesomeIcon icon={faIdBadge} className='icon' />
-                        <p>Ver Perfil</p>
+                        <p>{texts[language].Perfil}</p>
                       </div>
                       <div className="opcion" onClick={editarItem}>
                         <FontAwesomeIcon icon={faUserEdit} className='icon' />
-                        <p>Editar</p>
+                        <p>{texts[language].Editar} </p>
                       </div>
                       <div className="opcion" onClick={showConfirmDelete}>
                         <FontAwesomeIcon icon={faTrash} className='icon' />
-                        <p>Eliminar</p>
+                        <p>{texts[language].Eliminar}</p>
                       </div>
                     </div>
                   </div>
@@ -176,35 +176,35 @@ export default function Administrar({ type }) {
                 <div className="pacienteContainer" key={paciente.idcamas} id={paciente.idcamas}>
                   <div className="pacienteInfo">
                     <div className="infoItem">
-                      <p>CAMA: </p>
+                      <p>{`${texts[language].Cama} :`} </p>
                       <p>{paciente.idcamas}</p>
                     </div>
                     <div className="infoItem">
-                      <p>SALA: </p>
+                      <p>{`${texts[language].Sala} :`}  </p>
                       <p>{paciente.sala}</p>
                     </div>
                     <div className="infoItem">
-                      <p>ESTADO: </p>
+                      <p>{`${texts[language].Estado} :`}  </p>
                       <p>{paciente.estado}</p>
                     </div>
                     {
                       (paciente.estado === 'Ocupada')
                         ? <div className="infoItem">
-                          <p>PACIENTE: </p>
+                          <p>{`${texts[language].Paciente} :`} </p>
                           <p>{paciente.nombre}</p>
                         </div> : null
                     }
                   </div>
                   <div className="pacienteOpciones">
-                    <h1>Opciones</h1>
+                    <h1>{texts[language].Opciones} </h1>
                     <div className="opciones">
                       <div className="opcion" onClick={editarItem}>
                         <FontAwesomeIcon icon={faUserEdit} className='icon' />
-                        <p>Editar</p>
+                        <p>{texts[language].Editar} </p>
                       </div>
                       <div className="opcion" onClick={showConfirmDelete}>
                         <FontAwesomeIcon icon={faTrash} className='icon' />
-                        <p>Eliminar</p>
+                        <p>{texts[language].Eliminar}</p>
                       </div>
                     </div>
                   </div>

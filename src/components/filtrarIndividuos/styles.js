@@ -67,7 +67,7 @@ export const SubContainer = styled.div`
 
 export const RadioInfo = styled.div`
   position: absolute;
-  background-color: ${props => props.theme.colors.primary};
+  background-color: #fff;
   width: 100%;
   height: 100%;
   top: 0;
@@ -87,7 +87,7 @@ export const RadioInfo = styled.div`
     height: 100%;
     display: block;
     position: absolute;
-    background-color: #fff;
+  background-color: ${props => props.theme.colors.primary};
     display: none;
     top: 0;
     left: 0;
@@ -99,7 +99,7 @@ export const RadioInfo = styled.div`
     height: 100%;
     display: block;
     position: absolute;
-    background-color: #fff;
+  background-color: ${props => props.theme.colors.primary};
     display: none;
     top: 0;
     left: 0;
