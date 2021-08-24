@@ -12,6 +12,7 @@ import getCamas from 'services/getCamas'
 import setFont2 from 'services/setFont';
 import Context from '../../context/languageContext';
 import deleteUser from 'services/deleteUser'
+import deleteCama from 'services/deleteCama'
 import getAllDoctores from 'services/getAllDoctores'
 import Loader from 'components/loader'
 import FiltrarIndividuos from 'components/filtrarIndividuos'
@@ -23,9 +24,9 @@ const SERVICES = {
 }
 
 const DELETES = {
-  // Personal: (id) => getAllDoctores(id),
+  Personal: (id) => deleteUser(id),
   Paciente: (id) => deleteUser(id),
-  // Camas: () => getCamas()
+  Camas: (id) => deleteCama(id)
 }
 
 export default function Administrar({ type }) {
@@ -51,8 +52,6 @@ export default function Administrar({ type }) {
       })
   }, [type])
 
-  // const [font, setFont] = useState(localStorage.getItem('fontFamily'))
-  // const [size, setSize] = useState(localStorage.getItem('fontSize'))
   const editarItem = (evt) => {
     const id = evt.target.parentNode.parentNode.parentNode.id;
 
@@ -70,9 +69,14 @@ export default function Administrar({ type }) {
     setProfile(true)
   }
   const deletePaciente = (evt) => {
-    const idpac = evt.target.parentNode.parentNode.parentNode.id
-    setPacientes(pacientes.filter(paciente => paciente.id != idpac))
-    setPacientesTotal(pacientes.filter(paciente => paciente.id != idpac))
+    const idpac = evt.target.parentNode.parentNode.parentNode.id;
+    if (type !== 'Camas') {
+      setPacientes(pacientes.filter(paciente => paciente.id != idpac))
+      setPacientesTotal(pacientes.filter(paciente => paciente.id != idpac))
+    } else {
+      setPacientes(pacientes.filter(paciente => paciente.idcamas != idpac))
+      setPacientesTotal(pacientes.filter(paciente => paciente.idcamas != idpac))
+    }
     DELETES[type](idpac)
   }
 
@@ -84,7 +88,7 @@ export default function Administrar({ type }) {
     }
     {
       (editar)
-        ? <EditarItem setEditar={setEditar} itemActual={paciente} type={type} />
+        ? <EditarItem setEditar={setEditar} itemActual={paciente} type={type} setPacientes={setPacientes} setPacientesTotal={setPacientesTotal} />
         : null
     }
     {

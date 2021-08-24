@@ -39,7 +39,7 @@ export default function RegisterForm({ }) {
       apellidoP: datesDNI.apePaterno,
       apellidoM: datesDNI.apeMaterno,
       dni: data.dni || datesDNI.dni,
-      sexo: datesDNI.sexo,
+      sexo: datesDNI.idSexo,
       correo: data.correo,
       contrasena: data.password,
       vigencia: `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear() + 1}`,

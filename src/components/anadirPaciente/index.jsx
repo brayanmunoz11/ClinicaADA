@@ -17,22 +17,39 @@ export default function AnadirPaciente({ control, errors }) {
   return (<>
     <div className="formItem">
       <label htmlFor="vigencia">Vigencia</label>
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <Grid container justifyContent="space-around">
-          <KeyboardDatePicker
-            name="vigencia"
-            margin="normal"
-            id="date-picker-dialog"
-            format="dd/MM/yyyy"
-            value={horario}
-            onChange={handleDateChange}
-            KeyboardButtonProps={{
-              'aria-label': 'change date',
-            }}
-            style={{ width: '100%' }}
-          />
-        </Grid>
-      </MuiPickersUtilsProvider>
+      <Controller
+        name="vigencia"
+        isClearable
+        control={control}
+        render={({ field }) => (
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <Grid container justifyContent="space-around">
+              <KeyboardDatePicker
+                {...field}
+                name="vigencia"
+                margin="normal"
+                id="date-picker-dialog"
+                format="dd/MM/yyyy"
+                // value={horario}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+                style={{ width: '100%' }}
+              />
+            </Grid>
+          </MuiPickersUtilsProvider>
+        )}
+        rules={{
+          required: 'Elija una fecha'
+        }}
+      />
+      <ErrorMessage
+        errors={errors}
+        name="vigencia"
+        render={({ messages }) => {
+          return messages ? <MessageError><p>{messages.required}</p></MessageError> : null
+        }}
+      />
     </div>
     <div className="formItem">
       <label htmlFor="tipoSeguro">Tipo de seguro</label>

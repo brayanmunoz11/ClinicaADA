@@ -46,6 +46,7 @@ export default function Anadir({ type, setAnadir, setPacientesTotal, setPaciente
       data.sexo = datesDNI.idSexo
       data.direccion = datesDNI.deDireccion
       data.fechanac = datesDNI.feNacimiento.split('T')[0]
+      data.vigencia = `${data.vigencia.getDate()}/${data.vigencia.getMonth() + 1}/${data.vigencia.getFullYear()}`
 
       createPaciente(data).then(res => {
         setPacientesTotal(res)

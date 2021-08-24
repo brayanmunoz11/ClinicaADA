@@ -4,14 +4,14 @@ import { Controller } from "react-hook-form";
 import { MessageError } from '../anadir/styles';
 import { ErrorMessage } from "@hookform/error-message";
 const Especialidad = [
-  { value: 'cardiologia', label: 'Cardiologia' },
-  { value: 'traumatologia', label: 'Traumatologia' },
-  { value: 'oncologia', label: 'Oncologia' }
+  { value: 'Cardiologia', label: 'Cardiologia' },
+  { value: 'Traumatologia', label: 'Traumatologia' },
+  { value: 'Oncologia', label: 'Oncologia' }
 ]
 const turnos = [
-  { value: 'mañana', label: 'Mañana' },
-  { value: 'tarde', label: 'Tarde' },
-  { value: 'noche', label: 'Noche' }
+  { value: 'Mañana', label: 'Mañana' },
+  { value: 'Tarde', label: 'Tarde' },
+  { value: 'Noche', label: 'Noche' }
 ]
 
 export default function AnadirPersonal({ control, errors }) {

@@ -14,28 +14,34 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { MessageError } from 'components/anadir/styles';
 
 const turnos = [
-  { value: 'mañana', label: 'Mañana' },
-  { value: 'tarde', label: 'Tarde' },
-  { value: 'noche', label: 'Noche' }
+  { value: 'Mañana', label: 'Mañana' },
+  { value: 'Tarde', label: 'Tarde' },
+  { value: 'Noche', label: 'Noche' }
 ]
 
-export default function EditarPaciente({ itemActual, setEditar, type }) {
+export default function EditarPaciente({ itemActual, setEditar, type, setPacientes, setPacientesTotal }) {
   const { pacientes } = useGetPacientes('')
   const { handleSubmit, register, setError, watch, clearErrors, control, formState: { errors } } = useForm({
     mode: 'onBlur',
     reValidateMode: 'onChange',
-    criteriaMode: "all"
+    criteriaMode: "all",
+    defaultValues: {
+      vigencia: (type === 'Paciente') ? new Date(...itemActual.vigencia.split('/').reverse()) : null,
+      centro: (type === 'Paciente') ? { value: itemActual.centro, label: itemActual.centro } : null,
+      turno: (type === 'Personal') ? { value: itemActual.turno, label: itemActual.turno } : null,
+      sala: (type === 'Camas') ? { value: itemActual.sala, label: `Sala ${itemActual.sala}` } : null,
+      paciente: (type === 'Camas') ? { value: itemActual.idUsuario, label: itemActual.nombre } : null,
+    }
   })
   // const [horario, setHorario] = useState(new Date())
 
   // const handleDateChange = (date) => {
   //   setHorario(date)
   // };
-
   const GETDATA = {
     Paciente: (data) => {
       data.centro = data.centro.value
-      data.vigencia = `${data.vigencia.getDate()}/${data.vigencia.getMonth() + 1}/${data.vigencia.getFullYear()}`
+      data.vigencia = `${data.vigencia.getDate()}/${data.vigencia.getMonth()}/${data.vigencia.getFullYear()}`
       data.id = itemActual.id
       return data
     },
@@ -55,7 +61,8 @@ export default function EditarPaciente({ itemActual, setEditar, type }) {
   const editarData = (data, e) => {
     changeData({ data: GETDATA[type](data), type })
       .then(res => {
-        console.log(res)
+        setPacientes(res)
+        setPacientesTotal(res)
         setEditar(false)
       })
   }
@@ -250,7 +257,7 @@ export default function EditarPaciente({ itemActual, setEditar, type }) {
                       <Select
                         {...field}
                         options={pacientes}
-                        name="paciente"
+                        // name="paciente"
                         // value={especialidad}
                         placeholder='Elige un paciente'
                         id='pacientescama'
