@@ -13,6 +13,7 @@ function sendRegistro(json) {
   .then(res => {
     if (res.message === 'user created') {
       sessionStorage.setItem('usuario', JSON.stringify(res.user))
+      sessionStorage.setItem('familiares', JSON.stringify([]))
       // history.push('/Clinica')
     }
     return res.message
