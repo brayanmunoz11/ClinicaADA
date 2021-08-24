@@ -40,7 +40,7 @@ export default function MenuClinica({ }) {
             <img src={logoC} alt="logo" />
           </figure>
           <div className="logoName">
-            <p>Hospital <span>Hololive</span></p>
+            <p>Hospital <span>FISI</span></p>
           </div>
         </div>
         <nav className="menu-clinica">

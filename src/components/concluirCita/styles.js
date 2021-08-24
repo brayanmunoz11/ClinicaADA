@@ -22,6 +22,9 @@ export const ConfirmContainer = styled.div`
     font-size: 6em;
     color: ${props => props.theme.colors.primary};
   }
+  h1 {
+    font-size: 1.4em;
+  }
   .buttons {
     width: 70%;
     display: flex;

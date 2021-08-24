@@ -96,7 +96,7 @@ function Home({ }) {
                 <li><a href="">Especialidades</a></li>
                 <li><a href="">Staff Medico</a></li>
                 <li><a href="">Contacto</a></li>
-                <li><a href="" className="cita">Reserva tu cita</a></li>
+                <li><Link to={(user !== 'null' && user !== null) ? path : '/Login'}>Reserva tu cita</Link></li>
               </ul>
             </nav>
           </div>
@@ -106,7 +106,7 @@ function Home({ }) {
             <img src={logoC} alt="logo" ref={logo} />
           </figure>
           <div className="logoName">
-            <p>Hospital <span>Hololive</span></p>
+            <p>Hospital <span>FISI</span></p>
           </div>
         </div>
       </div>

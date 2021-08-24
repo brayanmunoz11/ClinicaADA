@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { ConfirmContainer, ConfirmSubContainer, ConfirmTitle, ConfirmDates, ConfirmButton, ConfirmItem } from './styles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarAlt, faCloudMoon, faTag, faUserMd } from '@fortawesome/free-solid-svg-icons'
@@ -6,12 +6,14 @@ import createCita from 'services/createCita'
 import setFont2 from 'services/setFont';
 import Errormodal from 'components/errormodal/errormodal'
 import Loader from 'components/loader'
+import Context from '../../context/languageContext';
 
 export default function Comfirm({ especialidad, horario, turno, doctor }) {
   const [errorModal, setErrorM] = useState(false)
   const [loading, setLoading] = useState(false)
   const [font, setFont] = useState(localStorage.getItem('fontFamily'))
   const [size, setSize] = useState(localStorage.getItem('fontSize'))
+  const { language, setLanguage, texts } = useContext(Context)
   useEffect(() => {
     if (font !== null) {
       setFont2(font, size)
@@ -50,7 +52,7 @@ export default function Comfirm({ especialidad, horario, turno, doctor }) {
           <ConfirmItem>
             <div className="left">
               <FontAwesomeIcon icon={faTag} className='icon' />
-              <p>Especialidad</p>
+              <p>{texts[language].Especialidad}</p>
             </div>
             <div className="right">
               <p>{especialidad}</p>
@@ -59,7 +61,7 @@ export default function Comfirm({ especialidad, horario, turno, doctor }) {
           <ConfirmItem>
             <div className="left">
               <FontAwesomeIcon icon={faCalendarAlt} className='icon' />
-              <p>Fecha</p>
+              <p>{texts[language].Fecha}</p>
             </div>
             <div className="right">
               <p>{horario.fecha}</p>
@@ -68,7 +70,7 @@ export default function Comfirm({ especialidad, horario, turno, doctor }) {
           <ConfirmItem>
             <div className="left">
               <FontAwesomeIcon icon={faCloudMoon} className='icon' />
-              <p>Turno</p>
+              <p>{texts[language].Turno}</p>
             </div>
             <div className="right">
               <p>{turno}</p>
@@ -85,7 +87,7 @@ export default function Comfirm({ especialidad, horario, turno, doctor }) {
           </ConfirmItem>
         </ConfirmDates>
         <ConfirmButton>
-          <button onClick={enviarForm}>enviar</button>
+          <button onClick={enviarForm}>{texts[language].Enviar}</button>
         </ConfirmButton>
       </ConfirmSubContainer>
     </ConfirmContainer>

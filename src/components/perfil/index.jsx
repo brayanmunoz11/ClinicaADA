@@ -8,7 +8,6 @@ import PerfilInfo from 'components/PerfilInfo';
 import getCitas from 'services/getCitas.js'
 import terminarCita from 'services/terminarCita'
 import ConcluirCita from '../concluirCita';
-import { set } from 'react-hook-form';
 
 export default function Perfil({
   user = JSON.parse(sessionStorage.getItem('usuario')),
@@ -55,7 +54,7 @@ export default function Perfil({
       <MiddlePerfil>
         <MiddleContainer>
           <div className="title">
-            <h1>Panel de Informacion</h1>
+            <h1>{texts[language].Panel}</h1>
           </div>
           {
             (tipoUsuario === 'paciente')
@@ -64,16 +63,16 @@ export default function Perfil({
                 <div className="infoTitle">
                   <h1>
                     <FontAwesomeIcon icon={faUsersCog} className='icon' />
-                    Informacion de Familiares
+                    {texts[language].FamInfo}
                   </h1>
                 </div>
                 <div className="infoContainer">
                   <table>
                     <thead>
                       <tr>
-                        <th>Nombre</th>
-                        <th>Parentesco</th>
-                        <th>Correo</th>
+                        <th>{texts[language].Nombre}</th>
+                        <th>{texts[language].Parentesco}</th>
+                        <th>{texts[language].Correo}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -110,7 +109,7 @@ export default function Perfil({
                 <div className="infoTitle">
                   <h1>
                     <FontAwesomeIcon icon={faCalendarAlt} className='icon' />
-                    Informacion de citas
+                    {texts[language].CitaInfo}
                   </h1>
                 </div>
                 <div className="infoContainer">
@@ -135,7 +134,7 @@ export default function Perfil({
                               <button className='buttonConcluir'>Ver Perfil</button>
                             </td> */}
                             <td>
-                              <button onClick={() => concluirCita(cita.idCita)} className='buttonConcluir'>Concluir</button>
+                              <button onClick={() => concluirCita(cita.idCita)} className='buttonConcluir'>{texts[language].Concluir}</button>
                             </td>
                           </tr>
                         )

@@ -1,10 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
 import { Container, RadioContainer, RadioInfo, SubContainer, FiltrarItem } from './styles'
 
+import Context from '../../context/languageContext';
 export default function FiltrarIndividuos({ pacientesTotal, setPacientes }) {
   const [filterItem, setFilterItem] = useState('nombre')
   const radio = document.querySelectorAll("input[type='radio']")
   const filter = useRef()
+  const { language, setLanguage, texts } = useContext(Context)
 
   useEffect(() => {
     if (radio.length > 0) {
@@ -35,7 +37,7 @@ export default function FiltrarIndividuos({ pacientesTotal, setPacientes }) {
           <RadioContainer>
             <input type="radio" name="filter" id="nombre" defaultChecked='checked' />
             <RadioInfo className='nombre'>
-              <p>Nombre</p>
+              <p>{texts[language].Nombre}</p>
             </RadioInfo>
           </RadioContainer>
         </SubContainer>

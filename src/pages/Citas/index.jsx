@@ -31,7 +31,7 @@ export default function Citas({ }) {
           : <>
             <CitasSeccion>
               <CitasTitle>
-                <h1>Citas Pendientes</h1>
+                <h1>{texts[language].CitasProgra}</h1>
               </CitasTitle>
               <CitasContainer>
                 {
@@ -45,7 +45,7 @@ export default function Citas({ }) {
                           <CitasItem>
                             <div className="left">
                               <FontAwesomeIcon icon={faTag} className='icon' />
-                              <p>Especialidad</p>
+                              <p>{texts[language].Especialidad}</p>
                             </div>
                             <div className="right">
                               <p>{cita.especialidad}</p>
@@ -54,7 +54,7 @@ export default function Citas({ }) {
                           <CitasItem>
                             <div className="left">
                               <FontAwesomeIcon icon={faCalendarAlt} className='icon' />
-                              <p>Fecha</p>
+                              <p>{texts[language].Fecha}</p>
                             </div>
                             <div className="right">
                               <p>{cita.fecha}</p>
@@ -63,7 +63,7 @@ export default function Citas({ }) {
                           <CitasItem>
                             <div className="left">
                               <FontAwesomeIcon icon={faCloudMoon} className='icon' />
-                              <p>Turno</p>
+                              <p>{texts[language].Turno}</p>
                             </div>
                             <div className="right">
                               <p>{cita.turno}</p>
@@ -87,7 +87,7 @@ export default function Citas({ }) {
             </CitasSeccion>
             <CitasSeccion>
               <CitasTitle>
-                <h1>Citas Recientes</h1>
+                <h1>{texts[language].CitasResc}</h1>
               </CitasTitle>
               <CitasContainer>
                 {
@@ -101,7 +101,7 @@ export default function Citas({ }) {
                           <CitasItem>
                             <div className="left">
                               <FontAwesomeIcon icon={faTag} className='icon' />
-                              <p>Especialidad</p>
+                              <p>{texts[language].Especialidad}</p>
                             </div>
                             <div className="right">
                               <p>{cita.especialidad}</p>
@@ -110,7 +110,7 @@ export default function Citas({ }) {
                           <CitasItem>
                             <div className="left">
                               <FontAwesomeIcon icon={faCalendarAlt} className='icon' />
-                              <p>Fecha</p>
+                              <p>{texts[language].Fecha}</p>
                             </div>
                             <div className="right">
                               <p>{cita.fecha}</p>
@@ -119,7 +119,7 @@ export default function Citas({ }) {
                           <CitasItem>
                             <div className="left">
                               <FontAwesomeIcon icon={faCloudMoon} className='icon' />
-                              <p>Turno</p>
+                              <p>{texts[language].Turno}</p>
                             </div>
                             <div className="right">
                               <p>{cita.turno}</p>

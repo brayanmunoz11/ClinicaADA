@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { InfoPerfil, TopInputs } from './styles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBirthdayCake, faCloudMoon, faEnvelope, faFingerprint, faHospitalAlt, faHourglassHalf, faIdCard, faMapMarkedAlt, faTag, faVenusMars } from '@fortawesome/free-solid-svg-icons'
 // import Context from '../../context/languageContext';
 // import setFont2 from '../../services/setFont';
+import Context from '../../context/languageContext';
 
-export default function PerfilInfo({user}) {
+export default function PerfilInfo({ user }) {
   // const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('usuario')))
   const tipoUsuario = user.tipoUsuario;
+  const { language, setLanguage, texts } = useContext(Context)
 
   return (<>
     <InfoPerfil>
@@ -17,7 +19,7 @@ export default function PerfilInfo({user}) {
       </figure>
       <div className="info">
         <div className="infoItem">
-          <span>Nombres</span>
+          <span>{texts[language].Nombre}</span>
           <p>{user.nombre}</p>
         </div>
         <div className="infoItem">
@@ -33,7 +35,7 @@ export default function PerfilInfo({user}) {
     <TopInputs>
       <div className="info">
         <div className="infoTitle">
-          <p>Informacion Personal</p>
+          <p>{texts[language].Informacion}</p>
         </div>
         <div className="infoItem">
           <div className="left">
@@ -47,7 +49,7 @@ export default function PerfilInfo({user}) {
         <div className="infoItem">
           <div className="left">
             <FontAwesomeIcon icon={faVenusMars} className='icon' />
-            <p>SEXO</p>
+            <p>{texts[language].Sexo}</p>
           </div>
           <div className="right">
             <p>{user.sexo || 'M'}</p>
@@ -65,7 +67,7 @@ export default function PerfilInfo({user}) {
         <div className="infoItem">
           <div className="left">
             <FontAwesomeIcon icon={faMapMarkedAlt} className='icon' />
-            <p>DIRECCION</p>
+            <p>{texts[language].direccion}</p>
           </div>
           <div className="right">
             <p>{user.direccion}</p>
@@ -74,7 +76,7 @@ export default function PerfilInfo({user}) {
         <div className="infoItem">
           <div className="left">
             <FontAwesomeIcon icon={faBirthdayCake} className='icon' />
-            <p>FECHA DE NACIMIENTO</p>
+            <p>{texts[language].FechaNac}</p>
           </div>
           <div className="right">
             <p>{user.fechanac}</p>
@@ -82,58 +84,58 @@ export default function PerfilInfo({user}) {
         </div>
         {
           (tipoUsuario === 'paciente')
-          ? <>
-            <div className="infoItem">
-              <div className="left">
-                <FontAwesomeIcon icon={faHospitalAlt} className='icon' />
-                <p>CENTRO ASISTENCIAL</p>
+            ? <>
+              <div className="infoItem">
+                <div className="left">
+                  <FontAwesomeIcon icon={faHospitalAlt} className='icon' />
+                  <p>{texts[language].CentroAsistencial}</p>
+                </div>
+                <div className="right">
+                  <p>{user.centro}</p>
+                </div>
               </div>
-              <div className="right">
-                <p>{user.centro}</p>
+              <div className="infoItem">
+                <div className="left">
+                  <FontAwesomeIcon icon={faFingerprint} className='icon' />
+                  <p>{texts[language].TipoSeguro}</p>
+                </div>
+                <div className="right">
+                  <p>{user.tipoSeguro}</p>
+                </div>
               </div>
-            </div>
-            <div className="infoItem">
-              <div className="left">
-                <FontAwesomeIcon icon={faFingerprint} className='icon' />
-                <p>TIPO</p>
+              <div className="infoItem">
+                <div className="left">
+                  <FontAwesomeIcon icon={faHourglassHalf} className='icon' />
+                  <p>{texts[language].Vigencia}</p>
+                </div>
+                <div className="right">
+                  <p>{user.vigencia}</p>
+                </div>
               </div>
-              <div className="right">
-                <p>{user.tipoSeguro}</p>
-              </div>
-            </div>
-            <div className="infoItem">
-              <div className="left">
-                <FontAwesomeIcon icon={faHourglassHalf} className='icon' />
-                <p>VIGENCIA</p>
-              </div>
-              <div className="right">
-                <p>{user.vigencia}</p>
-              </div>
-            </div>
-            </>: null
+            </> : null
         }
         {
           (tipoUsuario === 'doctor')
-          ? <>
-            <div className="infoItem">
-              <div className="left">
-                <FontAwesomeIcon icon={faTag} className='icon' />
-                <p>ESPECIALIDAD</p>
+            ? <>
+              <div className="infoItem">
+                <div className="left">
+                  <FontAwesomeIcon icon={faTag} className='icon' />
+                  <p>{texts[language].Especialidad}</p>
+                </div>
+                <div className="right">
+                  <p>{user.especialidad}</p>
+                </div>
               </div>
-              <div className="right">
-                <p>{user.especialidad}</p>
+              <div className="infoItem">
+                <div className="left">
+                  <FontAwesomeIcon icon={faCloudMoon} className='icon' />
+                  <p>{texts[language].Turno}</p>
+                </div>
+                <div className="right">
+                  <p>{user.turno}</p>
+                </div>
               </div>
-            </div>
-            <div className="infoItem">
-              <div className="left">
-                <FontAwesomeIcon icon={faCloudMoon} className='icon' />
-                <p>TURNO</p>
-              </div>
-              <div className="right">
-                <p>{user.turno}</p>
-              </div>
-            </div>
-            </>: null
+            </> : null
         }
 
       </div>

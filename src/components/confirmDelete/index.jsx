@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 import deleteUser from 'services/deleteUser'
 import deleteCama from 'services/deleteCama'
 import { Container, ConfirmContainer } from './styles'
+import Context from '../../context/languageContext';
 
 const DELETES = {
   Personal: (id) => deleteUser(id),
@@ -12,6 +13,7 @@ const DELETES = {
 }
 
 export default function ConfirmDelete({ setConfirm, iddelete, type, setPacientes, setPacientesTotal, pacientes }) {
+  const { language, setLanguage, texts } = useContext(Context)
   const deletePaciente = () => {
     // const idpac = evt.target.parentNode.parentNode.parentNode.id;
     if (type !== 'Camas') {
@@ -27,14 +29,14 @@ export default function ConfirmDelete({ setConfirm, iddelete, type, setPacientes
     <Container>
       <ConfirmContainer>
         <div className="signo">
-          <FontAwesomeIcon icon={faExclamationTriangle} className='icon'/>
+          <FontAwesomeIcon icon={faExclamationTriangle} className='icon' />
         </div>
         <div className="texto">
-          <h1>¿Estas seguro de eliminar?</h1>
+          <h1>{texts[language].ConfirmDelete}</h1>
         </div>
         <div className="buttons">
-          <button onClick={deletePaciente}>Eliminar</button>
-          <button onClick={() => setConfirm(false)}>Cancelar</button>
+          <button onClick={deletePaciente}>{texts[language].Eliminar}</button>
+          <button onClick={() => setConfirm(false)}>{texts[language].Cancelar}</button>
         </div>
       </ConfirmContainer>
     </Container>

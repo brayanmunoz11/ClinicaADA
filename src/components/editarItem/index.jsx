@@ -8,7 +8,7 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/picker
 import changeData from 'services/changeData';
 import useGetPacientes from 'hooks/useGetPacientes'
 import { useForm, Controller } from "react-hook-form";
-import Context from '../../context/languageContext';                   // value={especialidad}
+import Context from '../../context/languageContext';
 
 import { ErrorMessage } from "@hookform/error-message";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

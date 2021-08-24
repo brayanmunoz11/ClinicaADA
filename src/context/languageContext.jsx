@@ -4,7 +4,7 @@ const Context = React.createContext({})
 
 export function LanguageContext ({children}) {
   // const lan = JSON.parse(localStorage.getItem(''))
-  const [language, setLanguage] = useState('es')
+  const [language, setLanguage] = useState('en')
 
   const texts = {
     es: {
@@ -57,7 +57,17 @@ export function LanguageContext ({children}) {
       Perfil: 'Ver perfil',
       Correo: 'Correo',
       Aceptar: 'Aceptar',
-      Cancelar: 'Cancelar'
+      Cancelar: 'Cancelar',
+      direccion: 'Direccion',
+      Informacion: 'Informacion Personal',
+      ConfirmDelete: '¿Estas seguro de eliminar?',
+      FechaNac: 'Fecha de nacimiento',
+      Panel: 'Panel de informacion',
+      FamInfo: 'Informacion de familiares',
+      Parentesco: 'Parentesco',
+      Enviar: 'Enviar',
+      CitaInfo: 'Informacion de Citas',
+      ConcludeCita: '¿Estas seguro de concluir la cita?'
     },
     en: {
       Perfil: 'Profile',
@@ -109,7 +119,17 @@ export function LanguageContext ({children}) {
       Perfil: 'See Profile',
       Correo: 'E-mail',
       Aceptar: 'Accept',
-      Cancelar: 'Cancel'
+      Cancelar: 'Cancel',
+      direccion: 'Address',
+      Informacion: 'Personal Information',
+      ConfirmDelete: 'Are you sure to delete?',
+      FechaNac: 'Date of birth',
+      Panel: 'Information Panel',
+      FamInfo: 'Family information',
+      Parentesco: 'Relationship',
+      Enviar: 'Send',
+      CitaInfo: 'Informacion of appointments',
+      ConcludeCita: 'Are you sure to conclude the appointment?'
     }
   }
 
