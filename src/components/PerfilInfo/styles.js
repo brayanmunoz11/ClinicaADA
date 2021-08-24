@@ -81,7 +81,7 @@ export const TopInputs = styled.div`
         width: 28px;
       }
       .right {
-        width: 70%;
+        width: 50%;
 
       }
       .right p {
