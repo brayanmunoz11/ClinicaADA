@@ -30,6 +30,7 @@ export const LoginWindow = styled.div`
   transform: translate(-50%, -50%);
   position: absolute; */
   min-width: 75%;
+  overflow: auto;
   width: 1200px;
   margin: 0 30px;
   display: grid;

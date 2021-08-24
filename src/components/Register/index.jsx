@@ -225,7 +225,7 @@ export default function RegisterForm({ }) {
               {errors.passwordC && <MessageError> <p>{errors.passwordC.message}</p></MessageError>}
             </Input>
           </InputRegisterContainer>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '20px 0' }}>
             <Button type='submit'>Registrate</Button>
             <span style={{ marginTop: '10px', fontSize: '12px' }}>¿Ya tienes una cuenta? <Link to='/login'>Logeate</Link></span>
             <span style={{ marginTop: '10px', fontSize: '12px' }}><Link to='/'>Volver al Home</Link></span>

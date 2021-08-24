@@ -11,11 +11,12 @@ import getPacientes from 'services/listarPacientes'
 import getCamas from 'services/getCamas'
 import setFont2 from 'services/setFont';
 import Context from '../../context/languageContext';
-import deleteUser from 'services/deleteUser'
-import deleteCama from 'services/deleteCama'
+// import deleteUser from 'services/deleteUser'
+// import deleteCama from 'services/deleteCama'
 import getAllDoctores from 'services/getAllDoctores'
 import Loader from 'components/loader'
 import FiltrarIndividuos from 'components/filtrarIndividuos'
+import ConfirmDelete from '../../components/confirmDelete'
 
 const SERVICES = {
   Personal: () => getAllDoctores(),
@@ -23,11 +24,11 @@ const SERVICES = {
   Camas: () => getCamas()
 }
 
-const DELETES = {
-  Personal: (id) => deleteUser(id),
-  Paciente: (id) => deleteUser(id),
-  Camas: (id) => deleteCama(id)
-}
+// const DELETES = {
+//   Personal: (id) => deleteUser(id),
+//   Paciente: (id) => deleteUser(id),
+//   Camas: (id) => deleteCama(id)
+// }
 
 export default function Administrar({ type }) {
   const [pacientesTotal, setPacientesTotal] = useState([])
@@ -38,7 +39,10 @@ export default function Administrar({ type }) {
   const [editar, setEditar] = useState(false)
   const [profile, setProfile] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [confirm, setConfirm] = useState(false)
 
+
+  const [iddelete, setIdDelete] = useState('')
   const { language, setLanguage, texts } = useContext(Context)
 
   useEffect(() => {
@@ -68,16 +72,20 @@ export default function Administrar({ type }) {
     setPaciente(usuarioEle)
     setProfile(true)
   }
-  const deletePaciente = (evt) => {
-    const idpac = evt.target.parentNode.parentNode.parentNode.id;
-    if (type !== 'Camas') {
-      setPacientes(pacientes.filter(paciente => paciente.id != idpac))
-      setPacientesTotal(pacientes.filter(paciente => paciente.id != idpac))
-    } else {
-      setPacientes(pacientes.filter(paciente => paciente.idcamas != idpac))
-      setPacientesTotal(pacientes.filter(paciente => paciente.idcamas != idpac))
-    }
-    DELETES[type](idpac)
+  // const deletePaciente = (evt) => {
+  //   // const idpac = evt.target.parentNode.parentNode.parentNode.id;
+  //   if (type !== 'Camas') {
+  //     setPacientes(pacientes.filter(paciente => paciente.id != idpac))
+  //     setPacientesTotal(pacientes.filter(paciente => paciente.id != idpac))
+  //   } else {
+  //     setPacientes(pacientes.filter(paciente => paciente.idcamas != idpac))
+  //     setPacientesTotal(pacientes.filter(paciente => paciente.idcamas != idpac))
+  //   }
+  //   DELETES[type](idpac)
+  // }
+  const showConfirmDelete = (evt) => {
+    setIdDelete(evt.target.parentNode.parentNode.parentNode.id)
+    setConfirm(true)
   }
 
   return (<>
@@ -98,6 +106,16 @@ export default function Administrar({ type }) {
     }
     <Container>
       {(loading) ? <Loader /> : null}
+      {(confirm)
+        ? <ConfirmDelete
+          setConfirm={setConfirm}
+          iddelete={iddelete}
+          type={type}
+          setPacientes={setPacientes}
+          setPacientesTotal={setPacientesTotal}
+          pacientes={pacientes}
+        />
+        : null}
       <TitleContainer>
         <Link to='/ClinicaAdministrador'>
           <FontAwesomeIcon icon={faArrowAltCircleLeft} className='icon' />
@@ -147,7 +165,7 @@ export default function Administrar({ type }) {
                         <FontAwesomeIcon icon={faUserEdit} className='icon' />
                         <p>Editar</p>
                       </div>
-                      <div className="opcion" onClick={deletePaciente}>
+                      <div className="opcion" onClick={showConfirmDelete}>
                         <FontAwesomeIcon icon={faTrash} className='icon' />
                         <p>Eliminar</p>
                       </div>
@@ -184,7 +202,7 @@ export default function Administrar({ type }) {
                         <FontAwesomeIcon icon={faUserEdit} className='icon' />
                         <p>Editar</p>
                       </div>
-                      <div className="opcion" onClick={deletePaciente}>
+                      <div className="opcion" onClick={showConfirmDelete}>
                         <FontAwesomeIcon icon={faTrash} className='icon' />
                         <p>Eliminar</p>
                       </div>
