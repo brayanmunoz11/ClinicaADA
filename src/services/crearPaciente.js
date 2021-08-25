@@ -10,6 +10,6 @@ function createPaciente(json) {
     body: JSON.stringify(json)
   })
   .then(res => res.json())
-  .then(res => res.paciente);
+  .then(res => res);
 }
 export default createPaciente

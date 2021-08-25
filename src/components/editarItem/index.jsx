@@ -63,6 +63,7 @@ export default function EditarPaciente({ itemActual, setEditar, type, setPacient
   const editarData = (data, e) => {
     changeData({ data: GETDATA[type](data), type })
       .then(res => {
+        console.log(res)
         setPacientes(res)
         setPacientesTotal(res)
         setEditar(false)

@@ -11,9 +11,13 @@ import createDoctor from 'services/crearDoctor'
 import createCama from 'services/crearCama'
 import createPaciente from 'services/crearPaciente'
 import useGetInfoDNI from '../../hooks/useGetInfoDNI'
+import { useState } from 'react';
+import Errormodal from 'components/errormodal/errormodal'
 
 export default function Anadir({ type, setAnadir, setPacientesTotal, setPacientes }) {
   const { getInfo, datesDNI } = useGetInfoDNI('')
+  const [message, setMessage] = useState()
+  const [showMessage, setErrorM] = useState(false)
   const { handleSubmit, register, setError, watch, clearErrors, control, formState: { errors } } = useForm({
     mode: 'onBlur',
     reValidateMode: 'onChange',
@@ -35,9 +39,15 @@ export default function Anadir({ type, setAnadir, setPacientesTotal, setPaciente
       data.fechanac = datesDNI.feNacimiento.split('T')[0]
 
       createDoctor(data).then(res => {
-        setPacientesTotal(res)
-        setPacientes(res)
-        setAnadir(false)
+        setPacientesTotal(res.doctores)
+        setPacientes(res.doctores)
+        if (res.msg !== 'Doctor creado') {
+          setErrorM(true)
+          setMessage(res.msg)
+        } else {
+          setAnadir(false)
+        }
+        // setAnadir(false)
       })
     },
     Paciente: (data) => {
@@ -52,9 +62,14 @@ export default function Anadir({ type, setAnadir, setPacientesTotal, setPaciente
       data.vigencia = `${data.vigencia.getDate()}/${data.vigencia.getMonth() + 1}/${data.vigencia.getFullYear()}`
 
       createPaciente(data).then(res => {
-        setPacientesTotal(res)
-        setPacientes(res)
-        setAnadir(false)
+        setPacientesTotal(res.paciente)
+        setPacientes(res.paciente)
+        if (res.msg !== 'Paciente creado') {
+          setErrorM(true)
+          setMessage(res.msg)
+        } else {
+          setAnadir(false)
+        }
       })
     },
     Camas: (data) => {
@@ -93,6 +108,11 @@ export default function Anadir({ type, setAnadir, setPacientesTotal, setPaciente
 
   return (<>
     <Container>
+      {
+        (showMessage)
+          ? <Errormodal setErrorM={setErrorM} message={message} type='otro' />
+          : null
+      }
       <AnadirContainer>
         <TitleContainer>
           <h1><FontAwesomeIcon icon={faFileAlt} /> Añadir {type}</h1>

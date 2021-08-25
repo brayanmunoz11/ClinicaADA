@@ -10,6 +10,6 @@ function createDoctor(json) {
     body: JSON.stringify(json)
   })
   .then(res => res.json())
-  .then(res => res.doctores);
+  .then(res => res);
 }
 export default createDoctor
