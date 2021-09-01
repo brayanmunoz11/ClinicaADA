@@ -19,7 +19,7 @@ function sendPhoto({ formData, id }) {
 export default sendPhoto
 
 async function nuan(url,id ) {
-  const API = `https://api-login-heroku.herokuapp.com/updatePhoto/${id}`
+  const API = `https://backada.herokuapp.com/updatePhoto/${id}`
   // const API = `http://localhost:4000/updatePhoto/${id}`
   fetch(API, {
     method: 'POST',
