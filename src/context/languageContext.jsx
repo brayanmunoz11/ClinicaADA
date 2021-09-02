@@ -67,7 +67,8 @@ export function LanguageContext ({children}) {
       Parentesco: 'Parentesco',
       Enviar: 'Enviar',
       CitaInfo: 'Informacion de Citas',
-      ConcludeCita: '¿Estas seguro de concluir la cita?'
+      ConcludeCita: '¿Estas seguro de concluir la cita?',
+      Buscar: 'Buscar'
     },
     en: {
       Perfil: 'Profile',
@@ -129,7 +130,8 @@ export function LanguageContext ({children}) {
       Parentesco: 'Relationship',
       Enviar: 'Send',
       CitaInfo: 'Informacion of appointments',
-      ConcludeCita: 'Are you sure to conclude the appointment?'
+      ConcludeCita: 'Are you sure to conclude the appointment?',
+      Buscar: 'Search'
     }
   }
 

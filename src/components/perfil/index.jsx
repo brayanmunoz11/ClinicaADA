@@ -9,6 +9,9 @@ import getCitas from 'services/getCitas.js'
 import terminarCita from 'services/terminarCita'
 import ConcluirCita from '../concluirCita';
 
+import ordenarCita from 'services/ordenarCitas.js'
+import buscarPaciente from 'services/buscarPaciente.js'
+
 export default function Perfil({
   user = JSON.parse(sessionStorage.getItem('usuario')),
   familiares = JSON.parse(sessionStorage.getItem('familiares'))
@@ -30,17 +33,36 @@ export default function Perfil({
   const [confirm, setConfirm] = useState(false)
   const [id, setID] = useState(false)
 
+  const [ordenarCitas, setOrdenarCitas] = useState([])
+  const [buscarP, setBuscarP] = useState([])
+
   const concluirCita = (idCita) => {
     setID(idCita)
     setConfirm(true)
     // setCitas((prev) => prev.filter(el => el.idCita !== idCita))
     // terminarCita({ idCita })
   }
+ 
+
+  function buscarpaciente(){
+    const nombre = document.querySelector('#input').value
+    console.log(nombre)
+    buscarPaciente(nombre)
+    .then((res)=>{
+      setBuscarP(prev=>prev.concat(res))
+    })
+
+  }
+
+
+
 
   useEffect(() => {
     if (tipoUsuario === 'doctor') {
       getCitas()
         .then(setCitas)
+      ordenarCita()
+        .then(setOrdenarCitas)
     }
   }, [])
 
@@ -145,6 +167,81 @@ export default function Perfil({
               </Info>
               : null
           }
+
+          <div className="title">       
+          <h1>{texts[language].CitaInfo}</h1>
+          </div>
+
+          {
+            (tipoUsuario === 'doctor')
+              ?
+              <Info>
+                <div className="infoTitle">
+                  <h1>
+                    <FontAwesomeIcon icon={faCalendarAlt} className='icon' />
+                    {texts[language].CitaInfo}
+                  </h1>
+                </div>
+                <div className="infoContainer">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>{texts[language].Fecha}</th>
+                        <th>{texts[language].Horario}</th>
+                        <th>{texts[language].Paciente}</th>
+                        <th>{texts[language].Estado}</th>
+                        {/* <th>Perfil</th> */}
+                        {/*<th>{texts[language].Concluir}</th>*/}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {
+                        ordenarCitas.map(ordenarCitas =>
+                          <tr key={ordenarCitas.idCita}>
+                            <td>{ordenarCitas.fecha}</td>
+                            <td>{ordenarCitas.turno}</td>
+                            <td>{ordenarCitas.nombre}</td>
+                            <td>{ordenarCitas.estado}</td>
+                            {/* <td>
+                              <button className='buttonConcluir'>Ver Perfil</button>
+                            </td> */}
+                            <td>
+                              {/*<button onClick={() => concluirCita(cita.idCita)} className='buttonConcluir'>{texts[language].Concluir}</button>*/}
+                            </td>
+                          </tr>
+                        )
+                      }
+                    </tbody>
+                  </table>
+                </div>
+                <div className="title">       
+                <h1>{texts[language].Buscar}</h1>
+                </div>
+                <div className="title">       
+                <h1><label>{texts[language].Nombre}: <input type="nombre" id="input" name="Name" /></label></h1>
+                <button onClick={buscarpaciente} className='buttonConcluir'>{texts[language].Buscar}</button>
+                </div>
+                {
+                        buscarP.map(buscarP =>
+                          <tr key={buscarP.idCita}>
+                            <td>{buscarP.fecha}</td>
+                            <td>{buscarP.turno}</td>
+                            <td>{buscarP.nombre}</td>
+                            <td>{buscarP.estado}</td>
+                            {/* <td>
+                              <button className='buttonConcluir'>Ver Perfil</button>
+                            </td> */}
+                            <td>
+                              {/*<button onClick={() => concluirCita(cita.idCita)} className='buttonConcluir'>{texts[language].Concluir}</button>*/}
+                            </td>
+                          </tr>
+                        )
+                      }
+
+              </Info>
+              : null
+          }
+          
         </MiddleContainer>
       </MiddlePerfil>
     </PerfilContainer>
