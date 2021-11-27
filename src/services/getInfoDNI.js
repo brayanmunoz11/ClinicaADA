@@ -10,7 +10,10 @@
 //     body: JSON.stringify({dni: dni})
 //   })
 //     .then(res => res.json())
-//     .then(res => res.response)
+//     .then(res => {
+//       console.log(res)
+//       return res.response})
+
 // }
 // export default getInfoDNI
 import {API_URL} from './API_KEYS.js'

@@ -10,7 +10,7 @@ import Loader from 'components/loader'
 import Input from 'components/Input'
 
 import sendRegistro from 'services/sendRegistro';
-import getInfoDNI from 'services/getInfoDNI';
+//import getInfoDNI from 'services/getInfoDNI';
 
 export default function RegisterForm({ }) {
   let history = useHistory();
@@ -33,19 +33,20 @@ export default function RegisterForm({ }) {
   const onSumbit = (data, e) => {
     e.preventDefault()
     setLoading(true)
+    console.log(data)
     const fecha = new Date()
     const newUser = {
-      nombre: datesDNI.noNombres,
-      apellidoP: datesDNI.apePaterno,
-      apellidoM: datesDNI.apeMaterno,
-      dni: data.dni || datesDNI.dni,
-      sexo: datesDNI.idSexo,
+      nombre: data.noNombres,
+      apellidoP: data.apellidoP,
+      apellidoM: data.apellidoM,
+      dni: data.dni,      
+      //sexo: datesDNI.idSexo,
       correo: data.correo,
       contrasena: data.password,
       vigencia: `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear() + 1}`,
       tipoUsuario: 'paciente',
-      direccion: (datesDNI.deDireccion != null) ? datesDNI.deDireccion : 'No cuenta con direccion',
-      fechanac: datesDNI.feNacimiento.split('T')[0]
+      //direccion: (datesDNI.deDireccion != null) ? datesDNI.deDireccion : 'No cuenta con direccion',
+      //fechanac: datesDNI.feNacimiento.split('T')[0]
     }
     sendRegistro(newUser)
       .then(res => {
@@ -117,10 +118,10 @@ export default function RegisterForm({ }) {
               label='DNI'
               maxLength='8'
               onKeyPress={validateNumbers}
-              onChange={(evt) => {
+              /*onChange={(evt) => {
                 dni.onChange(evt)
                 getInfo(evt)
-              }}
+              }}*/
               onBlur={dni.onBlur}
               ref={dni.ref}
             >
@@ -138,8 +139,8 @@ export default function RegisterForm({ }) {
             <Input
               name='nombre'
               label='Nombre'
-              value={datesDNI.noNombres}
-              onChange={nombres.onChange}
+              //value={datesDNI.noNombres}
+              //onChange={nombres.onChange}
               onBlur={nombres.onBlur}
               ref={nombres.ref}
             />
@@ -159,18 +160,18 @@ export default function RegisterForm({ }) {
                 <Input
                   name='apellidoP'
                   label='Apellido Paterno'
-                  value={datesDNI.apePaterno}
+                  //value={datesDNI.apePaterno}
                   apellido={true}
-                  onChange={apellidoP.onChange}
+                  //onChange={apellidoP.onChange}
                   onBlur={apellidoP.onBlur}
                   ref={apellidoP.ref}
                 />
                 <Input
                   name='apellidoM'
                   label='Apellido Materno'
-                  value={datesDNI.apeMaterno}
+                  //value={datesDNI.apeMaterno}
                   apellido={true}
-                  onChange={apellidoM.onChange}
+                  //onChange={apellidoM.onChange}
                   onBlur={apellidoM.onBlur}
                   ref={apellidoM.ref}
                 />
