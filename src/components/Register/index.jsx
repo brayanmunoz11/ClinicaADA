@@ -36,10 +36,10 @@ export default function RegisterForm({ }) {
     console.log(data)
     const fecha = new Date()
     const newUser = {
-      nombre: data.noNombres,
+      nombre: data.nombre,
       apellidoP: data.apellidoP,
       apellidoM: data.apellidoM,
-      dni: data.dni,      
+      dni: data.dni,
       //sexo: datesDNI.idSexo,
       correo: data.correo,
       contrasena: data.password,

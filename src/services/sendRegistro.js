@@ -1,7 +1,7 @@
 import {API_URL} from './API_KEYS.js'
 
 function sendRegistro(json) {
-  return fetch(`${API_URL}/signup`, {
+  return fetch(`http://localhost:3003/register`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json, text/plain, */*',
